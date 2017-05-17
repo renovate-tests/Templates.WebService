@@ -1,0 +1,10 @@
+version: '2'
+
+# Exposes ports for local development/testing.
+
+services:
+  mysolutionname:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"

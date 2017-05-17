@@ -1,0 +1,19 @@
+version: '2'
+
+# Overrides used by Visual Studio for debugging "Debug" builds.
+
+services:
+  mysolutionname:
+    image: mysolutionname:dev
+    build:
+      args:
+        source: ${DOCKER_BUILD_SOURCE}
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+    volumes:
+      - ./MySolutionName:/app
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+      - ~/clrdbg:/clrdbg:ro
+    entrypoint: tail -f /dev/null
+    labels:
+      - "com.microsoft.visualstudio.targetoperatingsystem=linux"

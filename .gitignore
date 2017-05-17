@@ -1,0 +1,8 @@
+/content/src/.idea/
+/content/src/.vs/
+/content/src/_ReSharper.Caches/
+/content/**/bin/
+/content/**/obj/
+/content/**/*.user
+/content/**/launchSettings.json
+*.nupkg

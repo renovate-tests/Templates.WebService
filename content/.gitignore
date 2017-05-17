@@ -1,0 +1,7 @@
+/src/.idea/
+/src/.vs/
+/src/_ReSharper.Caches/
+bin/
+obj/
+*.user
+launchSettings.json

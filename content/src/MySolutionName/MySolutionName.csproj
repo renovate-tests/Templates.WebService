@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <RuntimeFrameworkVersion>1.1.2</RuntimeFrameworkVersion>
+    <IsPackable>False</IsPackable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Description>MySolutionName</Description>
+    <Authors>AXOOM GmbH</Authors>
+    <Company>AXOOM GmbH</Company>
+    <Copyright>Copyright (c) AXOOM GmbH</Copyright>
+    <PackageIconUrl>https://nuget.inside-axoom.org/resources/axoom_logo.png</PackageIconUrl>
+    <RepositoryUrl>https://tfs.inside-axoom.org/tfs/axoom/axoom/_git/MySolutionName</RepositoryUrl>
+    <PackageProjectUrl>https://tfs.inside-axoom.org/tfs/axoom/axoom/_git/MySolutionName?path=%2Freadme.md</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
+    <PackageReference Include="JetBrains.Annotations" Version="10.4.0" />
+    <PackageReference Include="Newtonsoft.Json.Schema" Version="2.0.11" />
+    <PackageReference Include="Polly" Version="5.1.0" />
+  </ItemGroup>
+
+  <!-- Include XML documentation in Publish Output to make it available for Swagger generation. -->
+  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
+    <ItemGroup>
+      <DocFile Include="$(OutputPath)\$(AssemblyName).xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
+  </Target>
+
+</Project>

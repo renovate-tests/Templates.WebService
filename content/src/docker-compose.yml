@@ -1,0 +1,10 @@
+version: '2'
+
+# Base compose file that defines services and their dependencies. Exposed ports and mounted volumes are configured in additional docker-compose.*.yml files.
+
+services:
+  mysolutionname:
+    image: mysolutionname
+    build:
+      context: ./MySolutionName
+      dockerfile: Dockerfile
