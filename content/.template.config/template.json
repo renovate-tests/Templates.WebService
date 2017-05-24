@@ -2,7 +2,7 @@
   "author": "Bastian Eicher",
   "classifications": [ "AXOOM", "WebService", "Docker" ],
   "name": "AXOOM WebService (ASP.NET Core, Docker)",
-  "identity": "Axoom.WebService",
+  "identity": "Axoom.Templates.WebService",
   "shortName": "axoom-webservice",
   "tags": {
     "language": "C#"
