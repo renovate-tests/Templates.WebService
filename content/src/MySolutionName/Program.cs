@@ -2,7 +2,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace MySolutionName
+namespace Axoom.MySolutionName
 {
     /// <summary>
     /// Main class.

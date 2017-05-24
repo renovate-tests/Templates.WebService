@@ -13,7 +13,7 @@ using Polly;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace MySolutionName
+namespace Axoom.MySolutionName
 {
     /// <summary>
     /// Startup.
@@ -73,7 +73,7 @@ namespace MySolutionName
                             Url = "http://developers.axoom.com"
                         }
                     });
-                options.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "MySolutionName.xml"));
+                options.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "Axoom.MySolutionName.xml"));
                 options.DescribeAllEnumsAsStrings();
             });
         }
