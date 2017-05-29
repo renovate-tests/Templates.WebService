@@ -9,7 +9,7 @@
     "language": "C#"
   },
   "sourceName": "Axoom.MyService",
-  "preferNameDirectory": "true",
+  "preferNameDirectory": true,
   "guids": [
     "837BC53E-0271-4E9C-B5B5-C60EA7A7C7B5",
     "113F2D04-69F0-40C3-8797-BA3F356DD812",
@@ -18,7 +18,7 @@
   "symbols": {
     "imageName": {
       "type": "parameter",
-      "isRequired": false,
+      "isRequired": true,
       "replaces":"my_image"
     }
   }
