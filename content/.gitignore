@@ -1,7 +1,9 @@
-/src/.idea/
+/src/**/obj/
+/src/**/bin/
+
 /src/.vs/
-/src/_ReSharper.Caches/
-bin/
-obj/
-*.user
-launchSettings.json
+/src/.idea/
+/src/_ReSharper.*/
+/src/**/*.user
+/src/**/launchSettings.json
+.vscode/
