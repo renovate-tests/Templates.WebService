@@ -3,7 +3,7 @@ version: '2'
 # Overrides used by Visual Studio for debugging "Release" builds.
 
 services:
-  mysolutionname:
+  axoom.myservice:
     build:
       args:
         source: ${DOCKER_BUILD_SOURCE}

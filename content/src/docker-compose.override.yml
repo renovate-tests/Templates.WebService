@@ -3,7 +3,7 @@ version: '2'
 # Exposes ports for local development/testing.
 
 services:
-  mysolutionname:
+  axoom.myservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:

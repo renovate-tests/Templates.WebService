@@ -3,15 +3,15 @@ version: '2'
 # Overrides used by Visual Studio for debugging "Debug" builds.
 
 services:
-  mysolutionname:
-    image: mysolutionname:dev
+  axoom.myservice:
+    image: my_image:dev
     build:
       args:
         source: ${DOCKER_BUILD_SOURCE}
     environment:
       - DOTNET_USE_POLLING_FILE_WATCHER=1
     volumes:
-      - ./MySolutionName:/app
+      - ./Axoom.MyService:/app
       - ~/.nuget/packages:/root/.nuget/packages:ro
       - ~/clrdbg:/clrdbg:ro
     entrypoint: tail -f /dev/null

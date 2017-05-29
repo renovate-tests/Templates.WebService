@@ -4,7 +4,7 @@
     <ProjectGuid>b74301c8-0759-45fe-ba6c-e832babe08e5</ProjectGuid>
     <DockerLaunchBrowser>True</DockerLaunchBrowser>
     <DockerServiceUrl>http://localhost:{ServicePort}/swagger/</DockerServiceUrl>
-    <DockerServiceName>mysolutionname</DockerServiceName>
+    <DockerServiceName>my_image</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose*.yml" />
