@@ -100,7 +100,7 @@ namespace Axoom.MyService
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AXOOM DataHub - IoT API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Axoom.MyService API v1");
             });
 
             var startupLogger = loggerFactory.CreateLogger<Startup>();
