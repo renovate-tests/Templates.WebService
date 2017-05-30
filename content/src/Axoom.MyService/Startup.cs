@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using Axoom.Extensions.Configuration.FileExtensions;
 using Axoom.Extensions.Configuration.Yaml;
 using Axoom.Extensions.Logging;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,7 @@ namespace Axoom.MyService
     /// <summary>
     /// Startup.
     /// </summary>
+    [UsedImplicitly]
     public class Startup
     {
         private const string APPLICATION_NAME = "Axoom.MyService";
