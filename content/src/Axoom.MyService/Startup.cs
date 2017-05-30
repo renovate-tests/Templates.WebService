@@ -33,11 +33,7 @@ namespace Axoom.MyService
         /// <param name="env">The hosting environment.</param>
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
-                .UseAxoomConfiguration(applicationName: APPLICATION_NAME.ToLowerInvariant())
-                .AddYamlFiles()
-                .AddEnvironmentVariables(prefix: $"{APPLICATION_NAME.ToLowerInvariant()}:");
-            Configuration = builder.Build();
+            Configuration = CreateConfiguration();
         }
 
         /// <summary>
@@ -59,12 +55,42 @@ namespace Axoom.MyService
                     options.SerializerSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
                 });
 
-            services
-                .AddSingleton(CreateLoggerFactory())
-                .AddOptions()
+            services.AddSingleton(CreateLoggerFactory());
+            services.AddOptions()
                 //.Configure<MyOptions>(Configuration.GetSection("MyOptions"))
                 ;
 
+            ConfigureSwaggerService(services);
+        }
+
+        /// <summary>
+        /// This method gets called by the runtime.
+        /// Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">The app.</param>
+        /// <param name="loggerFactory">The logger factory.</param>
+        /// <param name="provider">The service provider.</param>
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IServiceProvider provider)
+        {
+            loggerFactory.AddAxoomLogging("Axoom.MyService");
+
+            app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Axoom.MyService API v1"));
+
+            var startupLogger = loggerFactory.CreateLogger<Startup>();
+            var policy = Policy
+                .Handle<SocketException>()
+                .WaitAndRetry(
+                    sleepDurations: new[] {TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(20)},
+                    onRetry: (ex, timeSpan) => startupLogger.LogWarning("Problem connecting to external service. Retrying in {0}.", timeSpan));
+
+            //policy.Execute(provider.GetService<MyService>);
+        }
+
+        private static void ConfigureSwaggerService(IServiceCollection services)
+        {
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1",
@@ -84,35 +110,6 @@ namespace Axoom.MyService
             });
         }
 
-        /// <summary>
-        /// This method gets called by the runtime.
-        /// Use this method to configure the HTTP request pipeline.
-        /// </summary>
-        /// <param name="app">The app.</param>
-        /// <param name="loggerFactory">The logger factory.</param>
-        /// <param name="provider">The service provider.</param>
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IServiceProvider provider)
-        {
-            loggerFactory.AddAxoomLogging("Axoom.MyService");
-            
-            app.UseMvc();
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Axoom.MyService API v1");
-            });
-
-            var startupLogger = loggerFactory.CreateLogger<Startup>();
-            var policy = Policy
-                .Handle<SocketException>()
-                .WaitAndRetry(
-                    sleepDurations: new[] {TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(20)},
-                    onRetry: (ex, timeSpan) => startupLogger.LogWarning("Problem connecting to external service. Retrying in {0}.", timeSpan));
-
-            //policy.Execute(provider.GetService<MyService>);
-        }
-
         private static ILoggerFactory CreateLoggerFactory()
         {
             ILoggerFactory loggerFactory = new LoggerFactory().WithFilter(new FilterLoggerSettings
@@ -120,6 +117,15 @@ namespace Axoom.MyService
                 {"Microsoft", LogLevel.None}
             });
             return loggerFactory;
+        }
+
+        private static IConfigurationRoot CreateConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+                .UseAxoomConfiguration(applicationName: APPLICATION_NAME.ToLowerInvariant())
+                .AddYamlFiles()
+                .AddEnvironmentVariables(prefix: $"{APPLICATION_NAME.ToLowerInvariant()}:");
+            return builder.Build();
         }
     }
 }
