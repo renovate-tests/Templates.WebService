@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Sockets;
+using Axoom.Extensions.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +12,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Polly;
 using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace Axoom.MyService
 {
@@ -53,8 +54,13 @@ namespace Axoom.MyService
                     options.SerializerSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
                 });
 
+            ILoggerFactory loggerFactory = new LoggerFactory().WithFilter(new FilterLoggerSettings
+            {
+                {"Microsoft", LogLevel.None}
+            });
+          
             services
-                .AddLogging()
+                .AddSingleton(loggerFactory)
                 .AddOptions()
                 //.Configure<MyOptions>(Configuration.GetSection("MyOptions"))
                 ;
@@ -87,9 +93,8 @@ namespace Axoom.MyService
         /// <param name="provider">The service provider.</param>
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IServiceProvider provider)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
+            loggerFactory.AddAxoomLogging("Axoom.MyService");
+            
             app.UseMvc();
 
             app.UseSwagger();
