@@ -1,34 +1,15 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
 namespace Axoom.MyService
 {
-    /// <summary>
-    /// Main class.
-    /// </summary>
     public static class Program
     {
-        /// <summary>
-        /// Main entry point of the application.
-        /// </summary>
-        public static void Main(string[] args)
-        {
-            try
-            {
-                var host = new WebHostBuilder()
-                    .UseKestrel()
-                    .UseContentRoot(Directory.GetCurrentDirectory())
-                    .UseStartup<Startup>()
-                    .Build();
-
-                host.Run();
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                throw;
-            }
-        }
+        public static void Main() => new WebHostBuilder()
+            .UseKestrel()
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseStartup<Startup>()
+            .Build()
+            .Run();
     }
 }
