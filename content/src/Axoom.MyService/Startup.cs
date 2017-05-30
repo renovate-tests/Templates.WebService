@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net.Sockets;
+using Axoom.Extensions.Configuration.FileExtensions;
+using Axoom.Extensions.Configuration.Yaml;
 using Axoom.Extensions.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +23,8 @@ namespace Axoom.MyService
     /// </summary>
     public class Startup
     {
+        private const string APPLICATION_NAME = "Axoom.MyService";
+
         /// <summary>
         /// Startup.
         /// </summary>
@@ -28,10 +32,9 @@ namespace Axoom.MyService
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
+                .UseAxoomConfiguration(applicationName: APPLICATION_NAME.ToLowerInvariant())
+                .AddYamlFiles()
+                .AddEnvironmentVariables(prefix: $"{APPLICATION_NAME.ToLowerInvariant()}:");
             Configuration = builder.Build();
         }
 
