@@ -54,13 +54,8 @@ namespace Axoom.MyService
                     options.SerializerSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
                 });
 
-            ILoggerFactory loggerFactory = new LoggerFactory().WithFilter(new FilterLoggerSettings
-            {
-                {"Microsoft", LogLevel.None}
-            });
-          
             services
-                .AddSingleton(loggerFactory)
+                .AddSingleton(CreateLoggerFactory())
                 .AddOptions()
                 //.Configure<MyOptions>(Configuration.GetSection("MyOptions"))
                 ;
@@ -111,6 +106,15 @@ namespace Axoom.MyService
                     onRetry: (ex, timeSpan) => startupLogger.LogWarning("Problem connecting to external service. Retrying in {0}.", timeSpan));
 
             //policy.Execute(provider.GetService<MyService>);
+        }
+
+        private static ILoggerFactory CreateLoggerFactory()
+        {
+            ILoggerFactory loggerFactory = new LoggerFactory().WithFilter(new FilterLoggerSettings
+            {
+                {"Microsoft", LogLevel.None}
+            });
+            return loggerFactory;
         }
     }
 }
