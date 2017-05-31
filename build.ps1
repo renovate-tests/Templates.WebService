@@ -1,4 +1,4 @@
 Param ([Parameter(Mandatory=$True)][string]$Version)
 $ErrorActionPreference = "Stop"
 
-nuget pack -NoPackageAnalysis -Version $Version
+nuget pack -Version $Version -OutputDirectory artifacts -NoPackageAnalysis
