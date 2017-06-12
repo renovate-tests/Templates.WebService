@@ -1,6 +1,5 @@
-version: '2'
-
 # Base compose file that defines services and their dependencies. Exposed ports and mounted volumes are configured in additional docker-compose.*.yml files.
+version: '2'
 
 services:
   axoom.myservice:

@@ -1,6 +1,5 @@
-version: '2'
-
 # Overrides used by Visual Studio for debugging "Debug" builds.
+version: '2'
 
 services:
   axoom.myservice:

@@ -6,3 +6,5 @@ Run `build.ps1` to compile the source code and then package the result as a Dock
 This script takes a version number as an input argument. The source code itself contains no version numbers. Instead version numbers should be determined at build time using [GitVersion](gitversion.readthedocs.io).
 
 Use `src/Axoom.MyService.Docker.sln` to debug the service from within Visual Studio while deployed inside a Docker container.
+
+The directory `assets` contains a Compose file for running the service in a production-like environment. It is usually combined with other Compose files, e.g., by a release management or provisioning system.
