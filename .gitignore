@@ -1,5 +1,6 @@
 /content/src/**/obj/
 /content/src/**/bin/
+/content/artifacts/
 
 /content/src/.vs/
 /content/src/.idea/
@@ -8,4 +9,4 @@
 /content/src/**/launchSettings.json
 .vscode/
 
-/*.nupkg
+/artifacts/
