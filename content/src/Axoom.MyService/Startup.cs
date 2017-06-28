@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Axoom.Extensions.Configuration.Yaml;
 using Axoom.Extensions.Logging;
 using JetBrains.Annotations;
@@ -8,10 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.PlatformAbstractions;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace Axoom.MyService
 {
@@ -42,13 +37,13 @@ namespace Axoom.MyService
         [UsedImplicitly]
         public void ConfigureServices(IServiceCollection services)
         {
-            AddRestApi(services);
-
             services
+                .AddRestApi()
                 .AddLogging()
                 .AddOptions()
                 //.Configure<MyOptions>(Configuration.GetSection("MyOptions"))
-                //.AddSingleton<IMyRemoteService, MyRemoteService>()
+                //.AddTransient<IMyService, MyService>()
+                //.AddSingleton<Worker>()
                 ;
         }
 
@@ -60,40 +55,7 @@ namespace Axoom.MyService
         {
             loggerFactory.AddAxoomLogging("Axoom.MyService");
 
-            UseRestApi(app);
+            app.UseRestApi();
         }
-
-        private static void AddRestApi(IServiceCollection services)
-        {
-            services.AddMvc()
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    options.SerializerSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
-                });
-
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1",
-                    new Info
-                    {
-                        Title = "Axoom.MyService",
-                        Version = "v1",
-                        Contact = new Contact
-                        {
-                            Email = "developer@axoom.com",
-                            Name = "AXOOM GmbH",
-                            Url = "http://developers.axoom.com"
-                        }
-                    });
-                options.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "Axoom.MyService.xml"));
-                options.DescribeAllEnumsAsStrings();
-            });
-        }
-
-        private static void UseRestApi(IApplicationBuilder app) => app
-            .UseMvc()
-            .UseSwagger()
-            .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Axoom.MyService API v1"));
     }
 }
