@@ -53,9 +53,23 @@ namespace Axoom.MyService
         [UsedImplicitly]
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IServiceProvider provider)
         {
+            app.UseRestApi();
+
             loggerFactory.AddAxoomLogging("Axoom.MyService");
 
-            app.UseRestApi();
+            //var logger = loggerFactory.CreateLogger<Startup>();
+            //var policy = Policy
+            //    .Handle<SocketException>()
+            //    .Or<HttpRequestException>()
+            //    .WaitAndRetryAsync(
+            //        sleepDurations: new[] { TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(20) },
+            //        onRetry: (ex, timeSpan) => logger.LogWarning(0, ex,
+            //            "Problem connecting to external service. Retrying in {0}.", timeSpan));
+
+            //policy.ExecuteAsync(async () =>
+            //{
+            //    await provider.GetService<Worker>().StartAsync();
+            //}).Wait();
         }
     }
 }
