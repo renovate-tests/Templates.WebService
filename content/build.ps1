@@ -1,4 +1,4 @@
-Param ([Parameter(Mandatory=$True)][string]$Version, [string]$Registry = "docker.axoom.cloud")
+Param ([Parameter(Mandatory=$True)][string]$Version, [string]$DockerRegistry = "docker.axoom.cloud")
 $ErrorActionPreference = "Stop"
 $SolutionName = "Axoom.MyService"
 $ImageName = "my_image"
@@ -11,7 +11,7 @@ dotnet msbuild /t:Restore /t:Build /t:Publish /p:PublishDir=./obj/Docker/publish
 dotnet test --configuration Release --no-build "$SolutionName.UnitTests/$SolutionName.UnitTests.csproj"
 
 # Build Docker Image
-docker build -t "${Registry}/${ImageName}:${Version}" $SolutionName
+docker build -t "${DockerRegistry}/${ImageName}:${Version}" $SolutionName
 
 popd
 
