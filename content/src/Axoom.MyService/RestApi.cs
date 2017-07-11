@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Axoom.MyService.Pipeline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
@@ -12,11 +13,16 @@ namespace Axoom.MyService
     {
         public static IServiceCollection AddRestApi(this IServiceCollection services)
         {
-            services.AddMvc()
+            services
+                .AddMvc(options =>
+                {
+                    options.Conventions.Add(new CommandParameterBindingConvention());
+                    options.Filters.Add(typeof(ApiExceptionFilterAttribute));
+                })
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    options.SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
                 });
 
             services.AddSwaggerGen(options =>
