@@ -1,5 +1,6 @@
 /src/**/obj/
 /src/**/bin/
+/artifacts/
 
 /src/.vs/
 /src/.idea/
