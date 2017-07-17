@@ -20,6 +20,11 @@
       "type": "parameter",
       "isRequired": true,
       "replaces":"my_image"
+    },
+    "friendlyName": {
+      "type": "parameter",
+      "isRequired": true,
+      "replaces":"My Service"
     }
   }
 }
