@@ -53,9 +53,9 @@ namespace Axoom.MyService
         [UsedImplicitly]
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IServiceProvider provider)
         {
-            app.UseRestApi();
+            loggerFactory.AddAxoomLogging(Configuration["Logging"]);
 
-            loggerFactory.AddAxoomLogging("Axoom.MyService");
+            app.UseRestApi();
         }
     }
 }
