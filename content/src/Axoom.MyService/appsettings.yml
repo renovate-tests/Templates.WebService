@@ -1,2 +1,7 @@
 Logging:
   ApplicationName: my_image
+  LogTargets:
+    0:
+      Type: Console
+      Level: Debug
+      Async: true
