@@ -2,8 +2,8 @@
 version: '2'
 
 services:
-  axoom.myservice:
-    image: my_image
+  my_service:
+    image: my_service
     build:
       context: ./Axoom.MyService
       dockerfile: Dockerfile

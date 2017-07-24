@@ -2,7 +2,7 @@
 version: '2'
 
 services:
-  axoom.myservice:
+  my_service:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:

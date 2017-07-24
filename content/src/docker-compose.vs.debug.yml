@@ -2,8 +2,8 @@
 version: '2'
 
 services:
-  axoom.myservice:
-    image: my_image:dev
+  my_service:
+    image: my_service:dev
     build:
       args:
         source: ${DOCKER_BUILD_SOURCE}

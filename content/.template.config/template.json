@@ -16,10 +16,10 @@
     "B74301C8-0759-45FE-BA6C-E832BABE08E5"
   ],
   "symbols": {
-    "imageName": {
+    "dockerName": {
       "type": "parameter",
       "isRequired": true,
-      "replaces":"my_image"
+      "replaces":"my_service"
     },
     "friendlyName": {
       "type": "parameter",
