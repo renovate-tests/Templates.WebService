@@ -1,5 +1,5 @@
 Logging:
-  ApplicationName: my_image
+  ApplicationName: my_service
   LogTargets:
     0:
       Type: Console

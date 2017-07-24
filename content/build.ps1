@@ -1,7 +1,7 @@
 Param ([Parameter(Mandatory=$True)][string]$Version, [string]$DockerRegistry = "docker.axoom.cloud")
 $ErrorActionPreference = "Stop"
 $SolutionName = "Axoom.MyService"
-$ImageName = "my_image"
+$ImageName = "my_service"
 
 pushd $(Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 pushd src
