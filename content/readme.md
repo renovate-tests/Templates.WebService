@@ -12,5 +12,5 @@ For local testing:
 
     cd src
     ./build-dotnet.ps1
-    docker-compose up -d
+    docker-compose up -d --build
     open http://localhost:12345/swagger/
