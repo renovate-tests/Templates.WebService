@@ -1,5 +1,5 @@
 # Runs the service in a production-like environment. Usually combined with other Compose files.
-version: '2'
+version: '2.2'
 
 services:
   my_service:
