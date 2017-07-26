@@ -1,7 +1,0 @@
-# Runs the service in a production-like environment. Usually combined with other Compose files.
-version: '2'
-
-services:
-  my_service:
-    restart: always
-    image: ${DOCKER_REGISTRY}/my_service:${VERSION}
