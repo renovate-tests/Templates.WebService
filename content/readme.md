@@ -13,4 +13,5 @@ For local testing:
     cd src
     ./build-dotnet.ps1
     docker-compose up -d --build
-    open http://localhost:12345/swagger/
+
+ * My Service API: http://localhost:12345/swagger/
