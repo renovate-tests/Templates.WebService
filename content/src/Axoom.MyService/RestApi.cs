@@ -30,13 +30,13 @@ namespace Axoom.MyService
                 options.SwaggerDoc("v1",
                     new Info
                     {
-                        Title = "Axoom.MyService",
+                        Title = "My Service",
                         Version = "v1",
                         Contact = new Contact
                         {
                             Email = "developer@axoom.com",
                             Name = "AXOOM GmbH",
-                            Url = "http://developers.axoom.com"
+                            Url = "http://developer.axoom.com"
                         }
                     });
                 options.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "Axoom.MyService.xml"));
