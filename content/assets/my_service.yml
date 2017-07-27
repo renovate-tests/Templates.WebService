@@ -7,4 +7,4 @@ services:
     image: ${DOCKER_REGISTRY}/my_service:${VERSION}
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - Logging__LogTargets__0__Level=${LOG_LEVEL-Info}
+      - Logging__LogTargets__0__Level=${LOG_LEVEL-Information}
