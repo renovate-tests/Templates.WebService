@@ -1,9 +1,8 @@
-# Specified additional dependencies and exposes ports for local development/testing.
+# Specifies additional dependencies and exposes ports for local development/testing.
 version: '2.1'
 
 services:
   my_service:
-    image: my_service:dev
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
