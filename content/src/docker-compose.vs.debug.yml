@@ -1,9 +1,8 @@
-# Overrides used by Visual Studio for debugging "Debug" builds.
-version: '2'
+# Enables the Visual Studio debugger to attach to "Debug" builds.
+version: '2.1'
 
 services:
   my_service:
-    image: my_service:dev
     build:
       args:
         source: ${DOCKER_BUILD_SOURCE}

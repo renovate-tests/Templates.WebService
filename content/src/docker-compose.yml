@@ -1,9 +1,9 @@
-# Base compose file that defines services and their dependencies. Exposed ports and mounted volumes are configured in additional docker-compose.*.yml files.
-version: '2'
+# Builds and runs the services themselves. External dependencies, exposed ports, etc. are configured in docker-compose.override.yml.
+version: '2.1'
 
 services:
   my_service:
-    image: my_service
+    image: ${DOCKER_REGISTRY}/my_service:${VERSION}
     build:
       context: ./Axoom.MyService
       dockerfile: Dockerfile

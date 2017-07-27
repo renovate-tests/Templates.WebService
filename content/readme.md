@@ -11,7 +11,7 @@ The build script creates copies with injected version numbers in the `artifacts`
 For local testing:
 
     cd src
-    ./build-dotnet.ps1
-    docker-compose up -d --build
+    ./build.ps1
+    docker-compose up --build
 
  * My Service API: http://localhost:12345/swagger/

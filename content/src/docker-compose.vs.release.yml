@@ -1,5 +1,5 @@
-# Overrides used by Visual Studio for debugging "Release" builds.
-version: '2'
+# Enables the Visual Studio debugger to attach to "Release" builds.
+version: '2.1'
 
 services:
   my_service:
