@@ -1,6 +1,6 @@
 /src/**/obj/
 /src/**/bin/
-/artifacts/
+/release/*.yml
 
 /src/.vs/
 /src/.idea/
