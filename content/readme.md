@@ -10,6 +10,6 @@ For local testing:
 
     cd src
     ./build.ps1
-    docker-compose up --build
+    docker-compose up
 
  * My Service API: http://localhost:12345/swagger/
