@@ -1,5 +1,6 @@
 /content/src/**/obj/
 /content/src/**/bin/
+/content/release/*.xml
 /content/release/*.yml
 
 /content/src/.vs/

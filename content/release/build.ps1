@@ -14,4 +14,12 @@ foreach ($file in (Get-ChildItem -Filter *.yml.template))
   $output | Out-File $outputFile -Encoding "UTF8"
 }
 
+# Zero Install templates
+$released = Get-Date -Format "yyyy-MM-dd"
+$stability = if($Version.Contains("-")) {"developer"} else {"stable"}
+foreach ($file in (Get-ChildItem -Filter *.xml.template))
+{
+   0install run http://0install.net/tools/0template.xml $file.FullName version=$Version released=$released stability=$stability
+}
+
 Pop-Location

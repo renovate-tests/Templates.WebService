@@ -18,11 +18,14 @@
   "symbols": {
     "dockerName": {
       "type": "parameter",
+      "dataType": "string",
       "isRequired": true,
-      "replaces":"my_service"
+      "replaces":"my_service",
+      "fileRename": "my_service"
     },
     "friendlyName": {
       "type": "parameter",
+      "dataType": "string",
       "isRequired": true,
       "replaces":"My Service"
     }
