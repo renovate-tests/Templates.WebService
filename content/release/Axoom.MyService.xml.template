@@ -2,10 +2,10 @@
 <interface xmlns:ax="http://developer.axoom.com/schemas/deployment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://zero-install.sourceforge.net/2004/injector/interface http://0install.de/schema/injector/interface/interface.xsd http://0install.de/schema/desktop-integration/capabilities http://0install.de/schema/desktop-integration/capabilities/capabilities.xsd" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
   <name>My Service</name>
   <summary>My Service</summary>
-  <feed-for interface="http://assets.axoom.cloud/feeds/Axoom.MyService.xml" />
+  <feed-for interface="http://assets.axoom.cloud/services/Axoom.MyService.xml" />
 
   <group ax:optional-env-vars="LOG_LEVEL">
-    <requires interface="http://assets.axoom.cloud/feeds/compose-format.xml" version="2.1" />
+    <requires interface="http://assets.axoom.cloud/base/compose-format.xml" version="2.1" />
 
     <environment name="COMPOSE_FILE" insert="docker-compose.yml" mode="append" />
 

@@ -9,7 +9,7 @@ foreach ($file in (Get-ChildItem -Filter *.yml.template))
 {
   $template = Get-Content $file.FullName -Encoding "UTF8"
   $output = $template.Replace('${DOCKER_REGISTRY}', $DockerRegistry).Replace('${VERSION}', $Version)
-  $outputFile = $file.Name.Replace(".yml.template", "-$Version.yml")
+  $outputFile = $file.FullName.Replace(".yml.template", "-$Version.yml")
   echo "Writing $outputFile"
   $output | Out-File $outputFile -Encoding "UTF8"
 }
