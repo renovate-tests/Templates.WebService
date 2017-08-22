@@ -1,7 +1,7 @@
 /src/**/obj/
 /src/**/bin/
-/release/*.xml
-/release/*.yml
+/release/*-*.xml
+/release/*-*.yml
 
 /src/.vs/
 /src/.idea/
