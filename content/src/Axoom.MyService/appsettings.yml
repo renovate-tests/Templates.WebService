@@ -6,5 +6,6 @@ Logging:
   LogTargets:
     0:
       Type: Console
-      Level: Debug
       Async: true
+      Format: Plain
+      Level: Debug
