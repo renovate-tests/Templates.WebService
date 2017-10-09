@@ -1,13 +1,2 @@
-/content/src/**/obj/
-/content/src/**/bin/
-/content/release/*-*.xml
-/content/release/*-*.yml
-
-/content/src/.vs/
-/content/src/.idea/
-/content/src/_ReSharper.*/
-/content/src/**/*.user
-/content/src/**/launchSettings.json
-.vscode/
-
 /artifacts/
+.vscode/
