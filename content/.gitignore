@@ -1,7 +1,8 @@
+/release/*.xml
+/release/*.zip
+
 /src/**/obj/
 /src/**/bin/
-/release/*-*.xml
-/release/*-*.yml
 
 /src/.vs/
 /src/.idea/
