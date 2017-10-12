@@ -4,10 +4,13 @@ summary: my service for doing things
 description: This is my service that does things.
 
 mixins:
-  - feed_uri: http://assets.axoom.cloud/mixins/axoom-webservice.xml
+  - feed_uri: http://assets.axoom.cloud/mixins/axoom-service.xml
     parameters:
       SERVICE_NAME: my_service
       IMAGE: <DOCKER_REGISTRY>/my_service:<VERSION>
+  - feed_uri: http://assets.axoom.cloud/mixins/expose-internal.xml
+    parameters:
+      SERVICE_NAME: my_service
 
 compose:
   - version: 3.2
