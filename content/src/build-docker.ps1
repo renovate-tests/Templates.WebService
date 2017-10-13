@@ -2,8 +2,8 @@ Param ([Parameter(Mandatory=$True)][string]$Version)
 $ErrorActionPreference = "Stop"
 Push-Location $(Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 
-.\src\build-dotnet.ps1 $Version
-.\src\build-docker.ps1 $Version
-.\release\build.ps1 $Version
+$env:DOCKER_REGISTRY = if ($Version.Contains("-")) {"docker-ci.axoom.cloud"} else {"docker.axoom.cloud"}
+$env:VERSION = $Version
+docker-compose -f docker-compose.yml build
 
 Pop-Location

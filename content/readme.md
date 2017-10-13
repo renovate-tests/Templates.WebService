@@ -9,7 +9,7 @@ The `release` directory contains an [ax Asset Descriptor](https://tfs.inside-axo
 For local testing:
 
     cd src
-    ./build.ps1
-    docker-compose up
+    ./build-dotnet.ps1
+    docker-compose up --build
 
  * My Service API: http://localhost:12345/swagger/
