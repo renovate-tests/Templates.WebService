@@ -1,4 +1,4 @@
-feed_uri: http://assets.axoom.cloud/services/my_service.xml
+feed_uri: http://assets.axoom.cloud/services/myservice.xml
 name: My Service
 summary: my service for doing things
 description: This is my service that does things.
@@ -6,11 +6,11 @@ description: This is my service that does things.
 mixins:
   - feed_uri: http://assets.axoom.cloud/mixins/axoom-service.xml
     parameters:
-      SERVICE_NAME: my_service
-      IMAGE: <DOCKER_REGISTRY>/my_service:<VERSION>
+      SERVICE_NAME: myservice
+      IMAGE: <DOCKER_REGISTRY>/services/myservice:<VERSION>
   - feed_uri: http://assets.axoom.cloud/mixins/expose-internal.xml
     parameters:
-      SERVICE_NAME: my_service
+      SERVICE_NAME: myservice
 
 compose:
   - version: 3.2

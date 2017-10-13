@@ -2,8 +2,8 @@
 version: '3'
 
 services:
-  my_service:
-    image: my_service
+  myservice:
+    image: myservice
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:

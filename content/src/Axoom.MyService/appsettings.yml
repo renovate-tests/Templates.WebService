@@ -1,5 +1,5 @@
 Logging:
-  ApplicationName: my_service
+  ApplicationName: myservice
   Filter:
     # Reduce ASP.NET Core verbosity
     Microsoft: Warning
