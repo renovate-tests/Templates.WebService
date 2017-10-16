@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Axoom.MyService.Pipeline;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Converters;
@@ -16,7 +17,6 @@ namespace Axoom.MyService
             services
                 .AddMvc(options =>
                 {
-                    options.Conventions.Add(new CommandParameterBindingConvention());
                     options.Filters.Add(typeof(ApiExceptionFilterAttribute));
                 })
                 .AddJsonOptions(options =>
@@ -46,9 +46,18 @@ namespace Axoom.MyService
             return services;
         }
 
-        public static IApplicationBuilder UseRestApi(this IApplicationBuilder app) => app
-            .UseMvc()
-            .UseSwagger()
-            .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1"));
+        public static IApplicationBuilder UseRestApi(this IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1"));
+            }
+
+            app.UseMvc();
+
+            return app;
+        }
     }
 }

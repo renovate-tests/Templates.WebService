@@ -13,9 +13,11 @@ namespace Axoom.MyService
     /// <summary>
     /// Startup class used by ASP.NET Core.
     /// </summary>
+    [UsedImplicitly]
     public class Startup
     {
-        [UsedImplicitly]
+        public IHostingEnvironment Environment { get; }
+
         public IConfigurationRoot Configuration { get; }
 
         /// <summary>
@@ -23,6 +25,7 @@ namespace Axoom.MyService
         /// </summary>
         public Startup(IHostingEnvironment env)
         {
+            Environment = env;
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddYamlFile("appsettings.yml", optional: false, reloadOnChange: true)
@@ -58,7 +61,7 @@ namespace Axoom.MyService
                 .CreateLogger<Startup>()
                 .LogInformation("Starting My Service");
 
-            app.UseRestApi();
+            app.UseRestApi(Environment);
         }
     }
 }
