@@ -1,7 +1,6 @@
 feed_uri: http://assets.axoom.cloud/services/myservice.xml
 name: My Service
-summary: my service for doing things
-description: This is my service that does things.
+summary: my description
 
 mixins:
   - feed_uri: http://assets.axoom.cloud/mixins/axoom-service.xml

@@ -49,6 +49,6 @@ namespace Axoom.MyService
         public static IApplicationBuilder UseRestApi(this IApplicationBuilder app) => app
             .UseMvc()
             .UseSwagger()
-            .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Axoom.MyService API v1"));
+            .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1"));
     }
 }

@@ -20,14 +20,19 @@
       "type": "parameter",
       "dataType": "string",
       "isRequired": true,
-      "replaces":"myservice",
-      "fileRename": "myservice"
+      "replaces":"myservice"
     },
     "friendlyName": {
       "type": "parameter",
       "dataType": "string",
       "isRequired": true,
       "replaces":"My Service"
+    },
+    "description": {
+      "type": "parameter",
+      "dataType": "string",
+      "isRequired": true,
+      "replaces":"my description"
     }
   }
 }

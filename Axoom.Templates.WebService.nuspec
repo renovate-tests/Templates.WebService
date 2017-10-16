@@ -4,9 +4,9 @@
         <id>Axoom.Templates.WebService</id>
         <title>AXOOM WebService Template</title>
         <version>0.1</version>
-        <description>A dotnet-new template for AXOOM WebServices using ASP.NET Core and Docker.</description>
+        <description>A dotnet-new template for AXOOM Webservices using ASP.NET Core and Docker.</description>
         <authors>Bastian Eicher</authors>
-        <projectUrl>https://tfs.inside-axoom.org/tfs/axoom/axoom/_git/axoom-webservice?path=%2Freadme.md</projectUrl>
+        <projectUrl>https://tfs.inside-axoom.org/tfs/axoom/axoom/_git/Axoom.Templates.WebService?path=%2Freadme.md</projectUrl>
         <iconUrl>https://nuget.inside-axoom.org/resources/axoom_logo.png</iconUrl>
         <packageTypes>
             <packageType name="Template" />
