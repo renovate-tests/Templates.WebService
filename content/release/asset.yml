@@ -1,6 +1,7 @@
 feed_uri: http://assets.axoom.cloud/services/myservice.xml
 name: My Service
 summary: my description
+homepage: https://tfs.inside-axoom.org/tfs/axoom/axoom/_git/Axoom.MyService?_a=readme&fullScreen=true
 
 mixins:
   - feed_uri: http://assets.axoom.cloud/mixins/axoom-service.xml
@@ -12,4 +13,4 @@ mixins:
       SERVICE_NAME: myservice
 
 compose:
-  - version: 3.2
+  - version: '3.2'
