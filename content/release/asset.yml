@@ -7,10 +7,12 @@ mixins:
   - feed_uri: http://assets.axoom.cloud/mixins/axoom-service.xml
     parameters:
       SERVICE_NAME: myservice
-      IMAGE: <DOCKER_REGISTRY>/services/myservice:<VERSION>
+      DOCKER_REGISTRY: <DOCKER_REGISTRY>
+      VERSION: <VERSION>
   - feed_uri: http://assets.axoom.cloud/mixins/expose-internal.xml
     parameters:
       SERVICE_NAME: myservice
+      PORT: 80
 
 compose:
   - version: '3.2'
