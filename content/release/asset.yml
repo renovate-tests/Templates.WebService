@@ -15,4 +15,4 @@ mixins:
       PORT: 80
 
 compose:
-  - version: '3.2'
+  - version: '3.3'
