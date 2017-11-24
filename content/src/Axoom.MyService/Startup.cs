@@ -1,6 +1,6 @@
 ﻿using System;
 using Axoom.Extensions.Configuration.Yaml;
-using Axoom.Extensions.Logging;
+using Axoom.Extensions.Logging.Console;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,7 +42,7 @@ namespace Axoom.MyService
         {
             services
                 .AddRestApi()
-                .AddLogging()
+                .AddLogging(builder => builder.AddConfiguration(Configuration.GetSection("Logging")))
                 .AddOptions()
                 //.Configure<MyOptions>(Configuration.GetSection("MyOptions"))
                 //.AddTransient<IMyService, MyService>()
@@ -57,7 +57,7 @@ namespace Axoom.MyService
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IServiceProvider provider)
         {
             loggerFactory
-                .UseAxoomLogging(Configuration.GetSection("Logging"))
+                .AddAxoomConsole(Configuration.GetSection("Logging"))
                 .CreateLogger<Startup>()
                 .LogInformation("Starting My Service");
 
