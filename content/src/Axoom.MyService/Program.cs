@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 
 namespace Axoom.MyService
 {
@@ -7,7 +6,6 @@ namespace Axoom.MyService
     {
         public static void Main() => new WebHostBuilder()
             .UseKestrel()
-            .UseContentRoot(Directory.GetCurrentDirectory())
             .UseStartup<Startup>()
             .Build()
             .Run();
