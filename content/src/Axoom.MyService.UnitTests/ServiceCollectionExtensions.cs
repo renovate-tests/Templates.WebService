@@ -3,7 +3,7 @@ using Moq;
 
 namespace Axoom.MyService
 {
-    public static class ServiceCollectionExtension
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddMock<T>(this IServiceCollection services, Mock<T> mock) where T : class
         {

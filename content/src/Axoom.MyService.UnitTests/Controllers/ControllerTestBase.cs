@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Axoom.MyService
+namespace Axoom.MyService.Controllers
 {
     public abstract class ControllerTestBase : IDisposable
     {
