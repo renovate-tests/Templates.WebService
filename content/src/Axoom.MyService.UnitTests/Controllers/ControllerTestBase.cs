@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,7 +17,7 @@ namespace Axoom.MyService.Controllers
             _server = new TestServer(new WebHostBuilder()
                 .ConfigureServices(x => x.AddRestApi())
                 .ConfigureServices(ConfigureService)
-                .Configure(x => x.UseRestApi(new HostingEnvironment())));
+                .Configure(x => x.UseRestApi()));
             Client = _server.CreateClient();
         }
 

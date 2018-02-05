@@ -6,6 +6,7 @@ using Microsoft.DotNet.PlatformAbstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using Nexogen.Libraries.Metrics.Prometheus.AspCore;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Axoom.MyService
@@ -46,18 +47,17 @@ namespace Axoom.MyService
             return services;
         }
 
-        public static IApplicationBuilder UseRestApi(this IApplicationBuilder app, IHostingEnvironment env)
+        public static IApplicationBuilder UseRestApi(this IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (app.ApplicationServices.GetRequiredService<IHostingEnvironment>().IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1"));
+                app
+                    .UseDeveloperExceptionPage()
+                    .UseSwagger()
+                    .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1"));
             }
 
-            app.UseMvc();
-
-            return app;
+            return app.UseMvc();
         }
     }
 }
