@@ -1,12 +1,14 @@
 ﻿using System;
 using Axoom.Extensions.Configuration.Yaml;
 using Axoom.Extensions.Logging.Console;
+using Axoom.MyService.Pipeline;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Nexogen.Libraries.Metrics.Prometheus.AspCore;
 
 namespace Axoom.MyService
 {
@@ -37,6 +39,7 @@ namespace Axoom.MyService
         public IServiceProvider ConfigureServices(IServiceCollection services) => services
             .AddLogging(builder => builder.AddConfiguration(Configuration.GetSection("Logging")))
             .AddOptions()
+            .AddPrometheus()
             .AddRestApi()
             //.Configure<MyOptions>(Configuration.GetSection("MyOptions"))
             //.AddTransient<IMyService, MyService>()

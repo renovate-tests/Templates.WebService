@@ -13,6 +13,10 @@ mixins:
     parameters:
       SERVICE_NAME: myservice
       PORT: 80
+  - feed_uri: http://assets.axoom.cloud/mixins/expose-metrics.xml
+    parameters:
+      SERVICE_NAME: myservice
+      PORT: 5000
 
 compose:
   - version: '3.3'
