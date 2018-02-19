@@ -51,10 +51,17 @@ namespace Axoom.MyService
         /// </summary>
         public void Configure(IApplicationBuilder app)
         {
-            app.ApplicationServices.GetRequiredService<ILoggerFactory>()
+            var provider = app.ApplicationServices;
+
+            provider.GetRequiredService<ILoggerFactory>()
                 .AddAxoomConsole(Configuration.GetSection("Logging"))
                 .CreateLogger<Startup>()
                 .LogInformation("Starting My Service");
+
+            //provider.GetRequiredService<IPolicies>().StartupAsync(async () =>
+            //{
+            //    await provider.GetRequiredService<Worker>().StartAsync();
+            //}).Wait();
 
             app.UseRestApi();
         }

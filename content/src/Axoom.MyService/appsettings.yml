@@ -3,3 +3,8 @@ Logging:
     Default: Debug
     Microsoft: Warning # Reduce ASP.NET Core verbosity
   Format: Plain
+
+Policies:
+  StartupRetries:
+    - 00:00:15
+    - 00:00:30
