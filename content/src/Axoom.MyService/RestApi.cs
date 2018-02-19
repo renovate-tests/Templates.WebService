@@ -6,7 +6,6 @@ using Microsoft.DotNet.PlatformAbstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using Nexogen.Libraries.Metrics.Prometheus.AspCore;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Axoom.MyService

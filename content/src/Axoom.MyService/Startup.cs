@@ -1,14 +1,12 @@
 ﻿using System;
 using Axoom.Extensions.Configuration.Yaml;
 using Axoom.Extensions.Logging.Console;
-using Axoom.MyService.Pipeline;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Nexogen.Libraries.Metrics.Prometheus.AspCore;
 
 namespace Axoom.MyService
 {
@@ -23,15 +21,12 @@ namespace Axoom.MyService
         /// <summary>
         /// Called by ASP.NET Core to set up an environment.
         /// </summary>
-        public Startup(IHostingEnvironment env)
-        {
-            Configuration = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddYamlFile("appsettings.yml", optional: false, reloadOnChange: true)
-                .AddYamlFile($"appsettings.{env.EnvironmentName}.yml", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables()
-                .Build();
-        }
+        public Startup(IHostingEnvironment env) => Configuration = new ConfigurationBuilder()
+            .SetBasePath(env.ContentRootPath)
+            .AddYamlFile("appsettings.yml", optional: false, reloadOnChange: true)
+            .AddYamlFile($"appsettings.{env.EnvironmentName}.yml", optional: true, reloadOnChange: true)
+            .AddEnvironmentVariables()
+            .Build();
 
         /// <summary>
         /// Called by ASP.NET Core to register services.
@@ -39,7 +34,8 @@ namespace Axoom.MyService
         public IServiceProvider ConfigureServices(IServiceCollection services) => services
             .AddLogging(builder => builder.AddConfiguration(Configuration.GetSection("Logging")))
             .AddOptions()
-            .AddPrometheus()
+            .AddPolicies(Configuration.GetSection("Policies"))
+            .AddMetrics()
             .AddRestApi()
             //.Configure<MyOptions>(Configuration.GetSection("MyOptions"))
             //.AddTransient<IMyService, MyService>()
@@ -62,6 +58,8 @@ namespace Axoom.MyService
             //{
             //    await provider.GetRequiredService<Worker>().StartAsync();
             //}).Wait();
+
+            provider.ExposeMetrics(port: 5000);
 
             app.UseRestApi();
         }
