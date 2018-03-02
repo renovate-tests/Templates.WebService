@@ -54,10 +54,10 @@ namespace Axoom.MyService
                 .CreateLogger<Startup>()
                 .LogInformation("Starting My Service");
 
-            //provider.GetRequiredService<IPolicies>().StartupAsync(async () =>
+            //provider.GetRequiredService<IPolicies>().Startup(async () =>
             //{
             //    await provider.GetRequiredService<Worker>().StartAsync();
-            //}).Wait();
+            //});
 
             provider.ExposeMetrics(port: 5000);
 

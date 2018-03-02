@@ -18,7 +18,7 @@ namespace Axoom.MyService
         /// <summary>
         /// Policy for handling connection problems with external services during startup.
         /// </summary>
-        Task StartupAsync(Func<Task> action);
+        void Startup(Action action);
     }
 
     /// <summary>
@@ -36,12 +36,23 @@ namespace Axoom.MyService
         }
 
         /// <inheritdoc />
-        public Task StartupAsync(Func<Task> action) => Policy
-            .Handle<HttpRequestException>()
-            .WaitAndRetryAsync(
-                sleepDurations: _options.Value.StartupRetries,
-                onRetry: (ex, timeSpan) => _logger.LogWarning($"Problem connecting to external service; retrying in {timeSpan}. ({ex.GetType().Name}: {ex.Message})"))
-            .ExecuteAsync(action);
+        public void Startup(Action action)
+        {
+            try
+            {
+                Policy
+                    .Handle<HttpRequestException>()
+                    .WaitAndRetry(
+                        sleepDurations: _options.Value.StartupRetries,
+                        onRetry: (ex, timeSpan) => _logger.LogWarning($"Problem connecting to external service; retrying in {timeSpan}.\n ({ex.GetType().Name}: {ex.Message})"))
+                    .Execute(action);
+            }
+            catch (Exception ex)
+            { // Print exception info in GELF instead of letting default handler take care of it
+                _logger.LogCritical(ex, "Startup failed.");
+                Environment.Exit(exitCode: 1);
+            }
+        }
     }
 
     /// <summary>
@@ -50,7 +61,7 @@ namespace Axoom.MyService
     public class PolicyOptions
     {
         /// <summary>
-        /// The delays between subsequent retry attemps at startup.
+        /// The delays between subsequent retry attempts at startup.
         /// </summary>
         public ICollection<TimeSpan> StartupRetries { get; } = new List<TimeSpan>();
     }
