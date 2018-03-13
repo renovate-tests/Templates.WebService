@@ -36,23 +36,23 @@ namespace Axoom.MyService
         }
 
         /// <inheritdoc />
-        public void Startup(Action action)
+        public void Startup(Func<Task> action) => Task.Run(async () =>
         {
             try
             {
-                Policy
+                await Policy
                     .Handle<HttpRequestException>()
-                    .WaitAndRetry(
+                    .WaitAndRetryAsync(
                         sleepDurations: _options.Value.StartupRetries,
                         onRetry: (ex, timeSpan) => _logger.LogWarning($"Problem connecting to external service; retrying in {timeSpan}.\n ({ex.GetType().Name}: {ex.Message})"))
-                    .Execute(action);
+                    .ExecuteAsync(action);
             }
             catch (Exception ex)
             { // Print exception info in GELF instead of letting default handler take care of it
                 _logger.LogCritical(ex, "Startup failed.");
                 Environment.Exit(exitCode: 1);
             }
-        }
+        }).Wait();
     }
 
     /// <summary>
