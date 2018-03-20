@@ -18,7 +18,7 @@ namespace Axoom.MyService
         /// <summary>
         /// Policy for handling connection problems with external services during startup.
         /// </summary>
-        void Startup(Action action);
+        void Startup(Func<Task> action);
     }
 
     /// <summary>
