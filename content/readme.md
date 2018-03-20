@@ -9,7 +9,9 @@ Run `build.ps1` to compile the source code and package the result in Docker imag
 This script takes a version number as an input argument. The source code itself contains no version numbers. Instead version numbers should be determined at build time using [GitVersion](http://gitversion.readthedocs.io/).
 The `release` directory contains an [ax Asset Descriptor](https://tfs.inside-axoom.org/tfs/axoom/axoom/_git/Axoom.Provisioning?_a=readme&fullScreen=true) for building releases for production Docker environments.
 
-For local testing:
+### Docker Compose
+
+To build and run locally with Docker Compose:
 
     cd src
     ./build-dotnet.ps1
@@ -17,6 +19,13 @@ For local testing:
 
  * My Service API: http://localhost:12345/swagger/
 
+### AX
+
+To build and run locally with AX (requires [Infrastructure Stack](https://tfs.inside-axoom.org/tfs/axoom/axoom/_git/Axoom.Platform.Stacks.Infrastructure)):
+
+    ./build.ps1 -DeployLocal
+
+ * My Service API: http://myservice-myinstance.vcap.me/swagger/
 
 ## Deploying
 
