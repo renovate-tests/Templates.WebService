@@ -1,8 +1,7 @@
-# Deploys local dev build to local machine
 id: myinstance
 
-feeds: {}
-  #Local build gets set via command-line arg
+feeds:
+  http://assets.axoom.cloud/services/myservice.xml:
 
 environment:
   INTERNAL_DOMAIN: myinstance.vcap.me # *.vcap.me points to 127.0.0.1

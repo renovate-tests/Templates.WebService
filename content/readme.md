@@ -2,7 +2,6 @@
 
 This repository contains the source code for My Service.
 
-
 ## Development
 
 Run `build.ps1` to compile the source code and package the result in Docker images.
@@ -25,7 +24,7 @@ To build and run locally with AX (requires [Infrastructure Stack](https://tfs.in
 
     ./build.ps1 -DeployLocal
 
- * My Service API: http://myservice-myinstance.vcap.me/swagger/
+ * My Service API: https://myservice-myinstance.vcap.me/swagger/
 
 ## Deploying
 

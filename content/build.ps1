@@ -8,7 +8,9 @@ src\build-docker.ps1 $Version
 release\build.ps1 $Version
 
 if ($DeployLocal) {
-    ax deploy -f deploy\local-dev.yml --feed "$(Resolve-Path release\asset-$Version.xml)=$Version"
+    0install add-feed --batch release\asset-$Version.xml
+    0install run http://assets.axoom.cloud/tools/ax.xml deploy --refresh -f deploy\local.yml --feed http://assets.axoom.cloud/services/myservice.xml=$Version
+    0install remove-feed --batch release\asset-$Version.xml
 }
 
 popd
