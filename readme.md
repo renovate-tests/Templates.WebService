@@ -11,5 +11,5 @@ The `content` directory is what actually gets packaged into the template. The fi
 
 ## Using
 
-To install the template run `dotnet new --install axoom-webservice::*`.
+To install the template run `dotnet new --install Axoom.Templates.WebService::*`.
 To use the template run `dotnet new axoom-webservice --dockerName myservice --friendlyName "My Service" --description "my description"`.
