@@ -40,6 +40,7 @@ namespace Axoom.MyService
                         }
                     });
                 options.IncludeXmlComments(Path.Combine(ApplicationEnvironment.ApplicationBasePath, "Axoom.MyService.xml"));
+                options.IncludeXmlComments(Path.Combine(ApplicationEnvironment.ApplicationBasePath, "Axoom.MyService.Dto.xml"));
                 options.DescribeAllEnumsAsStrings();
             });
 

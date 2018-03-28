@@ -1,5 +1,6 @@
 ﻿using System;
 using Axoom.Extensions.Logging.Console;
+using Axoom.MyService.Services;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +38,7 @@ namespace Axoom.MyService
             .AddMetrics()
             .AddRestApi()
             //.Configure<MyOptions>(Configuration.GetSection("MyOptions"))
-            //.AddTransient<IMyService, MyService>()
+            .AddTransient<IEntityService, EntityService>()
             //.AddSingleton<Worker>()
             .BuildServiceProvider();
 

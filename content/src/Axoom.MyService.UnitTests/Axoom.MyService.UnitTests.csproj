@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Axoom.MyService\Axoom.MyService.csproj" />
+    <ProjectReference Include="..\Axoom.MyService.Client\Axoom.MyService.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>

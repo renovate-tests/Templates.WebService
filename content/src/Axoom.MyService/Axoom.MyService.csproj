@@ -41,6 +41,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Axoom.MyService.Dto\Axoom.MyService.Dto.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="appsettings.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -49,7 +53,8 @@
   <!-- Include XML documentation in Publish Output to make it available for Swagger generation. -->
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
     <ItemGroup>
-      <DocFile Include="$(OutputPath)\$(AssemblyName).xml" />
+      <DocFile Include="$(OutputPath)\Axoom.MyService.xml" />
+      <DocFile Include="$(OutputPath)\Axoom.MyService.Dto.xml" />
     </ItemGroup>
     <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
   </Target>

@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 15.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axoom.MyService", "Axoom.MyService\Axoom.MyService.csproj", "{837BC53E-0271-4E9C-B5B5-C60EA7A7C7B5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axoom.MyService.Dto", "Axoom.MyService.Dto\Axoom.MyService.Dto.csproj", "{2FD229AB-6C6D-4264-9B0F-2147C1F8C1F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axoom.MyService.Client", "Axoom.MyService.Client\Axoom.MyService.Client.csproj", "{499D0BF2-663C-47FA-8588-9CA2D2919F38}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axoom.MyService.UnitTests", "Axoom.MyService.UnitTests\Axoom.MyService.UnitTests.csproj", "{113F2D04-69F0-40C3-8797-BA3F356DD812}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "release", "release", "{E7BF52C7-20B2-4671-B0C7-D63EB243C54A}"
@@ -22,6 +26,14 @@ Global
 		{837BC53E-0271-4E9C-B5B5-C60EA7A7C7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{837BC53E-0271-4E9C-B5B5-C60EA7A7C7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{837BC53E-0271-4E9C-B5B5-C60EA7A7C7B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FD229AB-6C6D-4264-9B0F-2147C1F8C1F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FD229AB-6C6D-4264-9B0F-2147C1F8C1F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FD229AB-6C6D-4264-9B0F-2147C1F8C1F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FD229AB-6C6D-4264-9B0F-2147C1F8C1F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{499D0BF2-663C-47FA-8588-9CA2D2919F38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{499D0BF2-663C-47FA-8588-9CA2D2919F38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{499D0BF2-663C-47FA-8588-9CA2D2919F38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{499D0BF2-663C-47FA-8588-9CA2D2919F38}.Release|Any CPU.Build.0 = Release|Any CPU
 		{113F2D04-69F0-40C3-8797-BA3F356DD812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{113F2D04-69F0-40C3-8797-BA3F356DD812}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{113F2D04-69F0-40C3-8797-BA3F356DD812}.Release|Any CPU.ActiveCfg = Release|Any CPU
