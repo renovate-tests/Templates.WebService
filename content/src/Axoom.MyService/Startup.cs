@@ -1,5 +1,4 @@
 ﻿using System;
-using Axoom.Extensions.Configuration.Yaml;
 using Axoom.Extensions.Logging.Console;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
