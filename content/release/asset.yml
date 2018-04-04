@@ -17,6 +17,15 @@ mixins:
     parameters:
       SERVICE_NAME: myservice
       PORT: 5000
+  - feed_uri: http://assets.axoom.cloud/mixins/postgres.xml
+    version: 9.6..!10.0
+    parameters:
+      SERVICE_NAME: myservice
+      ENV_NAME: MYSERVICE
 
 compose:
   - version: '3.3'
+    services:
+      myservice:
+        environment:
+          DATABASE__CONNECTIONSTRING: $MYSERVICE_POSTGRES_CONNECTIONSTRING

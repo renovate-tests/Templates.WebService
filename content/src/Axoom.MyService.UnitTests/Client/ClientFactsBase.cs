@@ -5,11 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Axoom.MyService.Client
 {
-    public abstract class EndpointFactsBase : IDisposable
+    public abstract class ClientFactsBase : IDisposable
     {
         private readonly TestServer _server;
 
-        protected EndpointFactsBase() => _server = new TestServer(new WebHostBuilder()
+        protected ClientFactsBase() => _server = new TestServer(new WebHostBuilder()
             .ConfigureServices(x => x.AddRestApi())
             .ConfigureServices(ConfigureService)
             .Configure(x => x.UseRestApi()));

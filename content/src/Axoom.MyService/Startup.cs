@@ -1,9 +1,11 @@
 ﻿using System;
 using Axoom.Extensions.Logging.Console;
+using Axoom.MyService.Database;
 using Axoom.MyService.Services;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -38,8 +40,8 @@ namespace Axoom.MyService
             .AddMetrics()
             .AddRestApi()
             //.Configure<MyOptions>(Configuration.GetSection("MyOptions"))
-            .AddTransient<IEntityService, EntityService>()
-            //.AddSingleton<Worker>()
+            .AddDbContext<MyServiceDbContext>(options => options.UseNpgsql(Configuration.GetSection("Database").GetValue<string>("ConnectionString")))
+            .AddTransient<IContactService, ContactService>()
             .BuildServiceProvider();
 
         /// <summary>
@@ -54,10 +56,11 @@ namespace Axoom.MyService
                 .CreateLogger<Startup>()
                 .LogInformation("Starting My Service");
 
-            //provider.GetRequiredService<IPolicies>().Startup(async () =>
-            //{
-            //    await provider.GetRequiredService<Worker>().StartAsync();
-            //});
+            provider.GetRequiredService<IPolicies>().Startup(() =>
+            {
+                using (var scope = provider.CreateScope())
+                    scope.ServiceProvider.GetRequiredService<MyServiceDbContext>().Database.EnsureCreated(); //.Migrate();
+            });
 
             provider.ExposeMetrics(port: 5000);
 

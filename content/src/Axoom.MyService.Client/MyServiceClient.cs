@@ -13,6 +13,22 @@ namespace Axoom.MyService.Client
         public MyServiceClient(Uri uri, HttpClient httpClient) : base(uri, httpClient)
         {}
 
-        public ICollectionEndpoint<Entity> Entities => new CollectionEndpoint<Entity>(this, relativeUri: "entities");
+        public ContactCollectionEndpoint Contacts => new ContactCollectionEndpoint(this);
+    }
+
+    public class ContactCollectionEndpoint : CollectionEndpoint<ContactDto, ContactElementEndpoint>
+    {
+        public ContactCollectionEndpoint(IEndpoint referrer) : base(referrer, relativeUri: "contacts")
+        {}
+    }
+
+    public class ContactElementEndpoint : ElementEndpoint<ContactDto>
+    {
+        public ContactElementEndpoint(IEndpoint referrer, Uri relativeUri) : base(referrer, relativeUri)
+        {}
+
+        public ElementEndpoint<NoteDto> Note => new ElementEndpoint<NoteDto>(this, relativeUri: "./note");
+
+        public ActionEndpoint Poke => new ActionEndpoint(this, relativeUri: "./poke");
     }
 }

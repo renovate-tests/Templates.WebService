@@ -5,6 +5,12 @@ services:
   myservice:
     image: myservice
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      ASPNETCORE_ENVIRONMENT: Development
+      DATABASE__CONNECTIONSTRING: "Host=myservice_postgres;User ID=postgres;Password=postgres;Database=postgres"
     ports:
       - "12345:80"
+
+  myservice_postgres:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"

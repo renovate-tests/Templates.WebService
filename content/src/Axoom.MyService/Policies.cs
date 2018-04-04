@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
+using System.Net.Sockets;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -18,7 +17,7 @@ namespace Axoom.MyService
         /// <summary>
         /// Policy for handling connection problems with external services during startup.
         /// </summary>
-        void Startup(Func<Task> action);
+        void Startup(Action action);
     }
 
     /// <summary>
@@ -36,23 +35,23 @@ namespace Axoom.MyService
         }
 
         /// <inheritdoc />
-        public void Startup(Func<Task> action) => Task.Run(async () =>
+        public void Startup(Action action)
         {
             try
             {
-                await Policy
-                    .Handle<HttpRequestException>()
-                    .WaitAndRetryAsync(
+                Policy
+                    .Handle<SocketException>()
+                    .WaitAndRetry(
                         sleepDurations: _options.Value.StartupRetries,
                         onRetry: (ex, timeSpan) => _logger.LogWarning($"Problem connecting to external service; retrying in {timeSpan}.\n ({ex.GetType().Name}: {ex.Message})"))
-                    .ExecuteAsync(action);
+                    .Execute(action);
             }
             catch (Exception ex)
             { // Print exception info in GELF instead of letting default handler take care of it
                 _logger.LogCritical(ex, "Startup failed.");
                 Environment.Exit(exitCode: 1);
             }
-        }).Wait();
+        }
     }
 
     /// <summary>
