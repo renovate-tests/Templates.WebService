@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Axoom.MyService.Database
+namespace Axoom.MyService.Contacts
 {
     /// <summary>
     /// A representation of a contact for database storage.

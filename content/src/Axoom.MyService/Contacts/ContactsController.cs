@@ -1,12 +1,10 @@
 ﻿using System.IO;
 using System.Net;
 using System.Threading.Tasks;
-using Axoom.MyService.Dto;
-using Axoom.MyService.Services;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Axoom.MyService.Controllers
+namespace Axoom.MyService.Contacts
 {
     /// <summary>
     /// Provides access to contacts in an address book.

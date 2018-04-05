@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Axoom.MyService.Dto;
-using Axoom.MyService.Services;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using TypedRest;
 using Xunit;
 
-namespace Axoom.MyService.Client
+namespace Axoom.MyService.Contacts
 {
-    public class ContactsFacts : ClientFactsBase
+    public class ContactApiFacts : ClientFactsBase
     {
         private readonly Mock<IContactService> _serviceMock = new Mock<IContactService>();
 
@@ -54,7 +52,7 @@ namespace Axoom.MyService.Client
 
             var result = await Client.Contacts.CreateAsync(contactWithoutId);
 
-            result.Uri.Should().Be("http://localhost/contacts/1");
+            result.Uri.Should().Be("http://localhost/contacts/1/");
         }
 
         [Fact]

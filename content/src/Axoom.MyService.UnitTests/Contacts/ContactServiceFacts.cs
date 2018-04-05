@@ -1,17 +1,17 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Axoom.MyService.Database;
-using Axoom.MyService.Dto;
 using FluentAssertions;
+using Moq;
 using Xunit;
 
-namespace Axoom.MyService.Services
+namespace Axoom.MyService.Contacts
 {
     public class ContactServiceFacts : DatabaseFactsBase
     {
         private readonly IContactService _service;
+        private readonly Mock<IContactMetrics> _metricsMock = new Mock<IContactMetrics>();
 
-        public ContactServiceFacts() => _service = new ContactService(Context);
+        public ContactServiceFacts() => _service = new ContactService(Context, _metricsMock.Object);
 
         [Fact]
         public async Task ReadsAllFromDatabase()
@@ -40,7 +40,9 @@ namespace Axoom.MyService.Services
         public async Task CreatesInDatabase()
         {
             var result = await _service.CreateAsync(new ContactDto {FirstName = "John", LastName = "Smith"});
+
             Context.Contacts.Single().Should().BeEquivalentTo(new ContactEntity {Id = result.Id, FirstName = "John", LastName = "Smith"});
+            _metricsMock.Verify(x => x.TimerWrite());
         }
 
         [Fact]
@@ -54,6 +56,7 @@ namespace Axoom.MyService.Services
             var entity = Context.Contacts.Find(id);
             entity.FirstName.Should().Be("Jane");
             entity.LastName.Should().Be("Doe");
+            _metricsMock.Verify(x => x.TimerWrite());
         }
 
         [Fact]
@@ -83,9 +86,10 @@ namespace Axoom.MyService.Services
             string id = Context.Contacts.Add(new ContactEntity {FirstName = "John", LastName = "Smith"}).Entity.Id;
             Context.SaveChanges();
 
-            await _service.SetNoteAsync(id, new NoteDto{Content = "my note"});
+            await _service.SetNoteAsync(id, new NoteDto {Content = "my note"});
 
             Context.Contacts.Find(id).Note.Should().Be("my note");
+            _metricsMock.Verify(x => x.TimerWrite());
         }
 
         [Fact]
@@ -97,6 +101,7 @@ namespace Axoom.MyService.Services
             await _service.PokeAsync(id);
 
             Context.Pokes.Single().ContactId.Should().Be(id);
+            _metricsMock.Verify(x => x.Poke());
         }
     }
 }

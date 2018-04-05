@@ -1,14 +1,12 @@
 ﻿using System;
-using Axoom.Extensions.Logging.Console;
-using Axoom.MyService.Database;
-using Axoom.MyService.Services;
+using Axoom.MyService.Contacts;
+using Axoom.MyService.Infrastructure;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Axoom.MyService
 {
@@ -34,14 +32,9 @@ namespace Axoom.MyService
         /// Called by ASP.NET Core to register services.
         /// </summary>
         public IServiceProvider ConfigureServices(IServiceCollection services) => services
-            .AddLogging(builder => builder.AddConfiguration(Configuration.GetSection("Logging")))
-            .AddOptions()
-            .AddPolicies(Configuration.GetSection("Policies"))
-            .AddMetrics()
-            .AddRestApi()
-            //.Configure<MyOptions>(Configuration.GetSection("MyOptions"))
+            .AddInfrastructure(Configuration)
             .AddDbContext<MyServiceDbContext>(options => options.UseNpgsql(Configuration.GetSection("Database").GetValue<string>("ConnectionString")))
-            .AddTransient<IContactService, ContactService>()
+            .AddContacts()
             .BuildServiceProvider();
 
         /// <summary>
@@ -49,22 +42,13 @@ namespace Axoom.MyService
         /// </summary>
         public void Configure(IApplicationBuilder app)
         {
-            var provider = app.ApplicationServices;
+            var provider = app.UseInfrastructure();
 
-            provider.GetRequiredService<ILoggerFactory>()
-                .AddAxoomConsole(Configuration.GetSection("Logging"))
-                .CreateLogger<Startup>()
-                .LogInformation("Starting My Service");
-
-            provider.GetRequiredService<IPolicies>().Startup(() =>
+            provider.GetRequiredService<Policies>().Startup(() =>
             {
                 using (var scope = provider.CreateScope())
                     scope.ServiceProvider.GetRequiredService<MyServiceDbContext>().Database.EnsureCreated(); //.Migrate();
             });
-
-            provider.ExposeMetrics(port: 5000);
-
-            app.UseRestApi();
         }
     }
 }

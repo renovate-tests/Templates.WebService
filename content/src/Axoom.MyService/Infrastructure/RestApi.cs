@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Axoom.MyService.Pipeline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.DotNet.PlatformAbstractions;
@@ -8,7 +7,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace Axoom.MyService
+namespace Axoom.MyService.Infrastructure
 {
     public static class RestApi
     {

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Axoom.MyService.Dto;
 
-namespace Axoom.MyService.Services
+namespace Axoom.MyService.Contacts
 {
     /// <summary>
     /// Manages contacts in an address book.

@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Axoom.MyService.Database;
-using Axoom.MyService.Dto;
 using Microsoft.EntityFrameworkCore;
 
-namespace Axoom.MyService.Services
+namespace Axoom.MyService.Contacts
 {
     /// <summary>
     /// Manages contacts in an address book.
@@ -14,9 +12,13 @@ namespace Axoom.MyService.Services
     public class ContactService : IContactService
     {
         private readonly MyServiceDbContext _context;
+        private readonly IContactMetrics _metrics;
 
-        public ContactService(MyServiceDbContext context)
-            => _context = context;
+        public ContactService(MyServiceDbContext context, IContactMetrics metrics)
+        {
+            _context = context;
+            _metrics = metrics;
+        }
 
         public async Task<IEnumerable<ContactDto>> ReadAllAsync()
             => await ToDtos(_context.Contacts).ToListAsync();
@@ -37,9 +39,12 @@ namespace Axoom.MyService.Services
             var entity = new ContactEntity();
             FromDtoToEntity(element, entity);
 
-            await _context.Contacts.AddAsync(entity);
-            await _context.SaveChangesAsync();
-            return new ContactDto {Id = entity.Id, FirstName = element.FirstName, LastName = element.LastName};
+            using (_metrics.TimerWrite())
+            {
+                await _context.Contacts.AddAsync(entity);
+                await _context.SaveChangesAsync();
+                return new ContactDto {Id = entity.Id, FirstName = element.FirstName, LastName = element.LastName};
+            }
         }
 
         public async Task UpdateAsync(ContactDto element)
@@ -48,8 +53,12 @@ namespace Axoom.MyService.Services
             if (entity == null) throw new KeyNotFoundException($"Contact '{element.Id}' not found.");
 
             FromDtoToEntity(element, entity);
-            _context.Update(entity);
-            await _context.SaveChangesAsync();
+
+            using (_metrics.TimerWrite())
+            {
+                _context.Update(entity);
+                await _context.SaveChangesAsync();
+            }
         }
 
         private static void FromDtoToEntity(ContactDto dto, ContactEntity entity)
@@ -81,8 +90,12 @@ namespace Axoom.MyService.Services
             if (entity == null) throw new KeyNotFoundException($"Contact '{id}' not found.");
 
             entity.Note = note.Content;
-            _context.Update(entity);
-            await _context.SaveChangesAsync();
+
+            using (_metrics.TimerWrite())
+            {
+                _context.Update(entity);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task PokeAsync(string id)
@@ -90,6 +103,8 @@ namespace Axoom.MyService.Services
             var entity = await _context.Contacts.FindAsync(id);
             if (entity == null) throw new KeyNotFoundException($"Contact '{id}' not found.");
 
+            _metrics.Poke();
+            
             entity.Pokes.Add(new PokeEntity {Timestamp = DateTime.UtcNow});
             await _context.SaveChangesAsync();
         }

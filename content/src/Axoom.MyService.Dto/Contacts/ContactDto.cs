@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Axoom.MyService.Dto
+namespace Axoom.MyService.Contacts
 {
     /// <summary>
     /// A representation of a contact for serialization.

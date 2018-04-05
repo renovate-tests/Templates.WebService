@@ -1,9 +1,9 @@
 ﻿using System;
-using Axoom.MyService.Database;
+using Axoom.MyService.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Axoom.MyService.Services
+namespace Axoom.MyService
 {
     public class DatabaseFactsBase : IDisposable
     {

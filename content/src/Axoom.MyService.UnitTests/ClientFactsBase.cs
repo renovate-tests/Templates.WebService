@@ -1,9 +1,10 @@
 ﻿using System;
+using Axoom.MyService.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Axoom.MyService.Client
+namespace Axoom.MyService
 {
     public abstract class ClientFactsBase : IDisposable
     {

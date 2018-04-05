@@ -8,3 +8,6 @@ Policies:
   StartupRetries:
     - 00:00:15
     - 00:00:30
+
+Database:
+  ConnectionString: Host=localhost;User ID=postgres;Password=postgres;Database=myservice

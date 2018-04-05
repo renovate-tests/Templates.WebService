@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Net.Http;
-using Axoom.MyService.Dto;
-using JetBrains.Annotations;
+using Axoom.MyService.Contacts;
 using TypedRest;
 
-namespace Axoom.MyService.Client
+namespace Axoom.MyService
 {
     public class MyServiceClient : EntryEndpoint
     {
@@ -15,22 +14,5 @@ namespace Axoom.MyService.Client
         {}
 
         public ContactCollectionEndpoint Contacts => new ContactCollectionEndpoint(this);
-    }
-
-    public class ContactCollectionEndpoint : CollectionEndpoint<ContactDto, ContactElementEndpoint>
-    {
-        public ContactCollectionEndpoint(IEndpoint referrer) : base(referrer, relativeUri: "contacts")
-        {}
-    }
-
-    [UsedImplicitly]
-    public class ContactElementEndpoint : ElementEndpoint<ContactDto>
-    {
-        public ContactElementEndpoint(IEndpoint referrer, Uri relativeUri) : base(referrer, relativeUri.EnsureTrailingSlash())
-        {}
-
-        public ElementEndpoint<NoteDto> Note => new ElementEndpoint<NoteDto>(this, relativeUri: "note");
-
-        public ActionEndpoint Poke => new ActionEndpoint(this, relativeUri: "poke");
     }
 }

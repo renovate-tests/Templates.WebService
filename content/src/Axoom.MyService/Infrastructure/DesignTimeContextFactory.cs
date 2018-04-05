@@ -5,8 +5,11 @@ using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace Axoom.MyService.Database
+namespace Axoom.MyService.Infrastructure
 {
+    /// <summary>
+    /// Used by Entity Framework command-line tools to construct a DB context when generating migrations.
+    /// </summary>
     [UsedImplicitly]
     public class DesignTimeContextFactory : IDesignTimeDbContextFactory<MyServiceDbContext>
     {

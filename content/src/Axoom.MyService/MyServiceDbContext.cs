@@ -1,7 +1,8 @@
 ﻿using System;
+using Axoom.MyService.Contacts;
 using Microsoft.EntityFrameworkCore;
 
-namespace Axoom.MyService.Database
+namespace Axoom.MyService
 {
     public class MyServiceDbContext : DbContext
     {

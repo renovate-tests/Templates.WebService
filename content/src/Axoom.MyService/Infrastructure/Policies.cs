@@ -1,29 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Polly;
 
-namespace Axoom.MyService
+namespace Axoom.MyService.Infrastructure
 {
     /// <summary>
     /// Provides error handling and retry policies.
     /// </summary>
-    public interface IPolicies
-    {
-        /// <summary>
-        /// Policy for handling connection problems with external services during startup.
-        /// </summary>
-        void Startup(Action action);
-    }
-
-    /// <summary>
-    /// Provides error handling and retry policies.
-    /// </summary>
-    public class Policies : IPolicies
+    [UsedImplicitly]
+    public class Policies
     {
         private readonly IOptions<PolicyOptions> _options;
         private readonly ILogger<Policies> _logger;
@@ -34,7 +25,9 @@ namespace Axoom.MyService
             _logger = logger;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Policy for handling connection problems with external services during startup.
+        /// </summary>
         public void Startup(Action action)
         {
             try
@@ -43,11 +36,13 @@ namespace Axoom.MyService
                     .Handle<SocketException>()
                     .WaitAndRetry(
                         sleepDurations: _options.Value.StartupRetries,
-                        onRetry: (ex, timeSpan) => _logger.LogWarning($"Problem connecting to external service; retrying in {timeSpan}.\n ({ex.GetType().Name}: {ex.Message})"))
+                        onRetry: (ex, timeSpan) =>
+                            _logger.LogWarning($"Problem connecting to external service; retrying in {timeSpan}.\n ({ex.GetType().Name}: {ex.Message})"))
                     .Execute(action);
             }
             catch (Exception ex)
-            { // Print exception info in GELF instead of letting default handler take care of it
+            {
+                // Print exception info in GELF instead of letting default handler take care of it
                 _logger.LogCritical(ex, "Startup failed.");
                 Environment.Exit(exitCode: 1);
             }
@@ -65,10 +60,10 @@ namespace Axoom.MyService
         public ICollection<TimeSpan> StartupRetries { get; } = new List<TimeSpan>();
     }
 
-    public static class PolicyExtensions
+    public static class PoliciesExtensions
     {
         public static IServiceCollection AddPolicies(this IServiceCollection services, IConfiguration config) => services
             .Configure<PolicyOptions>(config)
-            .AddSingleton<IPolicies, Policies>();
+            .AddSingleton<Policies>();
     }
 }
