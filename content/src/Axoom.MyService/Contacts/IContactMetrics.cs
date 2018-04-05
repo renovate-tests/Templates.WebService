@@ -3,18 +3,18 @@
 namespace Axoom.MyService.Contacts
 {
     /// <summary>
-    /// Used to report service-specific metrics.
+    /// Used to report metrics relating to contacts.
     /// </summary>
     public interface IContactMetrics
     {
         /// <summary>
-        /// Counts occurances of an event.
+        /// Starts a timer for the duration of a persistence write operation. Place inside a using statement.
         /// </summary>
-        void Poke();
+        IDisposable Write();
 
         /// <summary>
-        /// Starts a timer for the duration of a job. Place inside a using statement.
+        /// Counts one poke of a contact.
         /// </summary>
-        IDisposable TimerWrite();
+        void Poke();
     }
 }

@@ -42,7 +42,7 @@ namespace Axoom.MyService.Contacts
             var result = await _service.CreateAsync(new ContactDto {FirstName = "John", LastName = "Smith"});
 
             Context.Contacts.Single().Should().BeEquivalentTo(new ContactEntity {Id = result.Id, FirstName = "John", LastName = "Smith"});
-            _metricsMock.Verify(x => x.TimerWrite());
+            _metricsMock.Verify(x => x.Write());
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace Axoom.MyService.Contacts
             var entity = Context.Contacts.Find(id);
             entity.FirstName.Should().Be("Jane");
             entity.LastName.Should().Be("Doe");
-            _metricsMock.Verify(x => x.TimerWrite());
+            _metricsMock.Verify(x => x.Write());
         }
 
         [Fact]
@@ -89,7 +89,7 @@ namespace Axoom.MyService.Contacts
             await _service.SetNoteAsync(id, new NoteDto {Content = "my note"});
 
             Context.Contacts.Find(id).Note.Should().Be("my note");
-            _metricsMock.Verify(x => x.TimerWrite());
+            _metricsMock.Verify(x => x.Write());
         }
 
         [Fact]

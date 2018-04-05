@@ -39,7 +39,7 @@ namespace Axoom.MyService.Contacts
             var entity = new ContactEntity();
             FromDtoToEntity(element, entity);
 
-            using (_metrics.TimerWrite())
+            using (_metrics.Write())
             {
                 await _context.Contacts.AddAsync(entity);
                 await _context.SaveChangesAsync();
@@ -54,7 +54,7 @@ namespace Axoom.MyService.Contacts
 
             FromDtoToEntity(element, entity);
 
-            using (_metrics.TimerWrite())
+            using (_metrics.Write())
             {
                 _context.Update(entity);
                 await _context.SaveChangesAsync();
@@ -91,7 +91,7 @@ namespace Axoom.MyService.Contacts
 
             entity.Note = note.Content;
 
-            using (_metrics.TimerWrite())
+            using (_metrics.Write())
             {
                 _context.Update(entity);
                 await _context.SaveChangesAsync();
