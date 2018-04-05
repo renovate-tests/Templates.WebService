@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Axoom.MyService.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Axoom.MyService.Controllers

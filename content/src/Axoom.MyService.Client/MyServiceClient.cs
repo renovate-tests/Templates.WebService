@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using Axoom.MyService.Dto;
+using JetBrains.Annotations;
 using TypedRest;
 
 namespace Axoom.MyService.Client
@@ -22,13 +23,14 @@ namespace Axoom.MyService.Client
         {}
     }
 
+    [UsedImplicitly]
     public class ContactElementEndpoint : ElementEndpoint<ContactDto>
     {
-        public ContactElementEndpoint(IEndpoint referrer, Uri relativeUri) : base(referrer, relativeUri)
+        public ContactElementEndpoint(IEndpoint referrer, Uri relativeUri) : base(referrer, relativeUri.EnsureTrailingSlash())
         {}
 
-        public ElementEndpoint<NoteDto> Note => new ElementEndpoint<NoteDto>(this, relativeUri: "./note");
+        public ElementEndpoint<NoteDto> Note => new ElementEndpoint<NoteDto>(this, relativeUri: "note");
 
-        public ActionEndpoint Poke => new ActionEndpoint(this, relativeUri: "./poke");
+        public ActionEndpoint Poke => new ActionEndpoint(this, relativeUri: "poke");
     }
 }
