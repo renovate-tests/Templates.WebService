@@ -29,6 +29,9 @@ namespace Axoom.MyService.Contacts
         /// </summary>
         public string Note { get; set; }
 
+        /// <summary>
+        /// A list of pokes performed on this contact.
+        /// </summary>
         public ICollection<PokeEntity> Pokes { get; set; } = new List<PokeEntity>();
     }
 }
