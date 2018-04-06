@@ -33,7 +33,7 @@ namespace Axoom.MyService
         /// </summary>
         public IServiceProvider ConfigureServices(IServiceCollection services) => services
             .AddInfrastructure(Configuration)
-            .AddDbContext<MyServiceDbContext>(options => options.UseNpgsql(Configuration.GetSection("Database").GetValue<string>("ConnectionString")))
+            .AddDbContext<MyServiceDbContext>(options => options.UseSqlite(Configuration.GetSection("Database").GetValue<string>("ConnectionString")))
             .AddContacts()
             .BuildServiceProvider();
 
