@@ -44,10 +44,15 @@ namespace Axoom.MyService
         {
             var provider = app.UseInfrastructure();
 
+            // Since SQLite is an in-process database resiliency against connectivity problems at startup is unnecessary.
+            // It is implemented here anyway as a sample in case you decide to use an external database such as PostgreSQL.
             provider.GetRequiredService<Policies>().Startup(() =>
             {
                 using (var scope = provider.CreateScope())
-                    scope.ServiceProvider.GetRequiredService<MyServiceDbContext>().Database.EnsureCreated(); //.Migrate();
+                {
+                    // Replace .EnsureCreated() with .Migrate() once you have generated an EF Migration
+                    scope.ServiceProvider.GetRequiredService<MyServiceDbContext>().Database.EnsureCreated();
+                }
             });
         }
     }
