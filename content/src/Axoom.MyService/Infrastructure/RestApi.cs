@@ -14,10 +14,7 @@ namespace Axoom.MyService.Infrastructure
         public static IServiceCollection AddRestApi(this IServiceCollection services)
         {
             services
-                .AddMvc(options =>
-                {
-                    options.Filters.Add(typeof(ApiExceptionFilterAttribute));
-                })
+                .AddMvc(options => options.Filters.Add(typeof(ApiExceptionFilterAttribute)))
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

@@ -18,7 +18,7 @@ namespace Axoom.MyService.Infrastructure
         public static IServiceProvider UseInfrastructure(this IApplicationBuilder app)
         {
             var provider = app.ApplicationServices;
-            
+
             provider.UseAxoomLogging();
             provider.ExposeMetrics(port: 5000);
 

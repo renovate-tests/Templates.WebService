@@ -87,7 +87,7 @@ This results in the following project structure:
 - `Axoom.MyService.Client`: The service client project.
 - `Axoom.MyService.Dto`: The dtos shared between webservice and its client.
 - `Axoom.MyService.UnitTests`: The tests for the service and the client as well. This includes in-memory API contract tests.
-                               __Note:__ All projects share the same namespace.
+                                __Note:__ All projects share the same namespace.
 
 ### General Design Considerations
 

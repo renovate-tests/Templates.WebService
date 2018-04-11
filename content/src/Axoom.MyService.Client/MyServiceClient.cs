@@ -8,10 +8,12 @@ namespace Axoom.MyService
     {
         // NOTE: Other parts of this class are in separate slice-specific files
 
-        public MyServiceClient(Uri uri) : base(uri)
+        public MyServiceClient(Uri uri)
+            : base(uri)
         {}
 
-        public MyServiceClient(Uri uri, HttpClient httpClient) : base(uri, httpClient)
+        public MyServiceClient(Uri uri, HttpClient httpClient)
+            : base(uri, httpClient)
         {}
     }
 }
