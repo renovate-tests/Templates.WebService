@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <AssemblyName>Axoom.MyService</AssemblyName>
-    <RootNamespace>Axoom.MyService</RootNamespace>    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <RootNamespace>Axoom.MyService</RootNamespace>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>False</IsPackable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
