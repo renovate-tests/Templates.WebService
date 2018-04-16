@@ -2,6 +2,6 @@
 $ErrorActionPreference = "Stop"
 pushd $(Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 
-dotnet test --configuration Release --no-build Axoom.MyService.UnitTests/Axoom.MyService.UnitTests.csproj
+dotnet test --no-build --configuration Release UnitTests\UnitTests.csproj
 
 popd

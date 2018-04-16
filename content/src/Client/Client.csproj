@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>Axoom.MyService</RootNamespace>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <AssemblyName>Axoom.MyService.Client</AssemblyName>
+    <RootNamespace>Axoom.MyService</RootNamespace>    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <OutputPath>..\..\artifacts\</OutputPath>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Axoom.MyService.Dto\Axoom.MyService.Dto.csproj" />
+    <ProjectReference Include="..\Dto\Dto.csproj" />
   </ItemGroup>
 
 </Project>

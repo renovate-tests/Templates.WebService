@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
+    <AssemblyName>Axoom.MyService</AssemblyName>
+    <RootNamespace>Axoom.MyService</RootNamespace>    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>False</IsPackable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -47,7 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Axoom.MyService.Dto\Axoom.MyService.Dto.csproj" />
+    <ProjectReference Include="..\Dto\Dto.csproj" />
   </ItemGroup>
 
   <ItemGroup>

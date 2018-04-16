@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>Axoom.MyService</RootNamespace>
+    <AssemblyName>Axoom.MyService.Dto</AssemblyName>
+    <RootNamespace>Axoom.MyService</RootNamespace>    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <OutputPath>..\..\artifacts\</OutputPath>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
