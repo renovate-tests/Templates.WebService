@@ -12,7 +12,8 @@ namespace Axoom.MyService.Contacts
         private readonly IContactService _service;
         private readonly Mock<IContactMetrics> _metricsMock = new Mock<IContactMetrics>();
 
-        public ContactServiceFacts() => _service = new ContactService(Context, _metricsMock.Object, new Mock<ILogger<ContactService>>().Object);
+        public ContactServiceFacts()
+            => _service = new ContactService(Context, _metricsMock.Object, new Mock<ILogger<ContactService>>().Object);
 
         [Fact]
         public async Task ReadsAllFromDatabase()

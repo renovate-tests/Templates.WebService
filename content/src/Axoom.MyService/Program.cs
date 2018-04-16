@@ -6,9 +6,9 @@ namespace Axoom.MyService
     {
         public static void Main(string[] args) => BuildWebHost(args).Run();
 
-        public static IWebHost BuildWebHost(string[] args) => new WebHostBuilder()
-            .UseKestrel()
-            .UseStartup<Startup>()
-            .Build();
+        public static IWebHost BuildWebHost(string[] args)
+            => new WebHostBuilder().UseKestrel()
+                                   .UseStartup<Startup>()
+                                   .Build();
     }
 }

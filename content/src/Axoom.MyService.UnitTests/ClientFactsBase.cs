@@ -10,10 +10,11 @@ namespace Axoom.MyService
     {
         private readonly TestServer _server;
 
-        protected ClientFactsBase() => _server = new TestServer(new WebHostBuilder()
-            .ConfigureServices(x => x.AddRestApi())
-            .ConfigureServices(ConfigureService)
-            .Configure(x => x.UseRestApi()));
+        protected ClientFactsBase()
+            => _server = new TestServer(new WebHostBuilder()
+                .ConfigureServices(x => x.AddRestApi())
+                .ConfigureServices(ConfigureService)
+                .Configure(x => x.UseRestApi()));
 
         protected MyServiceClient Client => new MyServiceClient(new Uri("http://localhost"), _server.CreateClient());
 
