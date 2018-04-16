@@ -1,119 +1,51 @@
-# AXOOM WebService .NET Core Template
+# AXOOM Web Service Template
 
-This is the documentation for the AXOOM Webservice .NET Core project template---The way we recommend to build Apps to run on the AXOOM Platform.
+This template helps you create web services for the [AXOOM](http://www.axoom.com/) Platform. In addition to its role as a template this repository also serves as a reference implementation and living documentation for infrastructure concerns such as configuration, logging and monitoring.
 
-## Purpose
+The template creates a C# [ASP.NET Core](https://docs.microsoft.com/aspnet/core/) project packaged to run in a [Docker](https://www.docker.com/) container. The AXOOM Platform uses common web technologies for communication, so services created with this template can easily be used in other environments as well. You can also use any other containerized language to create services for the AXOOM Platform. In this case you can use the following documentation to learn about our infrastructure requirements and best practices.
 
-We created this template to serve as both, a template to enable quick starts to create .NET Core Apps and also as a living documentation of how to work with the AXOOM Platform.
+This template focuses on creating web services that provide RESTful APIs. If this is not your goal one of our other templates may be a better match:
+- [AXOOM Library Template](https://github.com/AXOOM/Axoom.Templates.Library)
+- [AXOOM Service Template](https://github.com/AXOOM/Axoom.Templates.Service)
+- [AXOOM Portal App Template](https://github.com/AXOOM/Axoom.Templates.PortalApp)
 
-The AXOOM Platform demands a set of features of each and every service. This is the only way to ensure operability and maintainabilty from our side.
-This template comes with a default implementation for all of these aspects:
-- startup resilience
-- monitoring metrics endpoints
-- AXOOM logging standards configured
-- Environment variable based configuration
 
-The template is intentionally opinionated on architecture to increase cohesion/synergy between different players on the platform.
-For now we are focusing on .NET to provide best development experience, but other technologies work fine too because all interop is done via standard web technologies.
-In the future we will also provide Maven archetypes and such to provide the same benefit to users of different languages.
+# Using the template
 
-There are also Templates for
-- [Libraries]()
-- [Services]()
-- [Portal Apps]()
+Download and install the [.NET Core SDK](https://www.microsoft.com/net/download) on your machine. You can then install the template by running the following:
 
-## Getting Started
-
-This is the quick guide how to setup a development environment for .NET Core Apps.
-
-1. Make sure you have installed:
-    - Vistual Studio 2017 / Jetbrains Rider
-    - [.NET Core SDK & Runtime 2.0.0](https://download.microsoft.com/download/0/F/D/0FD852A4-7EA1-4E2A-983A-0484AC19B92C/dotnet-sdk-2.0.0-win-x64.exe)
-    - Optional: Docker for Windows
-2. Open the shell you are most familiar with
-3. Run the following commands:
-    ```
-    dotnet new --install Axoom.Templates.Library::*
-    dotnet new --install Axoom.Templates.Service::*
     dotnet new --install Axoom.Templates.WebService::*
-    dotnet new --install Axoom.Templates.PortalApp::*
-    ```
-    This will install all AXOOM project templates on your local machine.
-4. Run:
-    ```
-    mkdir MyOrg.MyService
-    cd MyOrg.MyService
-    ```
-5. To finally create your new web service project run:
-    ```
-    dotnet new axoom-webservice --dockerName "my-service" --friendlyName "My Service" --description "my very detailed description"
-    ```
 
-## Project Structure
+To use the template to create a new project:
 
-Let's have look at the project structure.
-In the following, we will use `Axoom.MyService` as the default namespace, this is obviously different in your case.
+    mkdir MyCompany.MyService
+    cd MyCompany.MyService
+    dotnet new axoom-webservice --dockerName myservice --friendlyName "My Service" --description "my description"
 
-### Top-level Files
-The template comes with a set of default top-level files.
-These are:
+In the commands above replace
+- `MyCompany.MyService` with the .NET namespace you wish to use,
+- `myservice` with the name of your service in all-lowercase and without spaces or underscores,
+- `My Service` with the full name of your service and
+- `my description` with a brief (single sentence) description of its purpose.
 
-- `.gitattributes`: Set special git attributes to specific paths ([See the docs](https://git-scm.com/docs/gitattributes)). 
-                    We use this to disable linebreak normalization.
-- `.gitingore`: Ignore files while adding files into a git commit ([See the docs](https://git-scm.com/docs/gitignore)).
-- `GitVersion.yml`: This is used by [GitVersion](https://github.com/GitTools/GitVersion) to extract version information from your git commits. 
-                    We use this in our continous integration pipeline, to keep the code seperate from versioning. 
-
-### Top-level Directories
-The template comes with a set of default top-level directories.
-
-| Directory   | Description                                               |
-| ----------- | --------------------------------------------------------- |
-| `src`       | Source Code, test and build scripts, docker-compose files |
-| `release`   | `AXOOM Provisioning` release files                        |
-| `deploy`    | `AXOOM Provisioning` deployment files                     |
-| `artifacts` | Compile output                                            |
-
-### Build Scripts
-
-### `*.NoDocker.sln`
-
-### The Projects
-
-Since, in most cases, a webservice is not only used by a graphical frontend, we usually also build clients to consume the exposed service API.
-This results in the following project structure:
-
-- `Axoom.MyService`: The actual web service project.
-- `Axoom.MyService.Client`: The service client project.
-- `Axoom.MyService.Dto`: The dtos shared between webservice and its client.
-- `Axoom.MyService.UnitTests`: The tests for the service and the client as well. This includes in-memory API contract tests.
-                                __Note:__ All projects share the same namespace.
-
-### General Design Considerations
-
-#### Formats, Libraries, ...
-
-To create a certain level of consistency across all our projects, we created a set of conventions, which lead to an easy to manage CI/CD pipline.
-
-##### GitVersion
-As mentioned earlier, we decided to use `GitVersion` to extract version information from our git commits. 
-Hence, we make use of git tags to create a release whereas all other commits are pre-releases by default.
-The `GitVersion.yml` file configures GitVersion to extract a Version number like the following from an untagged commit:
-```
-0.1.1-pre0045-20180404094115
-```
-| Version Part     | Description                                                                                               |
-| ---------------- | --------------------------------------------------------------------------------------------------------- |
-| `0.1.1`          | The latest tag with a bumped patch version                                                                |
-| `pre0045`        | Indicates, that it's a prerelease (of `0.1.1`) and 45 commits have been made since the last tag (`0.1.0`) |
-| `20180404094115` | The Timestamp _04/04/2018 09:41:15_                                                                       |
-
-Whereas `0.1.1` is extracted from a commit with tag `0.1.1`.
-
-##### OneFlow
+You can now open the generated project using your favorite IDE. We recommend [Visual Studio](https://www.visualstudio.com/downloads/), [Visual Studio Code](https://code.visualstudio.com/Download) or [Rider](https://www.jetbrains.com/rider/).
 
 
-##### SemVer
+# Walkthrough
+
+The following is a detailed walkthrough of the project structure generated by the template. To follow along you can either use the output of `dotnet new axoom-webservice` or this repository.
+
+The [`content/`](content/) directory in this repository contains the payload that is instantiated by the template. The file [`content/.template.config/template.json`](content/.template.config/template.json) instructs the templating engine which placeholders to replace. The following descriptions all refer to files and directories below this directory.
+
+## Formatting and encoding
+
+The [`.gitignore`](content/.gitignore) file prevents build artifacts, per-user settings and IDE-specific temp files from being checked into version control.
+
+The [`.gitattributes`](content/.gitattributes) file disable's Git's automatic End of Line (EOL) conversion between Windows and Linux. This ensures that files are binary-identical on all platforms.
+
+We use [EditorConfig](http://editorconfig.org/) to define and maintain consistent coding styles between different editors and IDEs. Our [`.editorconfig`](content/.editorconfig) file also ensures a consistent EOL style and charset encoding based on file type.
+
+## Versioning
 
 To make a CI/CD pipeline successful it's extremely relevant, to get the most information out of your versioning.
 Using [SemVer](https://semver.org/), you create the level of predictability of upgrade impact you need to enable continous delivery.
@@ -130,19 +62,37 @@ __Special versions:__
 
 There is a exception in how to handle versions before first production readyness, where we decided to use __Minor for breaking changes__ and __Patch for feature additions and bug fixes as well__, since in the ongoing development phase you are not bug aware anyway.
 
-##### YAML Config Files
+We decided to use [GitVersion](http://gitversion.readthedocs.io/) to extract version information from our git commits. 
+Hence, we make use of git tags to create a release whereas all other commits are pre-releases by default. The source code itself contains no version numbers.
+The [`GitVersion.yml`](content/GitVersion.yml) file configures GitVersion to extract a version number like the following from an untagged commit:
+```
+0.1.1-pre0045-20180404094115
+```
+| Version Part     | Description                                                                                               |
+| ---------------- | --------------------------------------------------------------------------------------------------------- |
+| `0.1.1`          | The latest tag with a bumped patch version                                                                |
+| `pre0045`        | Indicates, that it's a prerelease (of `0.1.1`) and 45 commits have been made since the last tag (`0.1.0`) |
+| `20180404094115` | The Timestamp _04/04/2018 09:41:15_                                                                       |
 
-We decided to use YAML files for configuration purposes.
-JSON is for sure a great format for serialization and is as well human-readable, but YAML is furthermore human-writable and supports comments, what you actually want from a configuration format.
+Whereas `0.1.1` is extracted from a commit with tag `0.1.1`.
 
-##### TypedRest
+## Project structure
 
-[TypedRest](https://github.com/TypedRest/TypedRest-DotNet) is a library supporting you on building high-level REST Clients.
-Using it feels like implementing the [Repository Pattern](https://msdn.microsoft.com/en-us/library/ff649690.aspx) instead of handling urls.
-Furthermore TypedRest relies on standard HTTP technologies, and simplifies use cases like paging and so on.
-Using the library guides to a clean and consistent API design.
+[`src/`](content/src/) contains the actual C# project structure.
 
-#### Layers and Slices
+- [`Service`](content/src/Service/): The actual web service project.
+- [`Client`](content/src/Client/): A client library for consuming the service's REST API.
+- [`Dto`](content/src/Dto/): DTOs shared between the service and the client.
+- [`UnitTests`](content/src/UnitTests/): Unit tests for the service and the client.
+
+__Note:__ All projects share the same namespace.
+
+## Client library                 
+
+TypedRest: builds clients at a higher-level (like collections instead of idividual HTTP routes) and implicitly guides to cleaner/more consistent API design
+
+## Layers vs Slices
+
 We for ourselves found, it's a good practice to architect services into slices instead of only thinking in layers.
 In times of _micro services_ services tend to become more and more stateless and isolated. 
 This increases availabilty, operability and simplifies technical ownership.
@@ -159,17 +109,111 @@ __Further reading:__
 - https://www.thoughtworks.com/insights/blog/slicing-your-development-work-multi-layer-cake
 - http://deviq.com/vertical-slices/
 
+Slices go acorss projects
 
-## Contributing
+Seperate `Startup.cs` with extension method per slice
 
-To contribute create pull requests in [this](https://github.com/) Git repository.
+`partial class` for splitting up DB context
 
-The repository contains a `content` directory. This is what actually gets packaged into the template.
-The file `content/template.config/template.json` controls which placeholders are replaced during instantiation.
+`partial class` for splitting up Client
+
+## "Infrastructure" pseudo-slice
+
+Boilerplate for WebAPI, logging, monitoring, etc.
+
+Usually no need to touch
+
+Also has it's own [`Startup.cs`](content/src/Service/Infrastructure/Startup.cs)
+
+More interesting/high-level config happens in top-level Startup.cs
+
+## Configuration
+
+After a `git clone` an asset should be pre-configured and ready to use with defaults for local development and debugging including any dependencies.
+
+When packaged as a release however, assets should ship with defaults ready for production. Only business parameters should be set at deployment-time. Avoid exposing connection strings and other technical details here if possible.
+
+Assets contain some configuration bundled at compile-time. This can be overriden at run-time using environment variables.
+
+The [`appsettings.yml`](content/src/Service/appsettings.yml) file is bundled into the Docker Image during build and sets development defaults.
+We decided to use YAML files for configuration purposes.
+JSON is for sure a great format for serialization and is as well human-readable, but YAML is furthermore human-writable and supports comments, what you actually want from a configuration format.
+
+The [`docker-compose.override.yml`](content/src/docker-compose.override.yml) file is used to set dummy values and wire up dependencies for local development.
+proper volumes optional
+
+The [`asset.yml`](content/release/asset.yml) file is used to generate releases, sets production defaults and maps external environment variables to service-specific environment variables.
+proper volumes mandatory
+Only business parameters should be set at deployment-time (avoid exposing connection strings, etc.)
+
+## Logging
+
+Print to console instead of file and let Docker handle the collection
+
+Print as JSON in production (handle multi-line messages, filter by log-level, etc.)
+
+Trace
+- Expected to cause severe performance degradation
+- May log every request
+- May duplicate entire request payload
+
+Debug (default for Dev stage)
+- Expected to cause slight performance degradation
+- Do *NOT* log every request
+- Do *NOT* duplicate entire request payload
+
+Information (default for Test, Staging and Live stages)
+- May be somewhat verbose during startup (e.g. dumping entire config)
+- Do *NOT* log for frequently expected events
+
+Warning
+- Indicates degraded customer experience
+- Indicates issues that may be fixable via config change
+- Should be collected for later triage, but system continues to function
+
+Error
+- Indicates blocking issues for customers
+- Indicates issues that may require code changes to be fixed
+- Should be surfaced in monitoring and addressed soon
+
+Fatal
+- System should be considered offline/crashed
+- Requires immediate attention
+
+Do not catch, log and rethrow unless you REALLY have context to add
+
+## Metrics
+
+Exposed on separate port to allow easy firewalling
+
+Avoid parameterizing by customer data, which effectively creates a memory leak (reason why we don't use Nexogen's default HTTP metrics)
+
+## "Contacts" sample slice
+
+Guideline for getting started, easy to remove
+
+Demonstrates "collection", "element" and "action" REST/TypedRest patterns
+
+Demonstrates DTO/Entity asymetry (Contact + Note vs Contact + Poke)
+
+No custom Repository or UnitOfWork classes, because Entity Framework's Context already implements those patterns
+
+Uses SQLite for simplicity. Consider PostgreSQL as an alternative, but only if you actually need scalability.
+
+Reusable CollectionController and ICrudService provided outside of slice
+
+## Unit tests
+
+Test controllers via client (avoid fragility, avoid testing of Framework itself) using 
+
+Inject in-memory DB contexts into services (avoid building complex mocks yourself)
 
 ## Building
 
-Run `build.ps1` to package the template as a NuGet package.
-This script takes a version number as an input argument. The source code itself contains no version numbers. Instead version numbers should be determined at build time using [GitVersion](http://gitversion.readthedocs.io/).
+TODO: Build scripts
 
-The `content` directory is what actually gets packaged into the template. The file `content/template.config/template.json` controls which placeholders are replaced during instantiation.
+`artifacts/` is created during build and contains artifacts for publishing (e.g. NuGet packages).
+
+[`release/`](content/release/)
+
+[`deploy/`](content/deploy/)
