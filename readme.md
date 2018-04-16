@@ -87,45 +87,15 @@ Whereas `0.1.1` is extracted from a commit with tag `0.1.1`.
 
 __Note:__ All projects share the same namespace.
 
-## Client library                 
+## Building
 
-TypedRest: builds clients at a higher-level (like collections instead of idividual HTTP routes) and implicitly guides to cleaner/more consistent API design
+TODO: Build scripts
 
-## Layers vs Slices
+`artifacts/` is created during build and contains artifacts for publishing (e.g. NuGet packages).
 
-We for ourselves found, it's a good practice to architect services into slices instead of only thinking in layers.
-In times of _micro services_ services tend to become more and more stateless and isolated. 
-This increases availabilty, operability and simplifies technical ownership.
-In the process of architecting and implementing, we learn a lot about the problem domain we are working in. In particular, we get to know the diverse actors in domain processes, the necessary/desired cardinalities and such.
-So, we mostly don't start building a micro service but a monolith---simply because we don't know what we actually need.
-Thinking in slices makes it extremely easy to reign our monolith's (internal) dependencies in an isolated way, so that we can extract projects or even a whole new service, implementing a single slice of our domain.
+[`release/`](content/release/)
 
-__So what is a slice?__ Actually it's a vertical cut through your application representing a single part of the domain or an use case.
-Having a vertical cut does not mean you have to drop your thoughts about layers, if your dependencies tend to get more and more complex, layers will still improve the design of your slice. The actual difference is then that you don't think of __the__ persistence layer anymore but about a _customers persistence layer_ and a _products persistence layer_.
-
-The template also sticks to slices. Therefore you find all the sub directories named by a part of the domain (`Contacts` in the included example).
-
-__Further reading:__
-- https://www.thoughtworks.com/insights/blog/slicing-your-development-work-multi-layer-cake
-- http://deviq.com/vertical-slices/
-
-Slices go acorss projects
-
-Seperate `Startup.cs` with extension method per slice
-
-`partial class` for splitting up DB context
-
-`partial class` for splitting up Client
-
-## "Infrastructure" pseudo-slice
-
-Boilerplate for WebAPI, logging, monitoring, etc.
-
-Usually no need to touch
-
-Also has it's own [`Startup.cs`](content/src/Service/Infrastructure/Startup.cs)
-
-More interesting/high-level config happens in top-level Startup.cs
+[`deploy/`](content/deploy/)
 
 ## Configuration
 
@@ -146,7 +116,43 @@ The [`asset.yml`](content/release/asset.yml) file is used to generate releases, 
 proper volumes mandatory
 Only business parameters should be set at deployment-time (avoid exposing connection strings, etc.)
 
-## Logging
+## Layers vs Slices
+
+We for ourselves found, it's a good practice to architect services into slices instead of only thinking in layers.
+In times of _micro services_ services tend to become more and more stateless and isolated. 
+This increases availability, operability and simplifies technical ownership.
+In the process of architecting and implementing, we learn a lot about the problem domain we are working in. In particular, we get to know the diverse actors in domain processes, the necessary/desired cardinalities and such.
+So, we mostly don't start building a micro service but a monolith---simply because we don't know what we actually need.
+Thinking in slices makes it extremely easy to reign our monolith's (internal) dependencies in an isolated way, so that we can extract projects or even a whole new service, implementing a single slice of our domain.
+
+__So what is a slice?__ Actually it's a vertical cut through your application representing a single part of the domain or an use case.
+Having a vertical cut does not mean you have to drop your thoughts about layers, if your dependencies tend to get more and more complex, layers will still improve the design of your slice. The actual difference is then that you don't think of __the__ persistence layer anymore but about a _customers persistence layer_ and a _products persistence layer_.
+
+The template also sticks to slices. Therefore you find all the sub directories named by a part of the domain (`Contacts` in the included example).
+
+__Further reading:__
+- https://www.thoughtworks.com/insights/blog/slicing-your-development-work-multi-layer-cake
+- http://deviq.com/vertical-slices/
+
+Slices go across projects
+
+Separate `Startup.cs` with extension method per slice
+
+`partial class` for splitting up DB context
+
+`partial class` for splitting up Client
+
+## Infrastructure pseudo-slice
+
+Boilerplate for WebAPI, logging, monitoring, etc.
+
+Usually no need to touch
+
+Also has it's own [`Startup.cs`](content/src/Service/Infrastructure/Startup.cs)
+
+More interesting/high-level config happens in top-level Startup.cs
+
+### Logging
 
 Print to console instead of file and let Docker handle the collection
 
@@ -182,7 +188,7 @@ Fatal
 
 Do not catch, log and rethrow unless you REALLY have context to add
 
-## Metrics
+### Metrics
 
 Exposed on separate port to allow easy firewalling
 
@@ -202,18 +208,12 @@ Uses SQLite for simplicity. Consider PostgreSQL as an alternative, but only if y
 
 Reusable CollectionController and ICrudService provided outside of slice
 
-## Unit tests
+### Client library
+
+TypedRest: builds clients at a higher-level (like collections instead of idividual HTTP routes) and implicitly guides to cleaner/more consistent API design
+
+### Unit testing
 
 Test controllers via client (avoid fragility, avoid testing of Framework itself) using 
 
 Inject in-memory DB contexts into services (avoid building complex mocks yourself)
-
-## Building
-
-TODO: Build scripts
-
-`artifacts/` is created during build and contains artifacts for publishing (e.g. NuGet packages).
-
-[`release/`](content/release/)
-
-[`deploy/`](content/deploy/)
