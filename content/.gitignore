@@ -1,14 +1,13 @@
+/artifacts/
 /release/*.xml
 /release/*.zip
 
 /src/**/obj/
 /src/**/bin/
-/artifacts/
 
 /src/.vs/
 /src/.idea/
 /src/_ReSharper.*/
 /src/**/*.user
-/src/**/launchSettings.json
 /src/**/*.db
 .vscode/

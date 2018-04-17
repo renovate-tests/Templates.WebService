@@ -13,6 +13,6 @@
         </packageTypes>
     </metadata>
     <files>
-        <file src="content/**" exclude="content/src/.idea/**;content/src/.vs/**;content/src/_ReSharper.Caches/**;content/**/bin/**;content/**/obj/**;content/**/*.user;content/**/launchSettings.json" />
+        <file src="content/**" exclude="content/artifacts/**;content/release/*.xml;content/release/*.zip;content/src/**/obj/**;content/src/**/bin/**;content/src/.vs/**;content/src/.idea/**;content/src/_ReSharper.*/**;content/src/**/*.user;content/src/**/*.db;**/.vscode/**" />
     </files>
 </package>
