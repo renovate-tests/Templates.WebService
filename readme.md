@@ -128,29 +128,31 @@ Thinking in slices makes it extremely easy to reign our monolith's (internal) de
 __So what is a slice?__ Actually it's a vertical cut through your application representing a single part of the domain or an use case.
 Having a vertical cut does not mean you have to drop your thoughts about layers, if your dependencies tend to get more and more complex, layers will still improve the design of your slice. The actual difference is then that you don't think of __the__ persistence layer anymore but about a _customers persistence layer_ and a _products persistence layer_.
 
-The template also sticks to slices. Therefore you find all the sub directories named by a part of the domain (`Contacts` in the included example).
-
 __Further reading:__
 - https://www.thoughtworks.com/insights/blog/slicing-your-development-work-multi-layer-cake
 - http://deviq.com/vertical-slices/
 
-Slices go across projects
+The template also sticks to slices and with that, you will find the slices going across the projects.
+Therefore, each project comes with sub directories named by a part of the domain (`Contacts` in the included example) encapsulating the domain's concerns.
 
-Separate `Startup.cs` with extension method per slice
+To make all these concerns pluggable---which is possible due to the encapsualtion---you will also find `Startup.cs` files, containing extension methods for `IServiceCollection` to simply plug the slice into the central dependency injection.
 
-`partial class` for splitting up DB context
-
-`partial class` for splitting up Client
+Also, we made use of the `partial class` concept to isolate domain concerns working on the `DbContext` ([`Base DbContext`](content/src/Service/MyServiceDbContext.cs) vs [`Contacts DbContext`](content/src/Service/Contacts/MyServiceDbContext.cs)).
+This means, every slice enriches the main `DbContext` with its domain specific concerns.
+So we have one single class maintaining connection and caching concerns whereas the actual domain logic is split over the diverse slices.
+Same holds true for the [`MyServiceClient`](content/src/Client/Contacts/MyServiceClient.cs).
 
 ## Infrastructure pseudo-slice
 
-Boilerplate for WebAPI, logging, monitoring, etc.
+There is one slice that actually seems not to handle actual business concerns: The `Infrastructure` slice.
+In times of micro services reigning the software world, infrastructure becomes more and more important, this is why we handle this also as a seperate part of our domain.
 
-Usually no need to touch
+What the slice actually does is handling mostly boilerplate for setting up our non-functional concerns like WebAPI, logging, monitoring, etc..
+If there are no special requirements, there is no need to touch the classes inside.
+One class that might be of special interest is the `ApiExceptionFilterAttribute.cs` where you can map Exceptions thrown while processing a request to HTTP status codes.
 
-Also has it's own [`Startup.cs`](content/src/Service/Infrastructure/Startup.cs)
-
-More interesting/high-level config happens in top-level Startup.cs
+Staying in our slice pattern, the infrastructure slices also comes with its own [`Startup.cs`](content/src/Service/Infrastructure/Startup.cs).
+The high-level config is meant to be happening in the top-level [`Startup.cs`](content/src/Service/Startup.cs).
 
 ### Logging
 
