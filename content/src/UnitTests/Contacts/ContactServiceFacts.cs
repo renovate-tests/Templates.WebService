@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
@@ -13,7 +13,9 @@ namespace Axoom.MyService.Contacts
         private readonly Mock<IContactMetrics> _metricsMock = new Mock<IContactMetrics>();
 
         public ContactServiceFacts()
-            => _service = new ContactService(Context, _metricsMock.Object, new Mock<ILogger<ContactService>>().Object);
+        {
+            _service = new ContactService(Context, _metricsMock.Object, new Mock<ILogger<ContactService>>().Object);
+        }
 
         [Fact]
         public async Task ReadsAllFromDatabase()

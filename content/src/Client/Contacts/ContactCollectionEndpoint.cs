@@ -1,4 +1,4 @@
-﻿using TypedRest;
+using TypedRest;
 
 namespace Axoom.MyService.Contacts
 {

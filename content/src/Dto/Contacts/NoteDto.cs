@@ -1,4 +1,4 @@
-﻿namespace Axoom.MyService.Contacts
+namespace Axoom.MyService.Contacts
 {
     /// <summary>
     /// A representation of a note for serialization.
@@ -14,7 +14,7 @@
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return (obj is NoteDto other) && Content == other.Content;
+            return obj is NoteDto other && Content == other.Content;
         }
 
         public override int GetHashCode()

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Axoom.MyService.Contacts;
 using Axoom.MyService.Infrastructure;
 using JetBrains.Annotations;
@@ -22,12 +22,14 @@ namespace Axoom.MyService
         /// Called by ASP.NET Core to set up an environment.
         /// </summary>
         public Startup(IHostingEnvironment env)
-            => Configuration = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddYamlFile("appsettings.yml", optional: false, reloadOnChange: true)
-                .AddYamlFile($"appsettings.{env.EnvironmentName}.yml", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables()
-                .Build();
+        {
+            Configuration = new ConfigurationBuilder()
+                           .SetBasePath(env.ContentRootPath)
+                           .AddYamlFile("appsettings.yml", optional: false, reloadOnChange: true)
+                           .AddYamlFile($"appsettings.{env.EnvironmentName}.yml", optional: true, reloadOnChange: true)
+                           .AddEnvironmentVariables()
+                           .Build();
+        }
 
         /// <summary>
         /// Called by ASP.NET Core to register services.
@@ -50,10 +52,8 @@ namespace Axoom.MyService
             provider.GetRequiredService<Policies>().Startup(() =>
             {
                 using (var scope = provider.CreateScope())
-                {
                     // Replace .EnsureCreated() with .Migrate() once you have generated an EF Migration
                     scope.ServiceProvider.GetRequiredService<MyServiceDbContext>().Database.EnsureCreated();
-                }
             });
         }
     }

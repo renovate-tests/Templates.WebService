@@ -1,5 +1,4 @@
-﻿using System;
-using Axoom.MyService.Infrastructure;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
@@ -10,12 +9,14 @@ namespace Axoom.MyService
         protected readonly MyServiceDbContext Context;
 
         protected DatabaseFactsBase()
-            => Context = new MyServiceDbContext(
+        {
+            Context = new MyServiceDbContext(
                 new DbContextOptionsBuilder()
-                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()) // Use GUID so every test has its own DB
-                    .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
-                    .EnableSensitiveDataLogging()
-                    .Options);
+                   .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()) // Use GUID so every test has its own DB
+                   .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
+                   .EnableSensitiveDataLogging()
+                   .Options);
+        }
 
         public void Dispose()
         {

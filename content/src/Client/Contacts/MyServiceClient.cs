@@ -1,4 +1,4 @@
-﻿using Axoom.MyService.Contacts;
+using Axoom.MyService.Contacts;
 
 // ReSharper disable once CheckNamespace
 namespace Axoom.MyService
