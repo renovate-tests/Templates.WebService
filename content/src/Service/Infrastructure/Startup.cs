@@ -12,7 +12,7 @@ namespace Axoom.MyService.Infrastructure
                        .AddOptions()
                        .AddAxoomLogging(configuration)
                        .AddPolicies(configuration.GetSection("Policies"))
-                       .AddMetrics()
+                       .AddMetrics(configuration)
                        .AddRestApi();
 
         public static IServiceProvider UseInfrastructure(this IApplicationBuilder app)
@@ -20,7 +20,7 @@ namespace Axoom.MyService.Infrastructure
             var provider = app.ApplicationServices;
 
             provider.UseAxoomLogging();
-            provider.ExposeMetrics(port: 5000);
+            provider.ExposeMetrics();
 
             app.UseRestApi();
 
