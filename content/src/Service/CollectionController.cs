@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Axoom.MyService
+namespace MyVendor.MyService
 {
     /// <summary>
     /// Common base class for controllers that conform to the "collection" REST pattern.

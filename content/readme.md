@@ -24,13 +24,13 @@ To build and run locally with AX (requires [Infrastructure Stack](https://tfs.in
 
     ./build.ps1 -DeployLocal
 
- * My Service API: https://myservice-myinstance.local.axoom.systems/swagger/
+ * My Service API: https://myvendor-myservice-myinstance.local.axoom.systems/swagger/
 
 ## Deploying
 
 ### Feed URI
 
-http://assets.axoom.cloud/services/myservice.xml
+http://assets.axoom.cloud/services/myvendor-myservice.xml
 
 ### External environment
 

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Polly;
 
-namespace Axoom.MyService.Infrastructure
+namespace MyVendor.MyService.Infrastructure
 {
     /// <summary>
     /// Provides error handling and retry policies.

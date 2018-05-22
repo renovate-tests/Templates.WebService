@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Axoom.MyService.Infrastructure
+namespace MyVendor.MyService.Infrastructure
 {
     public static class Startup
     {

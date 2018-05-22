@@ -2,8 +2,8 @@
 version: '3'
 
 services:
-  myservice:
-    image: ${DOCKER_REGISTRY-docker-ci.axoom.cloud}/services/myservice:${VERSION-0.1-pre}
+  myvendor-myservice:
+    image: ${DOCKER_REGISTRY-docker-ci.axoom.cloud}/services/myvendor-myservice:${VERSION-0.1-pre}
     build:
       context: ./Service
       dockerfile: Dockerfile

@@ -1,9 +1,9 @@
-using Axoom.MyService.Contacts;
+using MyVendor.MyService.Contacts;
 
 // ReSharper disable once CheckNamespace
-namespace Axoom.MyService
+namespace MyVendor.MyService
 {
-    public partial class MyServiceClient
+    public partial class Client
     {
         public ContactCollectionEndpoint Contacts => new ContactCollectionEndpoint(this);
     }

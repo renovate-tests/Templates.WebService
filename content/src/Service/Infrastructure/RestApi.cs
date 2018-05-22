@@ -7,7 +7,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace Axoom.MyService.Infrastructure
+namespace MyVendor.MyService.Infrastructure
 {
     public static class RestApi
     {
@@ -29,13 +29,12 @@ namespace Axoom.MyService.Infrastructure
                         Version = "v1",
                         Contact = new Contact
                         {
-                            Email = "developer@axoom.com",
-                            Name = "AXOOM GmbH",
-                            Url = "http://developer.axoom.com"
+                            Email = "developer@example.com",
+                            Url = "http://www.example.com"
                         }
                     });
-                options.IncludeXmlComments(Path.Combine(ApplicationEnvironment.ApplicationBasePath, "Axoom.MyService.xml"));
-                options.IncludeXmlComments(Path.Combine(ApplicationEnvironment.ApplicationBasePath, "Axoom.MyService.Dto.xml"));
+                options.IncludeXmlComments(Path.Combine(ApplicationEnvironment.ApplicationBasePath, "MyVendor.MyService.xml"));
+                options.IncludeXmlComments(Path.Combine(ApplicationEnvironment.ApplicationBasePath, "MyVendor.MyService.Dto.xml"));
                 options.DescribeAllEnumsAsStrings();
             });
 

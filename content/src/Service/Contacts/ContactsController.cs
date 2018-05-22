@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Axoom.MyService.Contacts
+namespace MyVendor.MyService.Contacts
 {
     /// <summary>
     /// Provides access to contacts in an address book.

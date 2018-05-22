@@ -8,7 +8,7 @@
   "tags": {
     "language": "C#"
   },
-  "sourceName": "Axoom.MyService",
+  "sourceName": "MyVendor.MyService",
   "preferNameDirectory": true,
   "guids": [
     "837BC53E-0271-4E9C-B5B5-C60EA7A7C7B5",
@@ -16,17 +16,23 @@
     "B74301C8-0759-45FE-BA6C-E832BABE08E5"
   ],
   "symbols": {
-    "dockerName": {
+    "serviceName": {
       "type": "parameter",
       "dataType": "string",
       "isRequired": true,
-      "replaces":"myservice"
+      "replaces":"myvendor-myservice"
     },
     "friendlyName": {
       "type": "parameter",
       "dataType": "string",
       "isRequired": true,
       "replaces":"My Service"
+    },
+    "vendorDomain": {
+      "type": "parameter",
+      "dataType": "string",
+      "isRequired": true,
+      "replaces":"example.com"
     },
     "description": {
       "type": "parameter",

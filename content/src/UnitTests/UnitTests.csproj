@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Axoom.MyService.UnitTests</AssemblyName>
-    <RootNamespace>Axoom.MyService</RootNamespace>
+    <AssemblyName>MyVendor.MyService.UnitTests</AssemblyName>
+    <RootNamespace>MyVendor.MyService</RootNamespace>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <OutputType>Library</OutputType>
     <IsPackable>False</IsPackable>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>

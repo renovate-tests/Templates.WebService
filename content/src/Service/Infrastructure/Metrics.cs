@@ -6,7 +6,7 @@ using Nexogen.Libraries.Metrics;
 using Nexogen.Libraries.Metrics.Prometheus;
 using Nexogen.Libraries.Metrics.Prometheus.Standalone;
 
-namespace Axoom.MyService.Infrastructure
+namespace MyVendor.MyService.Infrastructure
 {
     public static class Metrics
     {

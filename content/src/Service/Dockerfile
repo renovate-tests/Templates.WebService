@@ -4,4 +4,4 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 5000
 COPY ${source:-obj/Docker/publish} .
-ENTRYPOINT ["dotnet", "Axoom.MyService.dll"]
+ENTRYPOINT ["dotnet", "MyVendor.MyService.dll"]

@@ -1,14 +1,14 @@
 using System;
-using Axoom.MyService.Contacts;
-using Axoom.MyService.Infrastructure;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyVendor.MyService.Contacts;
+using MyVendor.MyService.Infrastructure;
 
-namespace Axoom.MyService
+namespace MyVendor.MyService
 {
     /// <summary>
     /// Startup class used by ASP.NET Core.
@@ -36,7 +36,7 @@ namespace Axoom.MyService
         /// </summary>
         public IServiceProvider ConfigureServices(IServiceCollection services)
             => services.AddInfrastructure(Configuration)
-                       .AddDbContext<MyServiceDbContext>(options => options.UseSqlite(Configuration.GetSection("Database").GetValue<string>("ConnectionString")))
+                       .AddDbContext<DbContext>(options => options.UseSqlite(Configuration.GetSection("Database").GetValue<string>("ConnectionString")))
                        .AddContacts()
                        .BuildServiceProvider();
 
@@ -53,7 +53,7 @@ namespace Axoom.MyService
             {
                 using (var scope = provider.CreateScope())
                     // Replace .EnsureCreated() with .Migrate() once you have generated an EF Migration
-                    scope.ServiceProvider.GetRequiredService<MyServiceDbContext>().Database.EnsureCreated();
+                    scope.ServiceProvider.GetRequiredService<DbContext>().Database.EnsureCreated();
             });
         }
     }

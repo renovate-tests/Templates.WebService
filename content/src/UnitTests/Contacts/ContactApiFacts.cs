@@ -8,7 +8,7 @@ using Moq;
 using TypedRest;
 using Xunit;
 
-namespace Axoom.MyService.Contacts
+namespace MyVendor.MyService.Contacts
 {
     public class ContactApiFacts : ClientFactsBase
     {

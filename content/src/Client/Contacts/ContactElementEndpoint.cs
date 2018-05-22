@@ -2,7 +2,7 @@ using System;
 using JetBrains.Annotations;
 using TypedRest;
 
-namespace Axoom.MyService.Contacts
+namespace MyVendor.MyService.Contacts
 {
     [UsedImplicitly]
     public class ContactElementEndpoint : ElementEndpoint<ContactDto>

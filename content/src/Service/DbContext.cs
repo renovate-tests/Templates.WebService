@@ -1,16 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Axoom.MyService
+namespace MyVendor.MyService
 {
     /// <summary>
     /// Describes the service's database model.
     /// Used as a combination of the Unit Of Work and Repository patterns.
     /// </summary>
-    public partial class MyServiceDbContext : DbContext
+    public partial class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
         // NOTE: Other parts of this class are in separate slice-specific files
 
-        public MyServiceDbContext(DbContextOptions options)
+        public DbContext(DbContextOptions options)
             : base(options)
         {}
     }

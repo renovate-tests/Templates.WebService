@@ -1,10 +1,10 @@
 using System;
-using Axoom.MyService.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
+using MyVendor.MyService.Infrastructure;
 
-namespace Axoom.MyService
+namespace MyVendor.MyService
 {
     public abstract class ClientFactsBase : IDisposable
     {
@@ -18,7 +18,7 @@ namespace Axoom.MyService
                                     .Configure(x => x.UseRestApi()));
         }
 
-        protected MyServiceClient Client => new MyServiceClient(new Uri("http://localhost"), _server.CreateClient());
+        protected Client Client => new Client(new Uri("http://localhost"), _server.CreateClient());
 
         protected abstract void ConfigureService(IServiceCollection services);
 

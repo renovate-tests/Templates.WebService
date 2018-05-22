@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 
-namespace Axoom.MyService
+namespace MyVendor.MyService
 {
     public static class Program
     {

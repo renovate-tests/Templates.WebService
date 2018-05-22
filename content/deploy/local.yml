@@ -1,7 +1,7 @@
 id: myinstance
 
 feeds:
-  http://assets.axoom.cloud/services/myservice.xml:
+  http://assets.axoom.cloud/services/myvendor-myservice.xml:
 
 environment:
   INTERNAL_DOMAIN: myinstance.local.axoom.systems # *.local.axoom.systems points to 127.0.0.1

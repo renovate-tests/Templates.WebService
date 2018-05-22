@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Axoom.MyService.Contacts
+namespace MyVendor.MyService.Contacts
 {
     /// <summary>
     /// Manages contacts in an address book.
     /// </summary>
     public class ContactService : IContactService
     {
-        private readonly MyServiceDbContext _context;
+        private readonly DbContext _context;
         private readonly IContactMetrics _metrics;
         private readonly ILogger<ContactService> _logger;
 
-        public ContactService(MyServiceDbContext context, IContactMetrics metrics, ILogger<ContactService> logger)
+        public ContactService(DbContext context, IContactMetrics metrics, ILogger<ContactService> logger)
         {
             _context = context;
             _metrics = metrics;

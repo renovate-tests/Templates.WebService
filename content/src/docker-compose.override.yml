@@ -2,8 +2,8 @@
 version: '3'
 
 services:
-  myservice:
-    image: myservice
+  myvendor-myservice:
+    image: myvendor-myservice
     ports:
       - "12345:80"
     environment:

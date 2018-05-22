@@ -1,7 +1,7 @@
-feed_uri: http://assets.axoom.cloud/services/myservice.xml
+feed_uri: http://assets.axoom.cloud/services/myvendor-myservice.xml
 name: My Service
 summary: my description
-homepage: https://tfs.inside-axoom.org/tfs/axoom/axoom/_git/Axoom.MyService?_a=readme&fullScreen=true
+homepage: https://tfs.inside-axoom.org/tfs/axoom/axoom/_git/MyVendor.MyService?_a=readme&fullScreen=true
 
 mixins:
   - feed_uri: http://assets.axoom.cloud/mixins/axoom-service.xml
@@ -23,7 +23,7 @@ compose:
     services:
       myservice:
         environment:
-          DATABASE__CONNECTIONSTRING: Data Source=/data/myservice.db
+          DATABASE__CONNECTIONSTRING: Data Source=/data/myvendor-myservice.db
         volumes:
           - "myservice:/data"
     volumes:
