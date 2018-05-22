@@ -1,3 +1,5 @@
+Port: 80
+
 Logging:
   LogLevel:
     Default: Debug
