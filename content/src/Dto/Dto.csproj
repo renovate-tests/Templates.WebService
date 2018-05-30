@@ -15,6 +15,7 @@
 
   <PropertyGroup>
     <Authors>example.com</Authors>
+    <Title>My Service DTOs</Title>
     <Description>DTOs for the My Service REST API</Description>
   </PropertyGroup>
 

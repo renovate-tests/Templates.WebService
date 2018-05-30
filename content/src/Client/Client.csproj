@@ -15,6 +15,7 @@
 
   <PropertyGroup>
     <Authors>example.com</Authors>
+    <Title>My Service Client</Title>
     <Description>Client library for the My Service REST API</Description>
   </PropertyGroup>
 

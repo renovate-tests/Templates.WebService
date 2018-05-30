@@ -14,7 +14,8 @@
 
   <PropertyGroup>
     <Authors>example.com</Authors>
-    <Description>My Service</Description>
+    <Title>My Service</Title>
+    <Description>my description</Description>
   </PropertyGroup>
 
   <ItemGroup>
