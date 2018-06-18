@@ -1,5 +1,5 @@
 dependencies:
-  - name: axoom-webservice
-    version: 0.1.0
+  - name: axoom-service
+    version: 1.1.0
     repository: '@axoom-base'
     alias: app
