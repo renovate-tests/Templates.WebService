@@ -14,7 +14,6 @@ namespace MyVendor.MyService.Infrastructure
         public static void UseAxoomLogging(this IServiceProvider provider)
             => provider.GetRequiredService<ILoggerFactory>()
                        .AddAxoomConsole(provider.GetRequiredService<IConfiguration>().GetSection("Logging"))
-                       .AddAxoomConsole(provider.GetRequiredService<IConfiguration>().GetSection("Logging"))
                        .CreateLogger("Startup")
                        .LogInformation("Starting My Service");
     }
