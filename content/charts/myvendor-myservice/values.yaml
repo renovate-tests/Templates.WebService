@@ -6,9 +6,6 @@ app:
     repository: apps/myvendor-myservice
     tag: latest
 
-  monitoring:
-    class: xetics
-
   resources:
     requests:
       memory: 256M
