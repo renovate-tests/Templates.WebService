@@ -12,7 +12,7 @@ releases:
         app:
           ingress:
             enabled: true
-            class: treafik-internal
+            class: traefik-internal
             domain: 'myvendor-myservice-{{ requiredEnv "PUBLIC_DOMAIN" }}'
           env:
             LOGGING__FORMAT: 'Gelf'
