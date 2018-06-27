@@ -3,7 +3,6 @@ version: '3.4'
 
 services:
   myvendor-myservice:
-    image: myvendor-myservice
     ports:
       - "12345:80"
     environment:
