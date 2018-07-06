@@ -146,7 +146,7 @@ Same holds true for the `Client` ([Base](content/src/Client/Client.cs) vs [Conta
 ## Infrastructure pseudo-slice
 
 There is one slice that actually seems not to handle actual business concerns: The `Infrastructure` slice.
-In times of micro services reigning the software world, infrastructure becomes more and more important, this is why we handle this also as a seperate part of our domain.
+In times of micro services reigning the software world, infrastructure becomes more and more important, this is why we handle this also as a separate part of our domain.
 
 What the slice actually does is handling mostly boilerplate for setting up our non-functional concerns like WebAPI, logging, monitoring, etc..
 If there are no special requirements, there is no need to touch the classes inside.
@@ -203,7 +203,7 @@ Guideline for getting started, easy to remove
 
 Demonstrates "collection", "element" and "action" REST/TypedRest patterns
 
-Demonstrates DTO/Entity asymetry (Contact + Note vs Contact + Poke)
+Demonstrates DTO/Entity asymmetry (Contact + Note vs Contact + Poke)
 
 No custom Repository or UnitOfWork classes, because Entity Framework's Context already implements those patterns
 
