@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <PackageReference Include="Axoom.Extensions.Logging.Console" Version="1.0.0-alpha0013" />
-    <PackageReference Include="Axoom.Extensions.Prometheus.Standalone" Version="1.0.0" />
+    <PackageReference Include="Axoom.Extensions.Prometheus.Standalone" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.1.1" />
