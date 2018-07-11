@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using MyVendor.MyService.Infrastructure;
+using Xunit.Abstractions;
 
 namespace MyVendor.MyService
 {
@@ -10,10 +11,11 @@ namespace MyVendor.MyService
     {
         private readonly TestServer _server;
 
-        protected ClientFactsBase()
+        protected ClientFactsBase(ITestOutputHelper output)
         {
             _server = new TestServer(new WebHostBuilder()
-                                    .ConfigureServices(x => x.AddRestApi())
+                                    .ConfigureServices(x => x.AddLogging(builder => builder.AddXunit(output))
+									                         .AddRestApi())
                                     .ConfigureServices(ConfigureService)
                                     .Configure(x => x.UseRestApi()));
         }

@@ -7,11 +7,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using TypedRest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace MyVendor.MyService.Contacts
 {
     public class ContactApiFacts : ClientFactsBase
     {
+        public ContactApiFacts(ITestOutputHelper output)
+            : base(output)
+        {}
+
         private readonly Mock<IContactService> _serviceMock = new Mock<IContactService>();
 
         protected override void ConfigureService(IServiceCollection services)

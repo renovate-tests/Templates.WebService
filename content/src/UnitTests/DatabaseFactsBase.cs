@@ -18,7 +18,7 @@ namespace MyVendor.MyService
                    .Options);
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             Context.Database.EnsureDeleted();
             Context.Dispose();
