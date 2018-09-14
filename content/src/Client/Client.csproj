@@ -6,7 +6,7 @@
     <LangVersion>7.2</LangVersion>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <OutputPath>..\..\artifacts\</OutputPath>
+    <OutputPath>..\..\artifacts</OutputPath>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>
@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TypedRest" Version="0.38.1" />
+    <PackageReference Include="TypedRest" Version="0.39.0" />
     <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
   </ItemGroup>
 
