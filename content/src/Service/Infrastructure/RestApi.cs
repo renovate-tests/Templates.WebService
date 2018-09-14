@@ -1,6 +1,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.PlatformAbstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
@@ -14,6 +15,7 @@ namespace MyVendor.MyService.Infrastructure
         public static IServiceCollection AddRestApi(this IServiceCollection services)
         {
             services.AddMvc(options => options.Filters.Add(typeof(ApiExceptionFilterAttribute)))
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                     .AddJsonOptions(options =>
                      {
                          options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
