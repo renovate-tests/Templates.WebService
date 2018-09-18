@@ -47,10 +47,11 @@ namespace MyVendor.MyService.Infrastructure
         {
             if (app.ApplicationServices.GetRequiredService<IHostingEnvironment>().IsDevelopment())
             {
-                app.UseDeveloperExceptionPage()
-                   .UseSwagger()
-                   .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1"));
+                app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger()
+               .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1"));
 
             return app.UseMvc();
         }
