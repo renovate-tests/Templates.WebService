@@ -1,6 +1,8 @@
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.PlatformAbstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
@@ -13,7 +15,10 @@ namespace MyVendor.MyService.Infrastructure
     {
         public static IServiceCollection AddRestApi(this IServiceCollection services)
         {
+            services.Configure<ForwardedHeadersOptions>(options => options.ForwardedHeaders = ForwardedHeaders.All);
+
             services.AddMvc(options => options.Filters.Add(typeof(ApiExceptionFilterAttribute)))
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                     .AddJsonOptions(options =>
                      {
                          options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -43,12 +48,15 @@ namespace MyVendor.MyService.Infrastructure
 
         public static IApplicationBuilder UseRestApi(this IApplicationBuilder app)
         {
+			app.UseForwardedHeaders(); // must be first middleware in pipeline
+
             if (app.ApplicationServices.GetRequiredService<IHostingEnvironment>().IsDevelopment())
             {
-                app.UseDeveloperExceptionPage()
-                   .UseSwagger()
-                   .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1"));
+                app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger()
+               .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1"));
 
             return app.UseMvc();
         }
