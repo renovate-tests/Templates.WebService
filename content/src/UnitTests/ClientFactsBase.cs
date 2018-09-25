@@ -15,7 +15,7 @@ namespace MyVendor.MyService
         {
             _server = new TestServer(new WebHostBuilder()
                                     .ConfigureServices(x => x.AddLogging(builder => builder.AddXunit(output))
-									                         .AddRestApi())
+                                                             .AddRestApi())
                                     .ConfigureServices(ConfigureService)
                                     .Configure(x => x.UseRestApi()));
         }
