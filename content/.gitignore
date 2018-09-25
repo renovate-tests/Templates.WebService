@@ -1,8 +1,5 @@
 /artifacts/
 
-/release/*.xml
-/release/*.zip
-
 /charts/*/requirements.lock
 /charts/*/charts/*
 
