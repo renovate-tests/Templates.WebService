@@ -3,7 +3,9 @@ version: '3.4'
 
 services:
   myvendor-myservice:
-    ports:
-      - "12345:80"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      Logging__Format: Plain
+    ports:
+      - "12345:80"
+    #   - "5000:5000"
