@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using MyVendor.MyService.Contacts;
 using TypedRest;
 
 namespace MyVendor.MyService
@@ -7,10 +8,8 @@ namespace MyVendor.MyService
     /// <summary>
     /// Provides a type-safe client for the My Service REST API.
     /// </summary>
-    public partial class Client : EntryEndpoint
+    public class Client : EntryEndpoint, IClient
     {
-        // NOTE: Other parts of this class are in separate slice-specific files
-
         /// <summary>
         /// Creates a new My Service Client.
         /// </summary>
@@ -27,5 +26,11 @@ namespace MyVendor.MyService
         public Client(Uri uri, HttpClient httpClient)
             : base(uri, httpClient)
         {}
+
+        /// <summary>
+        /// Provides access to contacts in an address book.
+        /// </summary>
+        public ICollectionEndpoint<ContactDto, ContactElementEndpoint> Contacts
+            => new CollectionEndpoint<ContactDto, ContactElementEndpoint>(this, relativeUri: "contacts");
     }
 }

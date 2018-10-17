@@ -1,13 +1,13 @@
 using MyVendor.MyService.Contacts;
+using TypedRest;
 
-// ReSharper disable once CheckNamespace
 namespace MyVendor.MyService
 {
-    public partial class Client
+    public interface IClient : IEndpoint
     {
         /// <summary>
         /// Provides access to contacts in an address book.
         /// </summary>
-        public ContactCollectionEndpoint Contacts => new ContactCollectionEndpoint(this);
+        ICollectionEndpoint<ContactDto, ContactElementEndpoint> Contacts { get; }
     }
 }
