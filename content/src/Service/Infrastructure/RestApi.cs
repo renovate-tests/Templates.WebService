@@ -52,7 +52,8 @@ namespace MyVendor.MyService.Infrastructure
 
             if (app.ApplicationServices.GetRequiredService<IHostingEnvironment>().IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage()
+                   .UseExceptionDemystifier();
             }
 
             app.UseSwagger()
