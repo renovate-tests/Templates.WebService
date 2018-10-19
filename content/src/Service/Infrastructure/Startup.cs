@@ -14,9 +14,10 @@ namespace MyVendor.MyService.Infrastructure
             => services.AddSingleton(configuration)
                        .AddOptions()
                        .AddLogging(builder => builder.AddConfiguration(configuration.GetSection("Logging"))
+                                                     .AddAxoomConsole(configuration.GetSection("Logging"))
                                                      .AddExceptionDemystifyer())
-                       .AddPrometheusServer(configuration)
-                       .AddPolicies(configuration)
+                       .AddPrometheusServer(configuration.GetSection("Metrics"))
+                       .AddPolicies(configuration.GetSection("Policies"))
                        .AddRestApi();
 
         public static IServiceProvider UseInfrastructure(this IApplicationBuilder app)
@@ -24,7 +25,6 @@ namespace MyVendor.MyService.Infrastructure
             var provider = app.ApplicationServices;
 
             provider.GetRequiredService<ILoggerFactory>()
-                    .AddAxoomConsole(provider.GetRequiredService<IConfiguration>().GetSection("Logging"))
                     .CreateLogger("Startup")
                     .LogInformation("Starting My Service");
 

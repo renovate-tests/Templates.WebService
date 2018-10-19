@@ -64,7 +64,7 @@ namespace MyVendor.MyService.Infrastructure
     public static class PoliciesExtensions
     {
         public static IServiceCollection AddPolicies(this IServiceCollection services, IConfiguration configuration)
-            => services.AddSingleton<Policies>()
-                       .Configure<PolicyOptions>(configuration.GetSection("Policies"));
+            => services.Configure<PolicyOptions>(configuration)
+                       .AddSingleton<Policies>();
     }
 }

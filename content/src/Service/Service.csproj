@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="Axoom.Extensions.Logging.Console" Version="1.0.0" />
-    <PackageReference Include="Axoom.Extensions.Prometheus.Standalone" Version="1.1.3" />
+    <PackageReference Include="Axoom.Extensions.Prometheus.Standalone" Version="1.2.0" />
     <PackageReference Include="codeessentials.AspNetCore.Diagnostics.Demystifier" Version="0.1.28" />
     <PackageReference Include="codeessentials.Extensions.Logging.Demystifier" Version="0.1.28" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.1.1" />
