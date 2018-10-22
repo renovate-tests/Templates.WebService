@@ -26,7 +26,7 @@ namespace MyVendor.MyService
         /// Returns all elements.
         /// </summary>
         /// <response code="200">OK</response>
-        [HttpGet, Route("")]
+        [HttpGet("")]
         public async Task<IEnumerable<T>> ReadAll()
             => await _service.ReadAllAsync();
 
@@ -36,7 +36,7 @@ namespace MyVendor.MyService
         /// <param name="id">The ID of the element to look for.</param>
         /// <response code="200">OK</response>
         /// <response code="404">Specified element not found</response>
-        [HttpGet, Route("{id}")]
+        [HttpGet("{id}")]
         public async Task<T> Read([FromRoute] string id)
             => await _service.ReadAsync(id);
 
@@ -47,7 +47,7 @@ namespace MyVendor.MyService
         /// <returns>The element that was created (with the ID).</returns>
         /// <response code="201">Created</response>
         /// <response code="400">Missing or invalid request body</response>
-        [HttpPost, Route("")]
+        [HttpPost("")]
         [ProducesResponseType(201)]
         public async Task<ActionResult<T>> Create([FromBody] T element)
         {
@@ -67,7 +67,7 @@ namespace MyVendor.MyService
         /// <response code="204">Success</response>
         /// <response code="400">Missing or invalid request body</response>
         /// <response code="404">Specified element not found</response>
-        [HttpPut, Route("{id}")]
+        [HttpPut("{id}")]
         [ProducesResponseType(204)]
         public async Task<IActionResult> Set([FromRoute] string id, [FromBody] T element)
         {
@@ -84,7 +84,7 @@ namespace MyVendor.MyService
         /// <param name="id">The ID of the element to delete.</param>
         /// <response code="204">Success</response>
         /// <response code="404">Specified element not found</response>
-        [HttpDelete, Route("{id}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         public async Task Delete([FromRoute] string id)
             => await _service.DeleteAsync(id);
