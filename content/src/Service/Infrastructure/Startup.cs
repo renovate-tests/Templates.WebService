@@ -24,10 +24,6 @@ namespace MyVendor.MyService.Infrastructure
         {
             var provider = app.ApplicationServices;
 
-            provider.GetRequiredService<ILoggerFactory>()
-                    .CreateLogger("Startup")
-                    .LogInformation("Starting My Service");
-
             provider.UsePrometheusServer();
 
             app.UseRestApi();
