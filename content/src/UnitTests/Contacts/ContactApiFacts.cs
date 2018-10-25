@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using MorseCode.ITask;
 using TypedRest;
 using Xunit;
 using Xunit.Abstractions;
@@ -63,7 +64,7 @@ namespace MyVendor.MyService.Contacts
         [Fact]
         public void RejectsCreateOnIncompleteBody()
         {
-            Client.Contacts.Awaiting(x => x.CreateAsync(new ContactDto())).Should().Throw<InvalidDataException>();
+            Client.Contacts.Awaiting(x => x.CreateAsync(new ContactDto()).AsTask()).Should().Throw<InvalidDataException>();
         }
 
         [Fact]
