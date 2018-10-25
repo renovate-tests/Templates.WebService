@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MyVendor.MyService
@@ -7,10 +9,14 @@ namespace MyVendor.MyService
     {
         protected readonly IServiceProvider Provider;
 
-        protected StartupFactsBase()
+        protected StartupFactsBase(IDictionary<string, string> configuration = null)
         {
+            var configBuilder = new ConfigurationBuilder().AddInMemoryCollection(configuration);
+            if (configuration != null)
+                configBuilder.AddInMemoryCollection(configuration);
+
             var services = new ServiceCollection();
-            new Startup().ConfigureServices(services);
+            new Startup(configBuilder.Build()).ConfigureServices(services);
             Provider = services.BuildServiceProvider();
         }
     }
