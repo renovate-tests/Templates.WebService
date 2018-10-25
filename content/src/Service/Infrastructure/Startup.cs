@@ -22,13 +22,8 @@ namespace MyVendor.MyService.Infrastructure
 
         public static IServiceProvider UseInfrastructure(this IApplicationBuilder app)
         {
-            var provider = app.ApplicationServices;
-
-            provider.UsePrometheusServer();
-
             app.UseRestApi();
-
-            return provider;
+            return app.ApplicationServices;
         }
     }
 }
