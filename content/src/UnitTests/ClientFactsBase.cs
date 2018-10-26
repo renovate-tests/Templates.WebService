@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MyVendor.MyService.Infrastructure;
 using Xunit.Abstractions;
 
@@ -13,11 +14,12 @@ namespace MyVendor.MyService
 
         protected ClientFactsBase(ITestOutputHelper output)
         {
-            _server = new TestServer(new WebHostBuilder()
-                                    .ConfigureServices(x => x.AddLogging(builder => builder.AddXunit(output))
-                                                             .AddRestApi())
-                                    .ConfigureServices(ConfigureService)
-                                    .Configure(x => x.UseRestApi()));
+            _server = new TestServer(
+                new WebHostBuilder()
+                   .ConfigureLogging(builder => builder.AddXUnit(output))
+                   .ConfigureServices(services => services.AddRestApi())
+                   .ConfigureServices(ConfigureService)
+                   .Configure(builder => builder.UseRestApi()));
         }
 
         protected Client Client => new Client(new Uri("http://localhost"), _server.CreateClient());
