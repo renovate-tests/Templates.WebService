@@ -12,7 +12,7 @@ using Xunit.Abstractions;
 
 namespace MyVendor.MyService.Contacts
 {
-    public class ContactApiFacts : ClientFactsBase
+    public class ContactApiFacts : ApiFactsBase
     {
         public ContactApiFacts(ITestOutputHelper output)
             : base(output)
@@ -77,27 +77,27 @@ namespace MyVendor.MyService.Contacts
         public async Task UpdatesInService()
         {
             var contact = new ContactDto {Id = "1", FirstName = "John", LastName = "Smith"};
-            _serviceMock.Setup(x => x.UpdateAsync(contact)).Returns(Task.CompletedTask);
 
             await Client.Contacts.SetAsync(contact);
+
+            _serviceMock.Verify(x => x.UpdateAsync(contact));
         }
 
         [Fact]
         public void RejectsUpdateOnIdMismatch()
         {
-            Func<Task> setAsync = async () =>
-            {
-                await Client.Contacts["2"].SetAsync(new ContactDto {Id = "1", FirstName = "John", LastName = "Smith"});
-            };
-            setAsync.Should().Throw<InvalidDataException>();
+            var contactDto = new ContactDto {Id = "1", FirstName = "John", LastName = "Smith"};
+
+            Client.Contacts["2"].Awaiting(x => x.SetAsync(contactDto))
+                  .Should().Throw<InvalidDataException>();
         }
 
         [Fact]
         public async Task DeletesFromService()
         {
-            _serviceMock.Setup(x => x.DeleteAsync("1")).Returns(Task.CompletedTask);
-
             await Client.Contacts["1"].DeleteAsync();
+
+            _serviceMock.Verify(x => x.DeleteAsync("1"));
         }
 
         [Fact]
@@ -107,6 +107,7 @@ namespace MyVendor.MyService.Contacts
             _serviceMock.Setup(x => x.ReadNoteAsync("1")).ReturnsAsync(note);
 
             var result = await Client.Contacts["1"].Note.ReadAsync();
+
             result.Should().Be(note);
         }
 
@@ -114,17 +115,18 @@ namespace MyVendor.MyService.Contacts
         public async Task SetsNoteInService()
         {
             var note = new NoteDto {Content = "my note"};
-            _serviceMock.Setup(x => x.SetNoteAsync("1", note)).Returns(Task.CompletedTask);
 
             await Client.Contacts["1"].Note.SetAsync(note);
+
+            _serviceMock.Verify(x => x.SetNoteAsync("1", note));
         }
 
         [Fact]
         public async Task PokesViaService()
         {
-            _serviceMock.Setup(x => x.PokeAsync("1")).Returns(Task.CompletedTask);
-
             await Client.Contacts["1"].Poke.TriggerAsync();
+
+            _serviceMock.Verify(x => x.PokeAsync("1"));
         }
     }
 }

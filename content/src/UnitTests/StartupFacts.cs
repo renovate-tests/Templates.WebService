@@ -4,8 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.ObjectPool;
 using Moq;
 using Xunit;
@@ -30,17 +33,24 @@ namespace MyVendor.MyService
             _output = output;
 
             AddFrameworkServices();
-            _services.AddLogging();
+            AddMvcControllers();
+            _services.AddLogging(builder => builder.AddXUnit());
             new Startup(_configuration).ConfigureServices(_services);
 
             _provider = _services.BuildServiceProvider();
         }
 
         private void AddFrameworkServices()
+            => _services.AddSingleton<IHostingEnvironment>(new HostingEnvironment {ContentRootPath = "dummy"})
+                        .AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>()
+                        .AddSingleton(new Mock<DiagnosticSource>().Object);
+
+        private void AddMvcControllers()
         {
-            _services.AddSingleton<IHostingEnvironment>(new HostingEnvironment {ContentRootPath = "dummy"});
-            _services.AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
-            _services.AddSingleton(new Mock<DiagnosticSource>().Object);
+            var feature = new ControllerFeature();
+            new ControllerFeatureProvider().PopulateFeature(new [] {new AssemblyPart(typeof(Startup).Assembly)}, feature);
+            foreach (var controller in feature.Controllers)
+                _services.AddTransient(controller);
         }
 
         [Fact]
