@@ -31,6 +31,8 @@ namespace MyVendor.MyService
                    .ConfigureServices((context, services) => services.AddRestApi())
                    .ConfigureServices(ConfigureService)
                    .Configure(builder => builder.UseRestApi()));
+
+            HttpClient = _server.CreateClient();
         }
 
         /// <summary>
@@ -41,7 +43,7 @@ namespace MyVendor.MyService
         /// <summary>
         /// A client configured for in-memory communication with ASP.NET MVC controllers.
         /// </summary>
-        protected HttpClient HttpClient => _server.CreateClient();
+        protected readonly HttpClient HttpClient;
 
         public virtual void Dispose()
         {

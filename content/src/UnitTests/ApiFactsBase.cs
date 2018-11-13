@@ -11,11 +11,13 @@ namespace MyVendor.MyService
     {
         protected ApiFactsBase(ITestOutputHelper output, IDictionary<string, string> configuration = null)
             : base(output, configuration)
-        {}
+        {
+            Client = new Client(new Uri("http://localhost"), HttpClient);
+        }
 
         /// <summary>
         /// A client configured for in-memory communication with ASP.NET MVC controllers.
         /// </summary>
-        protected Client Client => new Client(new Uri("http://localhost"), HttpClient);
+        protected readonly Client Client;
     }
 }
