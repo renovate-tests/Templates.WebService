@@ -68,12 +68,6 @@ namespace MyVendor.MyService.Contacts
         }
 
         [Fact]
-        public void RejectsCreateOnMissingBody()
-        {
-            new ActionEndpoint(Client.Contacts, "./").Awaiting(x => x.TriggerAsync()).Should().Throw<InvalidDataException>();
-        }
-
-        [Fact]
         public async Task UpdatesInService()
         {
             var contact = new ContactDto {Id = "1", FirstName = "John", LastName = "Smith"};

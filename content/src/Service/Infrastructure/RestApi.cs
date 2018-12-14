@@ -22,7 +22,7 @@ namespace MyVendor.MyService.Infrastructure
                     .AddJsonOptions(options =>
                      {
                          options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                         options.SerializerSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                         options.SerializerSettings.Converters.Add(new StringEnumConverter {NamingStrategy = new CamelCaseNamingStrategy()});
                      });
 
             services.AddSwaggerGen(options =>
