@@ -18,9 +18,8 @@ Download and install the [.NET Core SDK](https://www.microsoft.com/net/download)
 
 To use the template to create a new project:
 
-    mkdir MyVendor.MyService
+    dotnet new axoom-webservice --name "MyVendor.MyService" --serviceName myvendor-myservice --friendlyName "My Service" --vendorDomain example.com --description "my description"
     cd MyVendor.MyService
-    dotnet new axoom-webservice --serviceName myvendor-myservice --friendlyName "My Service" --vendorDomain example.com --description "my description"
 
 In the commands above replace
 - `MyVendor.MyService` with the .NET namespace you wish to use,
