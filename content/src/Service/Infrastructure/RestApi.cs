@@ -15,8 +15,6 @@ namespace MyVendor.MyService.Infrastructure
     {
         public static IServiceCollection AddRestApi(this IServiceCollection services)
         {
-            services.Configure<ForwardedHeadersOptions>(options => options.ForwardedHeaders = ForwardedHeaders.All);
-
             services.AddMvc(options => options.Filters.Add(typeof(ApiExceptionFilterAttribute)))
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                     .AddJsonOptions(options =>
@@ -48,7 +46,7 @@ namespace MyVendor.MyService.Infrastructure
 
         public static IApplicationBuilder UseRestApi(this IApplicationBuilder app)
         {
-			app.UseForwardedHeaders(); // must be first middleware in pipeline
+            app.TrustProxyHeaders();
 
             if (app.ApplicationServices.GetRequiredService<IHostingEnvironment>().IsDevelopment())
             {
@@ -60,6 +58,22 @@ namespace MyVendor.MyService.Infrastructure
                .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1"));
 
             return app.UseMvc();
+        }
+
+        private static IApplicationBuilder TrustProxyHeaders(this IApplicationBuilder app)
+        {
+            var options = new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            };
+
+            // Trust all source IPs, instead of just loopback
+            options.KnownProxies.Clear();
+            options.KnownNetworks.Clear();
+
+            app.UseForwardedHeaders(options);
+
+            return app;
         }
     }
 }
