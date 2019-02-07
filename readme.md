@@ -41,7 +41,7 @@ The [`content/`](content/) directory in this repository contains the payload tha
 
 The [`.gitignore`](content/.gitignore) file prevents build artifacts, per-user settings and IDE-specific temp files from being checked into version control.
 
-The [`.gitattributes`](content/.gitattributes) file disable's Git's automatic End of Line (EOL) conversion between Windows and Linux. This ensures that files are binary-identical on all platforms.
+The [`.gitattributes`](content/.gitattributes) file disables Git's automatic End of Line (EOL) conversion between Windows and Linux. This ensures that files are binary-identical on all platforms.
 
 We use [EditorConfig](http://editorconfig.org/) to define and maintain consistent coding styles between different editors and IDEs. Our [`.editorconfig`](content/.editorconfig) file also ensures a consistent EOL style and charset encoding based on file type.
 
@@ -92,10 +92,6 @@ __Note:__ All projects share the same namespace.
 TODO: Build scripts
 
 `artifacts/` is created during build and contains artifacts for publishing (e.g. NuGet packages).
-
-[`release/`](content/release/)
-
-[`deploy/`](content/deploy/)
 
 ## Configuration
 
