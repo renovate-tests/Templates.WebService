@@ -46,7 +46,7 @@ namespace MyVendor.MyService.Infrastructure
 
         public static IApplicationBuilder UseRestApi(this IApplicationBuilder app)
         {
-            app.TrustProxyHeaders();
+            app.UseForwardedHeaders(TrustExternalProxy());
 
             if (app.ApplicationServices.GetRequiredService<IHostingEnvironment>().IsDevelopment())
             {
@@ -60,20 +60,12 @@ namespace MyVendor.MyService.Infrastructure
             return app.UseMvc();
         }
 
-        private static IApplicationBuilder TrustProxyHeaders(this IApplicationBuilder app)
+        private static ForwardedHeadersOptions TrustExternalProxy()
         {
-            var options = new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            };
-
-            // Trust all source IPs, instead of just loopback
+            var options = new ForwardedHeadersOptions {ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto};
             options.KnownProxies.Clear();
             options.KnownNetworks.Clear();
-
-            app.UseForwardedHeaders(options);
-
-            return app;
+            return options;
         }
     }
 }
