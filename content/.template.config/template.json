@@ -21,6 +21,7 @@
       "dataType": "string",
       "isRequired": true,
       "replaces":"myvendor-myservice"
+      "fileRename": "myvendor-myservice"
     },
     "friendlyName": {
       "type": "parameter",
