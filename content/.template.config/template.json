@@ -20,26 +20,26 @@
       "type": "parameter",
       "dataType": "string",
       "isRequired": true,
-      "replaces":"myvendor-myservice"
+      "replaces": "myvendor-myservice",
       "fileRename": "myvendor-myservice"
     },
     "friendlyName": {
       "type": "parameter",
       "dataType": "string",
       "isRequired": true,
-      "replaces":"My Service"
+      "replaces": "My Service"
     },
     "vendorDomain": {
       "type": "parameter",
       "dataType": "string",
       "isRequired": true,
-      "replaces":"example.com"
+      "replaces": "example.com"
     },
     "description": {
       "type": "parameter",
       "dataType": "string",
       "isRequired": true,
-      "replaces":"my description"
+      "replaces": "my description"
     }
   }
 }

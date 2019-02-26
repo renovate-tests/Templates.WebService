@@ -11,6 +11,6 @@ namespace MyVendor.MyService
     public class RootController : Controller
     {
         [HttpGet("")]
-        public string Bla() => "My Service API";
+        public string Home() => "My Service API";
     }
 }

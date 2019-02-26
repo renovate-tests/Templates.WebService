@@ -9,8 +9,8 @@ namespace MyVendor.MyService
     /// </summary>
     public abstract class ApiFactsBase : ControllerFactsBase
     {
-        protected ApiFactsBase(ITestOutputHelper output, IDictionary<string, string> configuration = null)
-            : base(output, configuration)
+        protected ApiFactsBase(ITestOutputHelper output)
+            : base(output)
         {
             Client = new Client(new Uri("http://localhost"), HttpClient);
         }

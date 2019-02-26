@@ -12,9 +12,9 @@ using Xunit.Abstractions;
 
 namespace MyVendor.MyService.Contacts
 {
-    public class ContactApiFacts : ApiFactsBase
+    public class ContactsApiFacts : ApiFactsBase
     {
-        public ContactApiFacts(ITestOutputHelper output)
+        public ContactsApiFacts(ITestOutputHelper output)
             : base(output)
         {}
 
@@ -62,9 +62,10 @@ namespace MyVendor.MyService.Contacts
         }
 
         [Fact]
-        public void RejectsCreateOnIncompleteBody()
+        public async Task RejectsCreateOnIncompleteBody()
         {
-            Client.Contacts.Awaiting(x => x.CreateAsync(new ContactDto()).AsTask()).Should().Throw<InvalidDataException>();
+            await Client.Contacts.Awaiting(x => x.CreateAsync(new ContactDto()).AsTask())
+                        .Should().ThrowAsync<InvalidDataException>();
         }
 
         [Fact]
@@ -78,12 +79,12 @@ namespace MyVendor.MyService.Contacts
         }
 
         [Fact]
-        public void RejectsUpdateOnIdMismatch()
+        public async Task RejectsUpdateOnIdMismatch()
         {
             var contactDto = new ContactDto {Id = "1", FirstName = "John", LastName = "Smith"};
 
-            Client.Contacts["2"].Awaiting(x => x.SetAsync(contactDto))
-                  .Should().Throw<InvalidDataException>();
+            await Client.Contacts["2"].Awaiting(x => x.SetAsync(contactDto))
+                        .Should().ThrowAsync<InvalidDataException>();
         }
 
         [Fact]
