@@ -8,23 +8,24 @@ namespace MyVendor.MyService
     /// <summary>
     /// Provides a type-safe client for the My Service REST API.
     /// </summary>
-    public class Client : EntryEndpoint, IClient
+    public class Client : OAuthEntryEndpoint, IClient
     {
         /// <summary>
         /// Creates a new My Service Client.
         /// </summary>
-        /// <param name="uri">The base URI of the My Service REST API.</param>
-        public Client(Uri uri)
-            : base(uri)
+        /// <param name="uri">The base URI of the My Service API.</param>
+        /// <param name="oAuthOptions">Options for OAuth 2.0 / OpenID Connect authentication.</param>
+        public Client(Uri uri, OAuthOptions oAuthOptions)
+            : base(uri, oAuthOptions)
         {}
 
         /// <summary>
-        /// Creates a new My Service Client using a custom <see cref="HttpClient"/>. This is usually used for custom authentication schemes, e.g. client certificates.
+        /// Creates a new My Service Client using a custom <see cref="HttpMessageHandler"/>. This is usually used for custom authentication schemes (e.g. client certificates) or testing.
         /// </summary>
-        /// <param name="uri">The base URI of the My Service REST API.</param>
-        /// <param name="httpClient">The <see cref="HttpClient"/> to use for communication with My Service.</param>
-        public Client(Uri uri, HttpClient httpClient)
-            : base(uri, httpClient)
+        /// <param name="uri">The base URI of the My Service API.</param>
+        /// <param name="httpMessageHandler">The HTTP message handler used to communicate with the remote element.</param>
+        public Client(Uri uri, HttpMessageHandler httpMessageHandler)
+            : base(uri, oAuthOptions: null, httpMessageHandler)
         {}
 
         /// <summary>

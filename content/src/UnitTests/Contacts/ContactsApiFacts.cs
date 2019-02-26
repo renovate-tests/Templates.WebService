@@ -16,7 +16,9 @@ namespace MyVendor.MyService.Contacts
     {
         public ContactsApiFacts(ITestOutputHelper output)
             : base(output)
-        {}
+        {
+            AsUser("user1");
+        }
 
         private readonly Mock<IContactService> _serviceMock = new Mock<IContactService>();
 
@@ -36,6 +38,14 @@ namespace MyVendor.MyService.Contacts
             var result = await Client.Contacts.ReadAllAsync();
 
             result.Should().Equal(contacts);
+        }
+
+        [Fact]
+        public async Task RejectsUnauthenticatedRead()
+        {
+            AsAnonymous();
+            await Client.Contacts.Awaiting(x => x.ReadAllAsync())
+                        .Should().ThrowAsync<AuthenticationException>();
         }
 
         [Fact]
@@ -101,6 +111,7 @@ namespace MyVendor.MyService.Contacts
             var note = new NoteDto {Content = "my note"};
             _serviceMock.Setup(x => x.ReadNoteAsync("1")).ReturnsAsync(note);
 
+            AsUser("user1", Scopes.Notes);
             var result = await Client.Contacts["1"].Note.ReadAsync();
 
             result.Should().Be(note);
@@ -111,6 +122,7 @@ namespace MyVendor.MyService.Contacts
         {
             var note = new NoteDto {Content = "my note"};
 
+            AsUser("user1", Scopes.Notes);
             await Client.Contacts["1"].Note.SetAsync(note);
 
             _serviceMock.Verify(x => x.SetNoteAsync("1", note));
@@ -119,9 +131,25 @@ namespace MyVendor.MyService.Contacts
         [Fact]
         public async Task PokesViaService()
         {
+            AsUser("user1", Scopes.Poke);
             await Client.Contacts["1"].Poke.TriggerAsync();
 
             _serviceMock.Verify(x => x.PokeAsync("1"));
+        }
+
+        [Fact]
+        public async Task RejectsUnauthorizedPoke()
+        {
+            await Client.Contacts["1"].Poke.Awaiting(x => x.TriggerAsync())
+                        .Should().ThrowAsync<UnauthorizedAccessException>();
+        }
+
+        [Fact]
+        public async Task RejectsUnauthenticatedPoke()
+        {
+            AsAnonymous();
+            await Client.Contacts["1"].Poke.Awaiting(x => x.TriggerAsync())
+                        .Should().ThrowAsync<AuthenticationException>();
         }
     }
 }

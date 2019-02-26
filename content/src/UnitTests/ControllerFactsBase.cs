@@ -1,5 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
+using IdentityModel;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,12 +26,45 @@ namespace MyVendor.MyService
             _server = new TestServer(
                 new WebHostBuilder()
                    .ConfigureLogging(builder => builder.AddXUnit(output))
-                   .ConfigureServices((context, services) => services.AddRestApi())
+                   .ConfigureServices((context, services) => services.AddTestSecurity(_claims)
+                                                                     .AddRestApi())
                    .ConfigureServices(ConfigureService)
-                   .Configure(builder => builder.UseRestApi()));
+                   .Configure(builder => builder.UseAuthentication()
+                                                .UseRestApi()));
 
-            HttpClient = _server.CreateClient();
+            HttpHandler = _server.CreateHandler();
         }
+
+        private readonly List<Claim> _claims = new List<Claim>();
+
+        /// <summary>
+        /// Treats all following requests to the test server as anonymous/unauthenticated.
+        /// </summary>
+        protected void AsAnonymous() => _claims.Clear();
+
+        /// <summary>
+        /// Treats all following requests to the test server as authenticated.
+        /// </summary>
+        protected void AsUser(string name)
+        {
+            _claims.Clear();
+            _claims.Add(new Claim(ClaimTypes.Name, name));
+        }
+
+        /// <summary>
+        /// Treats all following requests to the test server as authenticated.
+        /// </summary>
+        protected void AsUser(string name, params Claim[] claims)
+        {
+            AsUser(name);
+            _claims.AddRange(claims);
+        }
+
+        /// <summary>
+        /// Treats all following requests to the test server as authenticated.
+        /// </summary>
+        protected void AsUser(string name, params string[] scopes)
+            => AsUser(name, scopes.Select(scope => new Claim(JwtClaimTypes.Scope, scope)).ToArray());
 
         /// <summary>
         /// Registers dependencies for controllers.
@@ -34,13 +72,13 @@ namespace MyVendor.MyService
         protected abstract void ConfigureService(IServiceCollection services);
 
         /// <summary>
-        /// A client configured for in-memory communication with ASP.NET MVC controllers.
+        /// A message handler configured for in-memory communication with ASP.NET MVC controllers.
         /// </summary>
-        protected readonly HttpClient HttpClient;
+        protected readonly HttpMessageHandler HttpHandler;
 
         public virtual void Dispose()
         {
-            HttpClient.Dispose();
+            HttpHandler.Dispose();
             _server.Dispose();
         }
     }

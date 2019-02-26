@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Xunit.Abstractions;
 
 namespace MyVendor.MyService
@@ -12,7 +11,7 @@ namespace MyVendor.MyService
         protected ApiFactsBase(ITestOutputHelper output)
             : base(output)
         {
-            Client = new Client(new Uri("http://localhost"), HttpClient);
+            Client = new Client(new Uri("http://localhost"), HttpHandler);
         }
 
         /// <summary>

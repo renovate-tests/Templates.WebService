@@ -22,8 +22,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TypedRest" Version="0.43.0" />
     <PackageReference Include="JetBrains.Annotations" Version="2018.3.0" />
+    <PackageReference Include="TypedRest.OAuth" Version="0.43.0" />
 
     <!-- Uncomment this if the project is hosted on GitHub. -->
     <!--

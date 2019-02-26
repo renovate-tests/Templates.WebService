@@ -32,10 +32,11 @@ namespace MyVendor.MyService
         /// </summary>
         public IServiceProvider ConfigureServices(IServiceCollection services)
             => services.AddOptions()
-                       .AddRestApi()
+                       .AddDbContext<DbContext>(options => options.UseSqlite(Configuration.GetSection("Database").GetValue<string>("ConnectionString")))
                        .AddPrometheusServer(Configuration.GetSection("Metrics"))
                        .AddPolicies(Configuration.GetSection("Policies"))
-                       .AddDbContext<DbContext>(options => options.UseSqlite(Configuration.GetSection("Database").GetValue<string>("ConnectionString")))
+                       .AddSecurity(Configuration.GetSection("Authentication"))
+                       .AddRestApi()
                        .AddContacts()
                        .BuildServiceProvider();
 
@@ -44,7 +45,8 @@ namespace MyVendor.MyService
         /// </summary>
         public void Configure(IApplicationBuilder app)
         {
-            app.UseRestApi();
+            app.UseSecurity()
+               .UseRestApi();
 
             var provider = app.ApplicationServices;
 

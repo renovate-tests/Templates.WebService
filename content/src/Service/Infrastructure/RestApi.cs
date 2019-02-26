@@ -15,8 +15,12 @@ namespace MyVendor.MyService.Infrastructure
     {
         public static IServiceCollection AddRestApi(this IServiceCollection services)
         {
-            services.AddMvc(options => options.Filters.Add(typeof(ApiExceptionFilterAttribute)))
+            services.AddMvcCore(options => options.Filters.Add(typeof(ApiExceptionFilterAttribute)))
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                    .AddApiExplorer()
+                    .AddFormatterMappings()
+                    .AddDataAnnotations()
+                    .AddJsonFormatters()
                     .AddJsonOptions(options =>
                      {
                          options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -55,7 +59,12 @@ namespace MyVendor.MyService.Infrastructure
             }
 
             app.UseSwagger()
-               .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1"));
+               .UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1");
+                    options.OAuthAppName("My Service Swagger UI");
+                    options.OAuthClientId("MyServiceSwagger");
+                });
 
             return app.UseMvc();
         }
