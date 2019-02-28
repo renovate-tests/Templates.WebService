@@ -16,7 +16,7 @@ Policies:
     - 00:00:30
 
 Authentication:
-  ApiName: myservice
+  ApiName: myvendor-myservice
 
 Database:
   ConnectionString: Data Source=myservice.db

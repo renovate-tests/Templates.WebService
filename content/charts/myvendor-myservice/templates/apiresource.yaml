@@ -1,0 +1,22 @@
+apiVersion: contrib.identityserver.io/v1
+kind: ApiResource
+metadata:
+  name: myvendor-myservice
+  labels:
+    app: myvendor-myservice
+
+spec:
+  # TODO: Remove this once Identity Server supports generating Resource Names from meta.namespace+name
+  name: myvendor-myservice # Must match Authentication.ApiName in appsettings.yaml
+
+  apiSecrets:
+    - value: {{ .Values.app.env.Authentication__ApiSecret | quote }}
+  scopes:
+    - name: myvendor-myservice.contacts.notes
+      userClaims:
+        - tenant
+        - access
+    - name: myvendor-myservice.contacts.poke
+      userClaims:
+        - tenant
+        - access

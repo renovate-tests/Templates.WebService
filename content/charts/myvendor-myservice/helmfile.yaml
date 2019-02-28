@@ -12,4 +12,4 @@ releases:
           env:
             ASPNETCORE_ENVIRONMENT: '{{ env "ASPNETCORE_ENVIRONMENT" | default "Production" }}'
             Authentication__Authority: 'https://account.{{ requiredEnv "PUBLIC_CLUSTER_DOMAIN" }}'
-            Authentication__ApiSecret: '{{ requiredEnv "MYSERVICE_APISECRET" }}'
+            Authentication__ApiSecret: '{{ randAlphaNum 16 }}'
