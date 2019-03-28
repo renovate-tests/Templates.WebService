@@ -12,6 +12,19 @@ Configuration overrides for local development are specified in:
 - [launchSettings.json](src/Service/Properties/launchSettings.json) for IDEs
 - [docker-compose.override.yml](src/docker-compose.override.yml) for Docker Compose
 
+To enable authentication against the Identity Server during local development run:
+```powershell
+cd src\Service
+dotnet user-secrets set Authentication:Authority https://account.myaxoom.com
+dotnet user-secrets set Authentication:ApiSecret thisissecret
+```
+
+To allow Prometheus metrics to be exposed when running locally run:
+```powershell
+netsh http add urlacl http://*:5000/ user=$env:USERDOMAIN\$env:USERNAME
+```
+You can then access the metrics at: http://localhost:5000/
+
 To build and then run locally with Docker Compose:
 ```powershell
 cd src
@@ -19,9 +32,3 @@ cd src
 docker-compose up --build
 ```
 You can then interact with the API at: http://localhost:12345/swagger/
-
-To access Prometheus metrics locally without Docker Compose run:
-```powershell
-netsh http add urlacl http://*:5000/ user=$env:USERDOMAIN\$env:USERNAME
-```
-You can then access the metrics at: http://localhost:5000/
