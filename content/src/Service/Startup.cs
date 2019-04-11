@@ -31,18 +31,26 @@ namespace MyVendor.MyService
         /// Called by ASP.NET Core to register services.
         /// </summary>
         public IServiceProvider ConfigureServices(IServiceCollection services)
-            => services.AddDbContext<DbContext>(options => options.UseSqlite(Configuration.GetSection("Database").GetValue<string>("ConnectionString")))
-                       .AddPrometheusServer(Configuration.GetSection("Metrics"))
-                       .AddSecurity(Configuration.GetSection("Authentication"))
-                       .AddRestApi()
-                       .AddContacts()
-                       .BuildServiceProvider();
+        {
+            services.AddPrometheusServer(Configuration.GetSection("Metrics"))
+                    .AddSecurity(Configuration.GetSection("Authentication"))
+                    .AddRestApi()
+                    .AddContacts();
+
+            services.AddDbContext<DbContext>(options => options.UseSqlite(Configuration.GetSection("Database").GetValue<string>("ConnectionString")));
+
+            services.AddHealthChecks()
+                    .AddDbContextCheck<DbContext>();
+
+            return services.BuildServiceProvider();
+        }
 
         /// <summary>
         /// Called by ASP.NET Core to configure services after they have been registered.
         /// </summary>
         public void Configure(IApplicationBuilder app)
-            => app.UseSecurity()
+            => app.UseHealthChecks("/health")
+                  .UseSecurity()
                   .UseRestApi();
 
         /// <summary>
