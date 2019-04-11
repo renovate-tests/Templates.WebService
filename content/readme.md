@@ -1,7 +1,5 @@
 # My Service
 
-This repository contains the source code for My Service.
-
 my description
 
 ## Development
@@ -15,7 +13,7 @@ Configuration overrides for local development are specified in:
 To enable authentication against the Identity Server during local development run:
 ```powershell
 cd src\Service
-dotnet user-secrets set Authentication:Authority https://account.myaxoom.com
+dotnet user-secrets set Authentication:Authority https://account.dev.myaxoom.com
 dotnet user-secrets set Authentication:ApiSecret thisissecret
 ```
 
