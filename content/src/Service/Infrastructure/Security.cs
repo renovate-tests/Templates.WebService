@@ -28,14 +28,13 @@ namespace MyVendor.MyService.Infrastructure
 
             services.ConfigureSwaggerGen(options =>
             {
-                options.AddSecurityDefinition("oauth2-implicit",
-                    new OAuth2Scheme
-                    {
-                        Type = "oauth2",
-                        Flow = "implicit",
-                        AuthorizationUrl = $"{identityOptions.Authority}/connect/authorize",
-                        Scopes = ScopeAuthorizeAttribute.GetAllScopes().ToDictionary(x => x, x => "")
-                    });
+                options.AddSecurityDefinition("oauth2", new OAuth2Scheme
+                {
+                    Type = "oauth2",
+                    Flow = "implicit",
+                    AuthorizationUrl = $"{identityOptions.Authority}/connect/authorize",
+                    Scopes = ScopeAuthorizeAttribute.GetAllScopes().ToDictionary(x => x, x => "")
+                });
                 options.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
                 {
                     ["oauth2-implicit"] = new string[0]

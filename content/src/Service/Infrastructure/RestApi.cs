@@ -57,7 +57,7 @@ namespace MyVendor.MyService.Infrastructure
                 {
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service API v1");
                     options.OAuthAppName("My Service Swagger UI");
-                    options.OAuthClientId("MyServiceSwagger");
+                    options.OAuthClientId("myvendor-myservice");
                 });
 
             return app.UseMvc();
