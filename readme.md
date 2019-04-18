@@ -1,13 +1,16 @@
 # AXOOM Web Service Template
 
+[![NuGet package](https://img.shields.io/nuget/v/Axoom.Templates.WebService.svg)](https://www.nuget.org/packages/Axoom.Templates.WebService/)
+[![Build status](https://img.shields.io/appveyor/ci/AXOOM/templates-webservice.svg)](https://ci.appveyor.com/project/AXOOM/templates-webservice)
+
 This template helps you create web services for the [AXOOM](http://www.axoom.com/) Platform. In addition to its role as a template this repository also serves as a reference implementation and living documentation for infrastructure concerns such as configuration, logging and monitoring.
 
 The template creates a C# [ASP.NET Core](https://docs.microsoft.com/aspnet/core/) project packaged to run in a [Docker](https://www.docker.com/) container. The AXOOM Platform uses common web technologies for communication, so services created with this template can easily be used in other environments as well. You can also use any other containerized language to create services for the AXOOM Platform. In this case you can use the following documentation to learn about our infrastructure requirements and best practices.
 
 This template focuses on creating web services that provide RESTful APIs. If this is not your goal one of our other templates may be a better match:
-- [AXOOM Library Template](https://github.com/AXOOM/Axoom.Templates.Library)
-- [AXOOM Service Template](https://github.com/AXOOM/Axoom.Templates.Service)
-- [AXOOM Portal App Template](https://github.com/AXOOM/Axoom.Templates.PortalApp)
+- [AXOOM Library Template](https://github.com/AXOOM/Templates.Library)
+- [AXOOM Service Template](https://github.com/AXOOM/Templates.Service)
+- [AXOOM Portal App Template](https://github.com/AXOOM/Templates.PortalApp)
 
 
 # Using the template
