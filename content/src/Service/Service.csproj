@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Swashbuckle.AspNetCore.Cli" Version="2.1.0-beta1" />
+    <DotNetCliToolReference Include="Swashbuckle.AspNetCore.Cli" Version="4.0.1" />
   </ItemGroup>
 
   <Target Name="SwaggerToFile" AfterTargets="AfterBuild">
