@@ -24,16 +24,9 @@
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
 
-    <!-- Uncomment this if the project is hosted on GitHub. -->
-    <!--
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
-    -->
-
-    <!-- Uncomment this if the project is hosted on TFS. -->
-    <!--
-    <PackageReference Include="Microsoft.SourceLink.Tfs.Git" Version="1.0.0-beta-63127-02" PrivateAssets="All"/>
-    <SourceLinkTfsGitHost Include="tfs.inside-axoom.org" VirtualDirectory="tfs"/>
-    -->
+    <!-- Uncomment the line appropriate for your Git hoster. -->
+    <!--<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />-->
+    <!--<PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />-->
   </ItemGroup>
 
 </Project>
