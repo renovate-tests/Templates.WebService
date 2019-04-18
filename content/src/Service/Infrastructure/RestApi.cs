@@ -1,6 +1,5 @@
 using System.IO;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.PlatformAbstractions;
@@ -50,13 +49,8 @@ namespace MyVendor.MyService.Infrastructure
 
         public static IApplicationBuilder UseRestApi(this IApplicationBuilder app)
         {
-            app.UseForwardedHeaders(TrustExternalProxy());
-
-            if (app.ApplicationServices.GetRequiredService<IHostingEnvironment>().IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage()
-                   .UseExceptionDemystifier();
-            }
+            app.UseForwardedHeaders(TrustExternalProxy())
+               .UseStatusCodePages();
 
             app.UseSwagger()
                .UseSwaggerUI(options =>
