@@ -16,7 +16,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Authors>example.com</Authors>
     <Title>My Service Client</Title>
     <Description>Client library for the My Service REST API</Description>
   </PropertyGroup>
@@ -24,11 +23,8 @@
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />
     <PackageReference Include="TypedRest.OAuth" Version="0.43.0" />
-
-    <!-- Uncomment the line appropriate for your Git hoster. -->
-    <!--<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />-->
-    <!--<PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />-->
   </ItemGroup>
 
   <ItemGroup>

@@ -3,7 +3,7 @@ version: '3.4'
 
 services:
   myvendor-myservice:
-    image: ${DOCKER_REGISTRY-docker-ci.axoom.cloud}/services/myvendor-myservice:${VERSION-0.1-dev}
+    image: eu.gcr.io/axoom-image/myteam/myvendor-myservice:${VERSION-0.1-dev}
     build:
       context: ./Service
       dockerfile: Dockerfile
