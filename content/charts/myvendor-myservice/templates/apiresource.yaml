@@ -3,7 +3,7 @@ kind: ApiResource
 metadata:
   name: myvendor-myservice
   labels:
-    app: myvendor-myservice
+    app.kubernetes.io/name: myvendor-myservice
 
 spec:
   # TODO: Remove this once Identity Server supports generating Resource Names from meta.namespace+name
