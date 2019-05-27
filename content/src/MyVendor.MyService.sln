@@ -16,11 +16,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helm", "Helm", "{DE708BBC-A1B7-4CD4-811F-01308B0E877C}"
 	ProjectSection(SolutionItems) = preProject
 		..\charts\myvendor-myservice\Chart.yaml = ..\charts\myvendor-myservice\Chart.yaml
-		..\charts\myvendor-myservice\helmfile.repos.yaml = ..\charts\myvendor-myservice\helmfile.repos.yaml
-		..\charts\myvendor-myservice\helmfile.yaml = ..\charts\myvendor-myservice\helmfile.yaml
-		..\charts\myvendor-myservice\README.md = ..\charts\myvendor-myservice\README.md
 		..\charts\myvendor-myservice\requirements.yaml = ..\charts\myvendor-myservice\requirements.yaml
 		..\charts\myvendor-myservice\values.yaml = ..\charts\myvendor-myservice\values.yaml
+		..\helmfile.yaml = ..\helmfile.yaml
 	EndProjectSection
 EndProject
 Global
