@@ -44,16 +44,16 @@ docker:
 
 nuget: &nuget
   stage: publish
-  only: [develop, master, release/.*, hotfix/.*]
+  only: [develop, master, /^release/, /^hotfix/]
   image: docker.bintray.io/jfrog/jfrog-cli-go
   variables:
     ARTIFACTORY_REPO: nuget
   script:
     - JFROG_CLI_OFFER_CONFIG=false jfrog rt upload --url https://axoom.jfrog.io/axoom/ --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_API_KEY "artifacts/*.nupkg" $ARTIFACTORY_REPO
 
-nuget-experimental: # Feature branches lead to non-linear versioning and therefore go to a separate NuGet repo
+nuget:experimental: # Feature branches lead to non-linear versioning and therefore go to a separate NuGet repo
   <<: *nuget
-  only: [feature/.*]
+  only: [/^feature/]
   variables:
     ARTIFACTORY_REPO: nuget-experimental
 
