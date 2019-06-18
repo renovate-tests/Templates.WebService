@@ -63,7 +63,7 @@ nuget:experimental: # Feature branches lead to non-linear versioning and therefo
   image: axoom/gcloud-helmfile
   environment:
     name: $CLUSTER_NAME
-    url: https://myvendor-myservice.$PUBLIC_CLUSTER_DOMAIN
+    url: https://myvendor-myservice.$PUBLIC_CLUSTER_DOMAIN/swagger/
   script:
     - /entrypoint.sh
 
