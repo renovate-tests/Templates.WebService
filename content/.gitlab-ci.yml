@@ -42,7 +42,7 @@ docker:
       --context dir://$CI_PROJECT_DIR/src/Service
       --destination eu.gcr.io/axoom-image/myteam/myvendor-myservice:$GitVersion_NuGetVersion
 
-nuget: &nuget
+nuget:
   stage: publish
   only: [develop, master, /^release/, /^hotfix/]
   image: mcr.microsoft.com/dotnet/core/sdk:2.2
@@ -53,12 +53,12 @@ nuget: &nuget
     - dotnet nuget push artifacts/MyVendor.MyService.Client.$GitVersion_NuGetVersion.nupkg --source https://axoom.jfrog.io/axoom/api/nuget/$ARTIFACTORY_REPO/axoom/MyVendor.MyService.Client --api-key $ARTIFACTORY_USER:$ARTIFACTORY_API_KEY
 
 nuget:experimental: # Feature branches lead to non-linear versioning and therefore go to a separate NuGet repo
-  <<: *nuget
+  extends: nuget
   only: [/^feature/]
   variables:
     ARTIFACTORY_REPO: nuget-experimental
 
-.deploy: &deploy
+.deploy:
   when: manual
   image: axoom/gcloud-helmfile
   environment:
@@ -67,8 +67,8 @@ nuget:experimental: # Feature branches lead to non-linear versioning and therefo
   script:
     - /entrypoint.sh
 
-deploy:dev: &deploy_dev
-  <<: *deploy
+deploy:dev:
+  extends: .deploy
   stage: deploy:dev
   except: [master]
   variables:
@@ -80,13 +80,13 @@ deploy:dev: &deploy_dev
     ASPNETCORE_ENVIRONMENT: Development
 
 deploy:dev:auto:
-  <<: *deploy_dev
+  extends: deploy:dev
   except: []
   only: [master]
   when: on_success
 
 deploy:test:
-  <<: *deploy
+  extends: .deploy
   stage: deploy:test
   variables:
     # gcloud
@@ -97,7 +97,7 @@ deploy:test:
     ASPNETCORE_ENVIRONMENT: Production
 
 deploy:live:
-  <<: *deploy
+  extends: .deploy
   stage: deploy:live
   variables:
     # gcloud
