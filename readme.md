@@ -24,7 +24,7 @@ To use the template to create a new project:
     dotnet new axoom-webservice --name "MyVendor.MyService" --serviceName myvendor-myservice --team "myteam" --friendlyName "My Service" --description "my description"
     cd MyVendor.MyService
     git init
-    git update-index --add --chmod=+x build.sh src/build.sh src/test.sh
+    git update-index --add --chmod=+x build.sh
 
 In the commands above replace
 - `MyVendor.MyService` with the .NET namespace you wish to use,
