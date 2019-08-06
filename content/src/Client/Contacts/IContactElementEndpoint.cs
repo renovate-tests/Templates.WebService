@@ -2,12 +2,12 @@ using TypedRest;
 
 namespace MyVendor.MyService.Contacts
 {
-    public interface IContactElementEndpoint : IElementEndpoint<ContactDto>
+    public interface IContactElementEndpoint : IElementEndpoint<Contact>
     {
         /// <summary>
         /// An optional note on the contact.
         /// </summary>
-        IElementEndpoint<NoteDto> Note { get; }
+        IElementEndpoint<Note> Note { get; }
 
         /// <summary>
         /// A action for poking the contact.

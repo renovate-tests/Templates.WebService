@@ -5,10 +5,10 @@ using TypedRest;
 namespace MyVendor.MyService.Contacts
 {
     /// <summary>
-    /// Represents a REST endpoint for a single <see cref="ContactDto"/>.
+    /// Represents a REST endpoint for a single <see cref="Contact"/>.
     /// </summary>
     [UsedImplicitly]
-    public class ContactElementEndpoint : ElementEndpoint<ContactDto>, IContactElementEndpoint
+    public class ContactElementEndpoint : ElementEndpoint<Contact>, IContactElementEndpoint
     {
         public ContactElementEndpoint(IEndpoint referrer, Uri relativeUri)
             : base(referrer, relativeUri.EnsureTrailingSlash())
@@ -17,7 +17,7 @@ namespace MyVendor.MyService.Contacts
         /// <summary>
         /// An optional note on the contact.
         /// </summary>
-        public IElementEndpoint<NoteDto> Note => new ElementEndpoint<NoteDto>(this, relativeUri: "note");
+        public IElementEndpoint<Note> Note => new ElementEndpoint<Note>(this, relativeUri: "note");
 
         /// <summary>
         /// A action for poking the contact.

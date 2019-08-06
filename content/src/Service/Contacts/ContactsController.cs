@@ -9,7 +9,7 @@ namespace MyVendor.MyService.Contacts
     /// Provides access to contacts in an address book.
     /// </summary>
     [ApiController, Route("contacts"), Authorize]
-    public class ContactsController : CollectionController<ContactDto>
+    public class ContactsController : CollectionController<Contact>
     {
         private readonly IContactService _service;
 
@@ -27,7 +27,7 @@ namespace MyVendor.MyService.Contacts
         /// <response code="404">Specified contact not found</response>
         [HttpGet("{id}/note")]
         [ScopeAuthorize(Scopes.Notes)]
-        public async Task<NoteDto> ReadNote([FromRoute] string id)
+        public async Task<Note> ReadNote([FromRoute] string id)
             => await _service.ReadNoteAsync(id);
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace MyVendor.MyService.Contacts
         /// <response code="404">Specified contact not found</response>
         [HttpPut("{id}/note")]
         [ScopeAuthorize(Scopes.Notes)]
-        public async Task<IActionResult> SetNote([FromRoute] string id, [FromBody] NoteDto note)
+        public async Task<IActionResult> SetNote([FromRoute] string id, [FromBody] Note note)
         {
             await _service.SetNoteAsync(id, note);
 

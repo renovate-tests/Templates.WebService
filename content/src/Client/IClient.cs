@@ -8,6 +8,6 @@ namespace MyVendor.MyService
         /// <summary>
         /// Provides access to contacts in an address book.
         /// </summary>
-        ICollectionEndpoint<ContactDto, ContactElementEndpoint> Contacts { get; }
+        ICollectionEndpoint<Contact, ContactElementEndpoint> Contacts { get; }
     }
 }

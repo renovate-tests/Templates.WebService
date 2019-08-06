@@ -28,10 +28,10 @@ namespace MyVendor.MyService.Contacts
         [Fact]
         public async Task ReadsAllFromService()
         {
-            var contacts = new List<ContactDto>
+            var contacts = new List<Contact>
             {
-                new ContactDto {Id = "1", FirstName = "John", LastName = "Smith"},
-                new ContactDto {Id = "2", FirstName = "Jane", LastName = "Doe"}
+                new Contact {Id = "1", FirstName = "John", LastName = "Smith"},
+                new Contact {Id = "2", FirstName = "Jane", LastName = "Doe"}
             };
             _serviceMock.Setup(x => x.ReadAllAsync()).ReturnsAsync(contacts);
 
@@ -51,7 +51,7 @@ namespace MyVendor.MyService.Contacts
         [Fact]
         public async Task ReadsFromService()
         {
-            var contact = new ContactDto {Id = "1", FirstName = "John", LastName = "Smith"};
+            var contact = new Contact {Id = "1", FirstName = "John", LastName = "Smith"};
             _serviceMock.Setup(x => x.ReadAsync("1")).ReturnsAsync(contact);
 
             var result = await Client.Contacts["1"].ReadAsync();
@@ -62,8 +62,8 @@ namespace MyVendor.MyService.Contacts
         [Fact]
         public async Task CreatesInService()
         {
-            var contactWithoutId = new ContactDto {FirstName = "John", LastName = "Smith"};
-            var contactWithId = new ContactDto {Id = "1", FirstName = "John", LastName = "Smith"};
+            var contactWithoutId = new Contact {FirstName = "John", LastName = "Smith"};
+            var contactWithId = new Contact {Id = "1", FirstName = "John", LastName = "Smith"};
             _serviceMock.Setup(x => x.CreateAsync(contactWithoutId)).ReturnsAsync(contactWithId);
 
             var result = await Client.Contacts.CreateAsync(contactWithoutId);
@@ -74,14 +74,14 @@ namespace MyVendor.MyService.Contacts
         [Fact]
         public async Task RejectsCreateOnIncompleteBody()
         {
-            await Client.Contacts.Awaiting(x => x.CreateAsync(new ContactDto()).AsTask())
+            await Client.Contacts.Awaiting(x => x.CreateAsync(new Contact()).AsTask())
                         .Should().ThrowAsync<InvalidDataException>();
         }
 
         [Fact]
         public async Task UpdatesInService()
         {
-            var contact = new ContactDto {Id = "1", FirstName = "John", LastName = "Smith"};
+            var contact = new Contact {Id = "1", FirstName = "John", LastName = "Smith"};
 
             await Client.Contacts.SetAsync(contact);
 
@@ -91,7 +91,7 @@ namespace MyVendor.MyService.Contacts
         [Fact]
         public async Task RejectsUpdateOnIdMismatch()
         {
-            var contactDto = new ContactDto {Id = "1", FirstName = "John", LastName = "Smith"};
+            var contactDto = new Contact {Id = "1", FirstName = "John", LastName = "Smith"};
 
             await Client.Contacts["2"].Awaiting(x => x.SetAsync(contactDto))
                         .Should().ThrowAsync<InvalidDataException>();
@@ -108,7 +108,7 @@ namespace MyVendor.MyService.Contacts
         [Fact]
         public async Task ReadsNoteFromService()
         {
-            var note = new NoteDto {Content = "my note"};
+            var note = new Note {Content = "my note"};
             _serviceMock.Setup(x => x.ReadNoteAsync("1")).ReturnsAsync(note);
 
             AsUser("user1", Scopes.Notes);
@@ -120,7 +120,7 @@ namespace MyVendor.MyService.Contacts
         [Fact]
         public async Task SetsNoteInService()
         {
-            var note = new NoteDto {Content = "my note"};
+            var note = new Note {Content = "my note"};
 
             AsUser("user1", Scopes.Notes);
             await Client.Contacts["1"].Note.SetAsync(note);

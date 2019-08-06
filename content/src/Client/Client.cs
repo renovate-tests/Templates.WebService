@@ -31,7 +31,7 @@ namespace MyVendor.MyService
         /// <summary>
         /// Provides access to contacts in an address book.
         /// </summary>
-        public ICollectionEndpoint<ContactDto, ContactElementEndpoint> Contacts
-            => new CollectionEndpoint<ContactDto, ContactElementEndpoint>(this, relativeUri: "contacts");
+        public ICollectionEndpoint<Contact, ContactElementEndpoint> Contacts
+            => new CollectionEndpoint<Contact, ContactElementEndpoint>(this, relativeUri: "contacts");
     }
 }
