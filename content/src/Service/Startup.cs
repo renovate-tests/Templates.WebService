@@ -36,7 +36,8 @@ namespace MyVendor.MyService
                     .AddSecurity(Configuration.GetSection("Authentication"))
                     .AddRestApi();
 
-            services.AddDbContext<DbContext>(options => options.UseSqlite(Configuration.GetSection("Database").GetValue<string>("ConnectionString")));
+            services.AddDbContext<DbContext>(options => options
+               .UseSqlite(Configuration.GetConnectionString("Database")));
 
             services.AddHealthChecks()
                     .AddDbContextCheck<DbContext>();
