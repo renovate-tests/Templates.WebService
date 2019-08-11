@@ -6,7 +6,6 @@
     <UserSecretsId>MyVendor.MyService</UserSecretsId>
     <LangVersion>latest</LangVersion>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <ServerGarbageCollection>False</ServerGarbageCollection>
     <OutputType>Exe</OutputType>
     <IsPackable>False</IsPackable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -60,8 +59,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="appsettings*.yml">
+    <Content Include="appsettings.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.*.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>appsettings.yml</DependentUpon>
     </Content>
   </ItemGroup>
 
@@ -71,7 +74,7 @@
       <DocFile Include="$(OutputPath)\MyVendor.MyService.xml" />
       <DocFile Include="$(OutputPath)\MyVendor.MyService.Dto.xml" />
     </ItemGroup>
-    <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
+    <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="False" />
   </Target>
 
 </Project>
