@@ -28,9 +28,12 @@ namespace MyVendor.MyService
                     .AddSecurity(_configuration.GetSection("Authentication"))
                     .AddRestApi();
 
-            services.AddDbContext<DbContext>(options => options
-                // TODO: Replace SQLite with external database for scalability
-               .UseSqlite(_configuration.GetConnectionString("Database")));
+            string dbConnectionString = _configuration.GetConnectionString("Database");
+            services.AddDbContext<DbContext>(options =>
+            {
+                if (dbConnectionString.StartsWith("Data Source=")) options.UseSqlite(dbConnectionString);
+                else options.UseNpgsql(dbConnectionString);
+            });
 
             services.AddHealthChecks()
                     .AddDbContextCheck<DbContext>();
