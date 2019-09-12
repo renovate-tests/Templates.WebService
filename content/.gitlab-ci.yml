@@ -2,9 +2,7 @@ stages:
   - version
   - build
   - publish
-  - deploy:dev
-  - deploy:test
-  - deploy:live
+  - deploy
 
 before_script: # Expose version variable in all jobs
   - source $CI_PROJECT_DIR/gitversion.properties && export GitVersion_NuGetVersion
@@ -59,6 +57,7 @@ nuget:experimental: # Feature branches lead to non-linear versioning and therefo
     ARTIFACTORY_REPO: nuget-experimental
 
 .deploy:
+  stage: deploy
   when: manual
   image: axoom/gcloud-helmfile
   environment:
@@ -69,7 +68,6 @@ nuget:experimental: # Feature branches lead to non-linear versioning and therefo
 
 deploy:dev:
   extends: .deploy
-  stage: deploy:dev
   except: [master]
   variables:
     # gcloud
@@ -88,7 +86,6 @@ deploy:dev:auto:
 
 deploy:test:
   extends: .deploy
-  stage: deploy:test
   variables:
     # gcloud
     GCP_PROJECT: axoom-platform-devstages
@@ -100,7 +97,6 @@ deploy:test:
 
 deploy:live:
   extends: .deploy
-  stage: deploy:live
   variables:
     # gcloud
     GCP_PROJECT: axoom-platform-production
