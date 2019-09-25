@@ -1,0 +1,31 @@
+apiVersion: contrib.identityserver.io/v1
+kind: OauthClient
+metadata:
+  name: myvendor-myservice
+  labels:
+    app.kubernetes.io/name: myvendor-myservice
+
+spec:
+  # TODO: Remove this once Identity Server supports generating Client ID from meta.namespace+name
+  clientId: myvendor-myservice # Must match options.OAuthClientId("...") in RestApi.cs
+
+  clientName: My Service
+  accessTokenType: reference
+  allowAccessTokensViaBrowser: true
+  requireConsent: false
+  allowedGrantTypes:
+    - implicit
+  allowedScopes:
+    - openid
+    - myvendor-myservice.contacts.notes
+    - myvendor-myservice.contacts.poke
+  redirectUris:
+    - https://{{ .Values.app.ingress.domain }}/swagger/oauth2-redirect.html
+{{- if eq .Values.app.env.ASPNETCORE_ENVIRONMENT "Development" }}
+    - http://localhost:12345/swagger/oauth2-redirect.html
+{{- end }}
+  allowedCorsOrigins:
+    - https://{{ .Values.app.ingress.domain }}
+{{- if eq .Values.app.env.ASPNETCORE_ENVIRONMENT "Development" }}
+    - http://localhost:12345
+{{- end }}
