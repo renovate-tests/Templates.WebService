@@ -63,6 +63,9 @@ nuget:experimental: # Feature branches lead to non-linear versioning and therefo
   environment:
     name: $CLUSTER_NAME
     url: https://myvendor-myservice.$PUBLIC_CLUSTER_DOMAIN/swagger/
+  variables:
+    # Automatically creates database in Google Cloud SQL
+    DATABASE_NAME: myvendor-myservice
   script:
     - /entrypoint.sh
 
@@ -73,7 +76,6 @@ deploy:dev:
     # gcloud
     GCP_PROJECT: axoom-platform-devstages
     CLUSTER_NAME: dev
-    DATABASE_NAME: myvendor-myservice
     # helmfile
     PUBLIC_CLUSTER_DOMAIN: dev.myaxoom.com
     ASPNETCORE_ENVIRONMENT: Development
@@ -90,7 +92,6 @@ deploy:test:
     # gcloud
     GCP_PROJECT: axoom-platform-devstages
     CLUSTER_NAME: test
-    DATABASE_NAME: myvendor-myservice
     # helmfile
     PUBLIC_CLUSTER_DOMAIN: test.myaxoom.com
     ASPNETCORE_ENVIRONMENT: Production
@@ -101,7 +102,6 @@ deploy:live:
     # gcloud
     GCP_PROJECT: axoom-platform-production
     CLUSTER_NAME: live
-    DATABASE_NAME: myvendor-myservice
     # helmfile
     PUBLIC_CLUSTER_DOMAIN: myaxoom.com
     ASPNETCORE_ENVIRONMENT: Production
