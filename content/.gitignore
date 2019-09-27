@@ -11,4 +11,5 @@
 /src/_ReSharper.*/
 /src/**/*.user
 /src/**/*.db
+/src/UnitTests/Properties/launchSettings.json
 .vscode/
