@@ -42,7 +42,7 @@ docker:
 
 nuget:
   stage: publish
-  only: [develop, master, /^release/, /^hotfix/]
+  only: [tags, develop, master, /^release/, /^hotfix/]
   image: mcr.microsoft.com/dotnet/core/sdk:2.2
   variables:
     ARTIFACTORY_REPO: nuget
